@@ -12,10 +12,12 @@
 		37606AC82359B98800FEAE6D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37606AC72359B98800FEAE6D /* Actions.sks */; };
 		37606ACA2359B98800FEAE6D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AC92359B98800FEAE6D /* GameScene.swift */; };
 		37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606ACB2359B98800FEAE6D /* GameViewController.swift */; };
-		37606ACF2359B98800FEAE6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37606ACD2359B98800FEAE6D /* Main.storyboard */; };
 		37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37606AD02359B98E00FEAE6D /* Assets.xcassets */; };
 		37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37606AD22359B98E00FEAE6D /* LaunchScreen.storyboard */; };
 		37606ADF2359B98F00FEAE6D /* Guns_and_DungeonsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606ADE2359B98F00FEAE6D /* Guns_and_DungeonsTests.swift */; };
+		37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AE92359BAA100FEAE6D /* MainNavigationController.swift */; };
+		37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */; };
+		37606AEE2359BDE900FEAE6D /* FuncButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AED2359BDE900FEAE6D /* FuncButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +37,15 @@
 		37606AC72359B98800FEAE6D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		37606AC92359B98800FEAE6D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		37606ACB2359B98800FEAE6D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		37606ACE2359B98800FEAE6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37606AD02359B98E00FEAE6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37606AD32359B98E00FEAE6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37606AD52359B98E00FEAE6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37606ADA2359B98F00FEAE6D /* Guns_and_DungeonsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Guns_and_DungeonsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37606ADE2359B98F00FEAE6D /* Guns_and_DungeonsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guns_and_DungeonsTests.swift; sourceTree = "<group>"; };
 		37606AE02359B98F00FEAE6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37606AE92359BAA100FEAE6D /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		37606AED2359BDE900FEAE6D /* FuncButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,10 +92,12 @@
 				37606AC72359B98800FEAE6D /* Actions.sks */,
 				37606AC92359B98800FEAE6D /* GameScene.swift */,
 				37606ACB2359B98800FEAE6D /* GameViewController.swift */,
-				37606ACD2359B98800FEAE6D /* Main.storyboard */,
 				37606AD02359B98E00FEAE6D /* Assets.xcassets */,
 				37606AD22359B98E00FEAE6D /* LaunchScreen.storyboard */,
 				37606AD52359B98E00FEAE6D /* Info.plist */,
+				37606AE92359BAA100FEAE6D /* MainNavigationController.swift */,
+				37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */,
+				37606AED2359BDE900FEAE6D /* FuncButtons.swift */,
 			);
 			path = Guns_and_Dungeons;
 			sourceTree = "<group>";
@@ -186,7 +192,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37606ACF2359B98800FEAE6D /* Main.storyboard in Resources */,
 				37606AC62359B98800FEAE6D /* GameScene.sks in Resources */,
 				37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */,
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
@@ -209,7 +214,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37606ACA2359B98800FEAE6D /* GameScene.swift in Sources */,
+				37606AEE2359BDE900FEAE6D /* FuncButtons.swift in Sources */,
+				37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */,
 				37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */,
+				37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */,
 				37606AC42359B98800FEAE6D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,14 +241,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		37606ACD2359B98800FEAE6D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37606ACE2359B98800FEAE6D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		37606AD22359B98E00FEAE6D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
