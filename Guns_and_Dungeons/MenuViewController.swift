@@ -9,29 +9,45 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-
- 
-    var singlePlayerButton: UIButton?
     
-    
+    var singlePlayerButton : UIButton?
+    var multiPlayerButton : UIButton?
+    var shopButton : UIButton?
+    var settingsButton : UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         let sq : CGFloat = 0.08
         let kw : CGFloat = 5
-        view.addButton(label: "Single player Texture",
-                       params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))
-        view.addButton(label: "Multi player Texture",
-                       params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
-        view.addButton(label: "Shop",
-                       params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.7), k: kw, square: sq))
-        view.addButton(label: "Settings",
-        params: AllParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1, square: 0.01))
+        singlePlayerButton = view.addButton(label: "Single player Texture", target: self, selector: #selector(toSinglePlayerScreen),
+                                            params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
+        multiPlayerButton = view.addButton(label: "Multi player Texture", target: self, selector: #selector(toMultiPlayerScreen),
+                                           params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))
+        shopButton =  view.addButton(label: "Shop", target: self, selector: #selector(toShopScreen),
+                                     params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.7), k: kw, square: sq))
+        settingsButton = view.addButton(label: "Settings", target: self, selector: #selector(toSettingScreen),
+                                        params: AllParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1, square: 0.01))
         // Do any additional setup after loading the view.
     }
     
-
+    @objc func toSinglePlayerScreen() {
+        self.navigationController?.pushViewController(SinglePlayerViewController(), animated: true)
+    }
+    
+    @objc func toMultiPlayerScreen() {
+        self.navigationController?.pushViewController(MultiPlayerViewController(), animated: true)
+    }
+    
+    @objc func toShopScreen() {
+        self.navigationController?.pushViewController(ShopViewController(), animated: true)
+    }
+    
+    @objc func toSettingScreen() {
+        self.navigationController?.pushViewController(SettingsViewController(), animated: true)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

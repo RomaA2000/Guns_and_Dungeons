@@ -25,10 +25,12 @@ extension UIView {
         self.addSubview(subView)
     }
     
-    func addButton(label : String, params : AllParameters) {
+    func addButton(label : String, target: Any?, selector: Selector, params : AllParameters) -> UIButton {
         let result = UIButton();
+        result.addTarget(target, action: selector, for: .touchUpInside)
         result.setUpButton(label : label, color : .black, translatesMask: true)
         self.posSubviewByRect(subView: result, params: params)
+        return result
     }
     
 }
