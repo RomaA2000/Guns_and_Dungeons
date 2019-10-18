@@ -18,6 +18,7 @@
 		37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AE92359BAA100FEAE6D /* MainNavigationController.swift */; };
 		37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */; };
 		37606AEE2359BDE900FEAE6D /* FuncButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AED2359BDE900FEAE6D /* FuncButtons.swift */; };
+		3791A8F32359C3E500212BBC /* FuncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791A8F22359C3E500212BBC /* FuncView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		37606AE92359BAA100FEAE6D /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		37606AED2359BDE900FEAE6D /* FuncButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncButtons.swift; sourceTree = "<group>"; };
+		3791A8F22359C3E500212BBC /* FuncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				37606AE92359BAA100FEAE6D /* MainNavigationController.swift */,
 				37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */,
 				37606AED2359BDE900FEAE6D /* FuncButtons.swift */,
+				3791A8F22359C3E500212BBC /* FuncView.swift */,
 			);
 			path = Guns_and_Dungeons;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */,
 				37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */,
 				37606AC42359B98800FEAE6D /* AppDelegate.swift in Sources */,
+				3791A8F32359C3E500212BBC /* FuncView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

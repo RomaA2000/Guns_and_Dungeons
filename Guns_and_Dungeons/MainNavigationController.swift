@@ -12,6 +12,8 @@ class MainNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setToolbarHidden(true, animated: true)
+        setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
     }
     

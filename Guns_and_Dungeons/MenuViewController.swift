@@ -13,16 +13,21 @@ class MenuViewController: UIViewController {
  
     var singlePlayerButton: UIButton?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let singlePlayerButton = UIButton();
-        let multiPlayerButton = UIButton();
-        let shopButton = UIButton()
-        let settingsButton = UIButton()
-        singlePlayerButton.setUpButton(label : "Single player Texture", color : .black, translatesMask: false)
-        multiPlayerButton.setUpButton(label : "Multi player Texture", color : .black, translatesMask: false)
-               shopButton.setUpButton(label : "Shop Texture", color : .black, translatesMask: false)
-               settingsButton.setUpButton(label : "Setting Texture", color : .black, translatesMask: false)
+        view.backgroundColor = .white
+        let sq : CGFloat = 0.08
+        let kw : CGFloat = 5
+        view.addButton(label: "Single player Texture",
+                       params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))
+        view.addButton(label: "Multi player Texture",
+                       params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
+        view.addButton(label: "Shop",
+                       params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.7), k: kw, square: sq))
+        view.addButton(label: "Settings",
+        params: AllParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1, square: 0.01))
         // Do any additional setup after loading the view.
     }
     
