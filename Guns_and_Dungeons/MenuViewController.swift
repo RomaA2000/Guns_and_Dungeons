@@ -23,7 +23,6 @@ class MenuViewController: UIViewController {
         multiPlayerButton.setUpButton(label : "Multi player Texture", color : .black, translatesMask: false)
                shopButton.setUpButton(label : "Shop Texture", color : .black, translatesMask: false)
                settingsButton.setUpButton(label : "Setting Texture", color : .black, translatesMask: false)
-        view.add
         // Do any additional setup after loading the view.
     }
     
