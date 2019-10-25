@@ -12,14 +12,12 @@ import UIKit
 class Panel {
     let buttons : [UIButton]
     let mainView : UIView
-    let center : CGPoint
     init(frame: CGRect) {
-        center = frame.origin
         buttons = []
         mainView = UIView(frame: frame)
         mainView.layer.cornerRadius = 10
         mainView.layer.masksToBounds = true
-        mainView.backgroundColor = .yellow
+        mainView.backgroundColor = .green;
     }
     func addButton() {}
 }
@@ -45,24 +43,24 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
         //temporary
         levelPanel.isScrollEnabled = true
 //        levelPanel.isPagingEnabled = true
-        fillLevelPanel(number: 3)
+        fillLevelPanel(number: 15)
         levelPanel.delegate = self
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let position = targetContentOffset.pointee.x
-        print(position)
-        let first: Int = panels.firstTrueBound(predicate: { (current: Panel) -> Bool in
+        let position = targetContentOffset.pointee.x + (view.bounds.size.width / 2);
+        var first: Int = panels.firstTrueBound(predicate: { (current: Panel) -> Bool in
             return current.mainView.center.x > position
         })
+        var last = first - 1;
         if (first == 0) {
-            
+            last = first
         }
         if (first == panels.count) {
-            
+            first = last;
         }
-        let last = first - 1;
-        
+        let now = abs(panels[last].mainView.center.x - position) < abs(position - panels[first].mainView.center.x) ? last : first
+        targetContentOffset.pointee.x = panels[now].mainView.center.x - (view.bounds.size.width / 2)
     }
     
     func addPanel(locationRect: CGRect) -> UIView {
