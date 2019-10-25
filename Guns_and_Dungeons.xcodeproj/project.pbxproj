@@ -23,6 +23,7 @@
 		7A89F622235A23DC00DEB50A /* MultiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */; };
 		7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F623235A23F700DEB50A /* ShopViewController.swift */; };
 		7A89F626235A241A00DEB50A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F625235A241A00DEB50A /* SettingsViewController.swift */; };
+		7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F627235A41D300DEB50A /* Datastructs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerViewController.swift; sourceTree = "<group>"; };
 		7A89F623235A23F700DEB50A /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7A89F625235A241A00DEB50A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7A89F627235A41D300DEB50A /* Datastructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datastructs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */,
 				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
 				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
+				7A89F627235A41D300DEB50A /* Datastructs.swift */,
 			);
 			path = Guns_and_Dungeons;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */,
 				7A89F620235A1F7600DEB50A /* SinglePlayerViewController.swift in Sources */,
 				37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */,
+				7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */,
 				37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */,
 				37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */,
 				7A89F622235A23DC00DEB50A /* MultiPlayerViewController.swift in Sources */,

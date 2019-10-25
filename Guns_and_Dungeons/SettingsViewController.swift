@@ -6,7 +6,6 @@
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class SettingsViewController : UIViewController {
