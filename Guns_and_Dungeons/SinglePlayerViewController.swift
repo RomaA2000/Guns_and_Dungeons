@@ -52,14 +52,17 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let position = targetContentOffset.pointee.x
         print(position)
-        let last: Int = panels.lastIndex(where: { (current: Panel) -> Bool in
-            return current.mainView.center.x < position
-        }) ?? panels.count - 1
-        let next: Int = last != panels.count - 1 ? last + 1 : panels.count - 1
+        let first: Int = panels.firstTrueBound(predicate: { (current: Panel) -> Bool in
+            return current.mainView.center.x > position
+        })
+        if (first == 0) {
+            
+        }
+        if (first == panels.count) {
+            
+        }
+        let last = first - 1;
         
-        print(last, " ", next)
-        let nearest: CGFloat = (panels[last].center.x + panels[next].center.x < 2 * position) ? panels[last].center.x : panels[next].center.x
-        targetContentOffset.pointee.x = nearest
     }
     
     func addPanel(locationRect: CGRect) -> UIView {

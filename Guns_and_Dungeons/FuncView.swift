@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
+func calcFloat(coord : CGFloat, length : CGFloat, size : CGFloat) -> CGFloat {
+    return coord * length - 0.5 * size;
+}
+
 func calcCenter(coord : CGPoint, frame : CGSize, size : CGSize) -> CGPoint {
-    return CGPoint(x : coord.x * frame.width - 0.5 * size.width,
-                   y: coord.y * frame.height - 0.5 * size.height)
+    return CGPoint(x : calcFloat(coord: coord.x, length: frame.width, size: size.width),
+                   y: calcFloat(coord: coord.y, length: frame.height, size: size.height))
 }
 
 extension UIView {
@@ -33,4 +37,22 @@ extension UIView {
         return result
     }
     
+}
+
+extension Array {
+    func firstTrueBound(predicate: (Element) -> Bool) -> Index {
+        var low = startIndex
+        var high = endIndex
+        while low < high {
+            let mid = index(low, offsetBy: distance(from: low, to: high) / 2)
+            if (predicate(self[mid])) {
+                high = mid
+            } else {
+                low = index(after: mid)
+            }
+        }
+        assert(low >= 0);
+        assert(low <= self.count);
+        return low
+    }
 }
