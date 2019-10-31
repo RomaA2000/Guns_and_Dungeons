@@ -17,7 +17,7 @@ class Panel {
         mainView = UIView(frame: frame)
         mainView.layer.cornerRadius = 10
         mainView.layer.masksToBounds = true
-        mainView.backgroundColor = .yellow
+        mainView.backgroundColor = .green;
     }
     func addButton() {}
 }
@@ -46,11 +46,14 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
         //temporary
         levelPanel.isScrollEnabled = true
 //        levelPanel.isPagingEnabled = true
+
         fillLevelPanel(number: levelNumber)
+
         levelPanel.delegate = self
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
         let position = targetContentOffset.pointee.x + levelPanel.bounds.width / 2 // cause initially pointee.x is hight left corner point
         var targetX: CGFloat = 0;
         if (position <= levelPanel.bounds.width / 2) {
@@ -67,6 +70,7 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
             }
         }
         targetContentOffset.pointee.x = targetX
+
     }
     
     func addPanel(locationRect: CGRect) -> UIView {
