@@ -17,7 +17,6 @@ class MainNavigationController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -27,5 +26,4 @@ class MainNavigationController: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

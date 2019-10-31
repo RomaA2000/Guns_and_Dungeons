@@ -9,72 +9,95 @@
 import Foundation
 import UIKit
 
+class PanelButton : UIButton {
+    let number: Int
+    init(frame: CGRect, num: Int) {
+        number = num
+        super.init(frame: frame)
+        backgroundColor = .red
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class Panel {
-    let buttons : [UIButton]
     let mainView : UIView
+    static let k : CGFloat = CGFloat(1)
+    static let square  : CGFloat = CGFloat(0.1)
+    static let cordinates : [AllParameters] = [
+        AllParameters(centerPoint: CGPoint(x: 0.25, y: 0.25), k: k, square: square),
+        AllParameters(centerPoint: CGPoint(x: 0.75, y: 0.25), k: k, square: square),
+        AllParameters(centerPoint: CGPoint(x: 0.25, y: 0.75), k: k, square: square),
+        AllParameters(centerPoint: CGPoint(x: 0.75, y: 0.75), k: k, square: square)]
+    
     init(frame: CGRect) {
-        buttons = []
         mainView = UIView(frame: frame)
         mainView.layer.cornerRadius = 10
         mainView.layer.masksToBounds = true
-        mainView.backgroundColor = .green;
+        mainView.backgroundColor = .green
     }
-    func addButton() {}
 }
 
 class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
-    
     let levelPanel: UIScrollView = UIScrollView()
     var backButton: UIButton = UIButton()
     var levelNumber: Int = 0
     var marginStart: CGFloat = 0
     var marginMiddle: CGFloat = 0
     var panelWidth: CGFloat = 0
-    // MARK: - когда подгружать информацию о уровнях
     var panels: [Panel] = []
+    static var nowPanel : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
+        view.backgroundColor = .blue
         let k_scroll = view.bounds.width / (0.6 * view.bounds.height)
-        self.view.posSubviewByRect(subView: levelPanel,
+        view.posSubviewByRect(subView: levelPanel,
                                    params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.4), k: k_scroll , square: 0.6))
         levelPanel.backgroundColor = .gray
-        backButton = self.view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
+        backButton = view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
                                          params: AllParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
-        levelNumber = 16
-        //temporary
+        levelNumber = 10
         levelPanel.isScrollEnabled = true
-//        levelPanel.isPagingEnabled = true
-
+        levelPanel.showsHorizontalScrollIndicator = false
         fillLevelPanel(number: levelNumber)
-
+        levelPanel.contentOffset = CGPoint(x: panels[SinglePlayerViewController.nowPanel].mainView.center.x - levelPanel.bounds.width / 2, y: 0)
         levelPanel.delegate = self
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-
-        let position = targetContentOffset.pointee.x + levelPanel.bounds.width / 2 // cause initially pointee.x is hight left corner point
+        let position = targetContentOffset.pointee.x + levelPanel.bounds.width / 2
         var targetX: CGFloat = 0;
-        if (position <= levelPanel.bounds.width / 2) {
-            targetX = panels.first!.mainView.center.x - levelPanel.bounds.width / 2
-        }
-        else {
+        var nearestIdx : Int = 0
+        if (position > levelPanel.bounds.width / 2) {
             let idx = Int((position - levelPanel.bounds.width / 2) / (panelWidth + marginMiddle * 2))
             if (idx >= panels.count - 1) {
-                targetX = panels.last!.mainView.center.x - levelPanel.bounds.width / 2
-            }
-            else {
-                let nearestIdx = position - panels[idx].mainView.center.x < panels[idx + 1].mainView.center.x - position ? idx : idx + 1
-                targetX = panels[nearestIdx].mainView.center.x - levelPanel.bounds.width / 2
+                nearestIdx = panels.count - 1
+            } else {
+                nearestIdx = position - panels[idx].mainView.center.x < panels[idx + 1].mainView.center.x - position ? idx : idx + 1
             }
         }
+        SinglePlayerViewController.nowPanel = nearestIdx
+        targetX = panels[nearestIdx].mainView.center.x - levelPanel.bounds.width / 2
         targetContentOffset.pointee.x = targetX
-
+    }
+    
+    @objc func buttonPressed(sender: PanelButton) {
+        print(sender.number)
+        sender.backgroundColor = .yellow
     }
     
     func addPanel(locationRect: CGRect) -> UIView {
         panels.append(Panel(frame: locationRect))
+        var numerator: Int = 0
+        for i in 0..<4 {
+            let now : PanelButton = PanelButton(frame: CGRect(), num: numerator)
+            panels.last!.mainView.posSubviewByRect(subView: now, params: Panel.cordinates[i])
+            numerator += 1
+            now.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        }
         return panels.last!.mainView
     }
     
@@ -96,7 +119,6 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
     }
     
     @objc func toMenuScreen() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
-    
 }
