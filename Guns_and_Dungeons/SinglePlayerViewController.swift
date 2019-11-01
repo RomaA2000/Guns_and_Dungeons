@@ -69,17 +69,17 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let position = targetContentOffset.pointee.x + levelPanel.bounds.width / 2
         var targetX: CGFloat = 0;
-        var nearestIdx : Int = 0
+        var idx : Int = 0
         if (position > levelPanel.bounds.width / 2) {
-            let idx = Int((position - levelPanel.bounds.width / 2) / (panelWidth + marginMiddle * 2))
+            idx = Int((position - levelPanel.bounds.width / 2) / (panelWidth + marginMiddle * 2))
             if (idx >= panels.count - 1) {
-                nearestIdx = panels.count - 1
+                idx = panels.count - 1
             } else {
-                nearestIdx = position - panels[idx].mainView.center.x < panels[idx + 1].mainView.center.x - position ? idx : idx + 1
+                idx += position - panels[idx].mainView.center.x > panels[idx + 1].mainView.center.x - position ? 0 : 1
             }
         }
-        SinglePlayerViewController.nowPanel = nearestIdx
-        targetX = panels[nearestIdx].mainView.center.x - levelPanel.bounds.width / 2
+        SinglePlayerViewController.nowPanel = idx
+        targetX = panels[idx].mainView.center.x - levelPanel.bounds.width / 2
         targetContentOffset.pointee.x = targetX
     }
     
