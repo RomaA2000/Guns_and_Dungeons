@@ -21,16 +21,28 @@ class PanelButton : UIButton {
     }
 }
 
+class AboutLevels {
+     var nowPanel : Int = 0
+}
+
+class PanelInformation {
+    var cordinates : [AllParameters]
+    var numerator: Int
+    init(x_list : [CGFloat], y_list : [CGFloat], k : CGFloat, s : CGFloat) {
+        cordinates  = []
+        for i in x_list {
+            for j in y_list {
+                cordinates.append(AllParameters(centerPoint: CGPoint(x: i, y: j), k: k, square: s))
+            }
+        }
+        numerator = 0
+    }
+}
+
+
+
 class Panel {
     let mainView : UIView
-    static let k : CGFloat = CGFloat(1)
-    static let square  : CGFloat = CGFloat(0.1)
-    static let cordinates : [AllParameters] = [
-        AllParameters(centerPoint: CGPoint(x: 0.25, y: 0.25), k: k, square: square),
-        AllParameters(centerPoint: CGPoint(x: 0.75, y: 0.25), k: k, square: square),
-        AllParameters(centerPoint: CGPoint(x: 0.25, y: 0.75), k: k, square: square),
-        AllParameters(centerPoint: CGPoint(x: 0.75, y: 0.75), k: k, square: square)]
-    
     init(frame: CGRect) {
         mainView = UIView(frame: frame)
         mainView.layer.cornerRadius = 10
@@ -39,15 +51,24 @@ class Panel {
     }
 }
 
-class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
-    let levelPanel: UIScrollView = UIScrollView()
-    var backButton: UIButton = UIButton()
-    var levelNumber: Int = 0
+class MarnginsInformation {
     var marginStart: CGFloat = 0
     var marginMiddle: CGFloat = 0
     var panelWidth: CGFloat = 0
+}
+
+class LevelScroller {
+    var marginsInformation = MarnginsInformation()
+    
+    func setter(number: UInt) {}
+}
+
+class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
+    let levelPanel: UIScrollView = UIScrollView()
+    var backButton: UIButton = UIButton()
+    var marginsInformation = MarnginsInformation()
+    var aboutLevels : AboutLevels = AboutLevels()
     var panels: [Panel] = []
-    static var nowPanel : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +79,10 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
         levelPanel.backgroundColor = .gray
         backButton = view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
                                          params: AllParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
-        levelNumber = 10
         levelPanel.isScrollEnabled = true
         levelPanel.showsHorizontalScrollIndicator = false
-        fillLevelPanel(number: levelNumber)
-        levelPanel.contentOffset = CGPoint(x: panels[SinglePlayerViewController.nowPanel].mainView.center.x - levelPanel.bounds.width / 2, y: 0)
+        fillLevelPanel()
+        levelPanel.contentOffset = CGPoint(x: panels[aboutLevels.nowPanel].mainView.center.x - levelPanel.bounds.width / 2, y: 0)
         levelPanel.delegate = self
     }
     
@@ -71,14 +91,14 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
         var targetX: CGFloat = 0;
         var idx : Int = 0
         if (position > levelPanel.bounds.width / 2) {
-            idx = Int((position - levelPanel.bounds.width / 2) / (panelWidth + marginMiddle * 2))
+            idx = Int((position - levelPanel.bounds.width / 2) / (marginsInformation.panelWidth + marginsInformation.marginMiddle * 2))
             if (idx >= panels.count - 1) {
                 idx = panels.count - 1
             } else {
-                idx += position - panels[idx].mainView.center.x > panels[idx + 1].mainView.center.x - position ? 0 : 1
+                idx += position - panels[idx].mainView.center.x > panels[idx + 1].mainView.center.x - position ? 1 : 0
             }
         }
-        SinglePlayerViewController.nowPanel = idx
+        aboutLevels.nowPanel = idx
         targetX = panels[idx].mainView.center.x - levelPanel.bounds.width / 2
         targetContentOffset.pointee.x = targetX
     }
@@ -88,35 +108,36 @@ class SinglePlayerViewController : UIViewController, UIScrollViewDelegate {
         sender.backgroundColor = .yellow
     }
     
-    func addPanel(locationRect: CGRect) -> UIView {
-        panels.append(Panel(frame: locationRect))
-        var numerator: Int = 0
-        for i in 0..<4 {
-            let now : PanelButton = PanelButton(frame: CGRect(), num: numerator)
-            panels.last!.mainView.posSubviewByRect(subView: now, params: Panel.cordinates[i])
-            numerator += 1
-            now.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        }
-        return panels.last!.mainView
-    }
+    func addPanel(locationRect: CGRect, information: PanelInformation) -> UIView {
+         panels.append(Panel(frame: locationRect))
+         for i in 0..<4 {
+             let now : PanelButton = PanelButton(frame: CGRect(), num: information.numerator)
+             panels.last!.mainView.posSubviewByRect(subView: now, params: information.cordinates[i])
+             information.numerator += 1
+             now.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+         }
+         return panels.last!.mainView
+     }
     
-    func fillLevelPanel(number: Int) {
+    func fillLevelPanel() {
+        let number = 10
         let panelPart : CGFloat = 0.6
-        var imageRect : CGRect = CGRect(x: 0, y: 0, width: levelPanel.bounds.width * panelPart, height: levelPanel.bounds.height)
-        panelWidth = imageRect.width
-        marginMiddle = levelPanel.bounds.width * 0.05
-        marginStart = (levelPanel.bounds.width - imageRect.width) / 2
+          var imageRect : CGRect = CGRect(x: 0, y: 0, width: levelPanel.bounds.width * panelPart, height: levelPanel.bounds.height)
+        let information: PanelInformation = PanelInformation(x_list: [CGFloat(0.30), CGFloat(0.70)], y_list: [CGFloat(0.25), CGFloat(0.75)], k: CGFloat(1), s: CGFloat(0.1))
+        marginsInformation.panelWidth = imageRect.width
+        marginsInformation.marginMiddle = levelPanel.bounds.width * 0.05
+        marginsInformation.marginStart = (levelPanel.bounds.width - imageRect.width) / 22
         for i in 0..<number {
             if (i == 0) {
-                imageRect.origin.x += marginStart - marginMiddle
+                imageRect.origin.x += marginsInformation.marginStart - marginsInformation.marginMiddle
             }
-            imageRect.origin.x += marginMiddle
-            levelPanel.addSubview(addPanel(locationRect: imageRect))
-            imageRect.origin.x += imageRect.width + marginMiddle
+            imageRect.origin.x += marginsInformation.marginMiddle
+            levelPanel.addSubview(addPanel(locationRect: imageRect, information: information))
+            imageRect.origin.x += imageRect.width + marginsInformation.marginMiddle
         }
-        levelPanel.contentSize = CGSize(width: marginStart * 2 + marginMiddle * CGFloat(2 * (number - 1)) + imageRect.width * CGFloat(number), height: imageRect.height)
+        levelPanel.contentSize = CGSize(width: marginsInformation.marginStart * 2 + marginsInformation.marginMiddle * CGFloat(2 * (number - 1)) + imageRect.width * CGFloat(number), height: imageRect.height)
     }
-    
+
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
     }
