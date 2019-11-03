@@ -1,9 +1,9 @@
 //
-//  FuncView.swift
-//  Guns_and_Dungeons
+// FuncView.swift
+// Guns_and_Dungeons
 //
-//  Created by Роман Агеев on 18.10.2019.
-//  Copyright © 2019 Роман Агеев. All rights reserved.
+// Created by Александр Потапов on 18.10.2019.
+// Copyright © 2019 Александр Потапов. All rights reserved.
 //
 
 import Foundation
@@ -18,14 +18,18 @@ func calcCenter(coord : CGPoint, frame : CGSize, size : CGSize) -> CGPoint {
                    y: calcFloat(coord: coord.y, length: frame.height, size: size.height))
 }
 
+func getRect(parentFrame : CGRect, params : AllParameters) -> CGRect {
+    let s : CGFloat = params.square * parentFrame.width * parentFrame.height
+    let height : CGFloat = sqrt(CGFloat(s) / params.k)
+    let width : CGFloat = params.k * height
+    let size = CGSize(width: width, height: height)
+    let center = calcCenter(coord: params.centerPoint, frame: parentFrame.size, size: size)
+    return CGRect(origin: center, size: size)
+}
+
 extension UIView {
     func posSubviewByRect(subView : UIView, params : AllParameters) {
-        let s : CGFloat = params.square * self.frame.width * self.frame.height
-        let height : CGFloat = sqrt(CGFloat(s) / params.k)
-        let width : CGFloat = params.k * height
-        let size = CGSize(width: width, height: height)
-        let center = calcCenter(coord: params.centerPoint, frame: self.frame.size, size: size)
-        subView.frame = CGRect(origin: center, size: size)
+        subView.frame = getRect(parentFrame: self.frame, params: params)
         self.addSubview(subView)
     }
     
