@@ -10,13 +10,18 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 10, rows: 10, tileSize: CGSize(width: 128, height: 128))
     
-    var background: SKSpriteNode = {
-        var sprite = SKSpriteNode(imageNamed: "fon")
-        sprite.position = CGPoint.zero
-        sprite.scale(to: CGSize(width: 100, height: 100))
-        return sprite
-    }()
+    func createNoiseMap() -> GKNoiseMap {
+        //Get our noise source, this can be customized further
+        let source = GKPerlinNoiseSource()
+        //Initalize our GKNoise object with our source
+        let noise = GKNoise.init(source)
+        //Create our map,
+        //sampleCount = to the number of tiles in the grid (row, col)
+        let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(11, 11), seamless: true)
+        return map
+    }
     
     var player: SKSpriteNode = {
         var sprite = SKSpriteNode(imageNamed: "bot")
@@ -34,6 +39,27 @@ class GameScene: SKScene {
     }()
     
     override func didMove(to view: SKView) {
+        let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
+        let noiseMap = createNoiseMap()
+        map.enableAutomapping = true
+        for col in 0..<10 {
+            for row in 0..<10 {
+                let val = noiseMap.value(at: vector2(Int32(row),Int32(col)))
+                switch val {
+                case -1.0..<(0.0):
+                    if let g = tileSet.tileGroups.first(where: {
+                        ($0.name ?? "") == "Water"}) {
+                        map.setTileGroup(g, forColumn: col, row: row)
+                    }
+                default:
+                    if let g = tileSet.tileGroups.first(where: {
+                        ($0.name ?? "") == "Grass"}) {
+                        map.setTileGroup(g, forColumn: col, row: row)
+                    }
+                }
+             }
+        }
+        addChild(map)
         addChild(player)
         addChild(grena)
     }

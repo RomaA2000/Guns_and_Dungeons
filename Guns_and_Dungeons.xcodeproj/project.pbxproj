@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372651422374B4E5007C841D /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 372651412374B4E5007C841D /* MyTileSet.sks */; };
 		37606AC42359B98800FEAE6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AC32359B98800FEAE6D /* AppDelegate.swift */; };
 		37606AC62359B98800FEAE6D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37606AC52359B98800FEAE6D /* GameScene.sks */; };
 		37606AC82359B98800FEAE6D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37606AC72359B98800FEAE6D /* Actions.sks */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		372651412374B4E5007C841D /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		37606AC02359B98800FEAE6D /* Guns_and_Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guns_and_Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37606AC32359B98800FEAE6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37606AC52359B98800FEAE6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
 				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
 				7A89F627235A41D300DEB50A /* Datastructs.swift */,
+				372651412374B4E5007C841D /* MyTileSet.sks */,
 			);
 			path = Guns_and_Dungeons;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				37606AC62359B98800FEAE6D /* GameScene.sks in Resources */,
 				37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */,
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
+				372651422374B4E5007C841D /* MyTileSet.sks in Resources */,
 				37606AC82359B98800FEAE6D /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

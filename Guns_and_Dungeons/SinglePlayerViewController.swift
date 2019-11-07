@@ -12,11 +12,15 @@ protocol Callable: class {
     func call(number: Int)
 }
 
-class PanelButton : UIButton {
+protocol PanelSubview: UIView {
+    init(panel: Callable?, frame: CGRect, num: Int)
+}
+
+class PanelButton : UIButton, PanelSubview {
     let number: Int
     weak var panel: Callable?
     
-    init(panel: Callable?, frame: CGRect = CGRect(), num: Int) {
+    required init(panel: Callable?, frame: CGRect, num: Int) {
         number = num
         self.panel = panel
         super.init(frame: frame)
@@ -48,16 +52,15 @@ class PanelButton : UIButton {
     
 }
 
-class Panel: UIView, Callable {
-    var buttons: [PanelButton] = []
+class Panel<Element : PanelSubview>: UIView, Callable {
+    var buttons: [Element] = []
     weak var scrollView: Callable? = nil
     
     init(scrollView: Callable?, panelArgs: PanelInformation) {
         self.scrollView = scrollView
         super.init(frame: panelArgs.panelFrame)
         for buttonNumber in panelArgs.numerator..<panelArgs.numerator + 4 {
-            let button: PanelButton = PanelButton(panel: self, num: buttonNumber)
-            button.setTitle(String(buttonNumber), for: .normal)
+            let button = Element(panel: self, frame : CGRect(), num: buttonNumber)
             self.posSubviewByRect(subView: button, params: panelArgs.cordinates[buttonNumber % 4])
             buttons.append(button)
         }
@@ -109,7 +112,7 @@ class PanelsScrollView : UIScrollView, Callable {
     }
     
     func addPanel(panelArgs: PanelInformation) {
-        let panel: Panel = Panel(scrollView: self, panelArgs: panelArgs)
+        let panel = Panel<PanelButton>(scrollView: self, panelArgs: panelArgs)
         panel.layer.cornerRadius = 10
         panel.layer.masksToBounds = true
         panel.backgroundColor = .green
