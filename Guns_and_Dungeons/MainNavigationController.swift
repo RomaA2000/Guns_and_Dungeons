@@ -2,8 +2,8 @@
 //  MainNavigationController.swift
 //  Guns_and_Dungeons
 //
-//  Created by Роман Агеев on 18.10.2019.
-//  Copyright © 2019 Роман Агеев. All rights reserved.
+//  Created by Александр Потапов on 18.10.2019.
+//  Copyright © 2019 Александр Потапов. All rights reserved.
 //
 
 import UIKit
@@ -15,6 +15,11 @@ class MainNavigationController: UINavigationController {
         setToolbarHidden(true, animated: true)
         setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
+    }
+    
+    func toGameSceneViewController() {
+        popToRootViewController(animated: false)
+        pushViewController(GameViewController(), animated: false)
     }
     
     /*

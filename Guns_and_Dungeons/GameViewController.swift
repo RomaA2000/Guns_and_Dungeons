@@ -11,6 +11,13 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    override func loadView() {
+        let sceneView = SKView()
+        sceneView.backgroundColor = .white
+        
+        self.view = sceneView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +40,7 @@ class GameViewController: UIViewController {
     }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

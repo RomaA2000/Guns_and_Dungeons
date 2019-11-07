@@ -8,24 +8,63 @@
 import Foundation
 import UIKit
 
+protocol Callable: class {
+    func call(number: Int)
+}
+
 class PanelButton : UIButton {
     let number: Int
-    init(frame: CGRect = CGRect(), num: Int) {
+    weak var panel: Callable?
+    
+    init(panel: Callable?, frame: CGRect = CGRect(), num: Int) {
         number = num
+        self.panel = panel
         super.init(frame: frame)
         backgroundColor = .red
+        addTarget(self, action: #selector(buttonRelisedInside(sender:)), for: .touchUpInside)
+        addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchDown)
+        addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc func buttonPressed(sender: PanelButton) {
+        print("touched: ", sender.number)
+        backgroundColor = .yellow
+    }
+    
+    @objc func buttonReleasedOutside(sender: PanelButton) {
+        print("realised outsied")
+        backgroundColor = .red
+    }
+    
+    @objc func buttonRelisedInside(sender: PanelButton) {
+        panel?.call(number: sender.number)
+        sender.backgroundColor = .red
+    }
+    
+    
 }
 
-class Panel: UIView {
+class Panel: UIView, Callable {
     var buttons: [PanelButton] = []
+    weak var scrollView: Callable? = nil
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(scrollView: Callable?, panelArgs: PanelInformation) {
+        self.scrollView = scrollView
+        super.init(frame: panelArgs.panelFrame)
+        for buttonNumber in panelArgs.numerator..<panelArgs.numerator + 4 {
+            let button: PanelButton = PanelButton(panel: self, num: buttonNumber)
+            button.setTitle(String(buttonNumber), for: .normal)
+            self.posSubviewByRect(subView: button, params: panelArgs.cordinates[buttonNumber % 4])
+            buttons.append(button)
+        }
+    }
+    
+    func call(number: Int) {
+        scrollView?.call(number: number)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,12 +76,7 @@ class AboutLevels {
      var nowPanel : Int = 0
 }
 
-protocol Callable: class {
-    func itemSelected(number: Int)
-}
-
-class PanelsScrollView : UIScrollView {
-    
+class PanelsScrollView : UIScrollView, Callable {
     var panels: [UIView] = []
     let margins: MarnginsInformation
     weak var viewConroller: Callable? = nil
@@ -70,44 +104,23 @@ class PanelsScrollView : UIScrollView {
         
         contentSize = CGSize(width: 2 * margins.marginStart + CGFloat(panelsNumber) * margins.panelWidth + CGFloat(panelsNumber - 1) * margins.marginMiddle, height: bounds.height)
         isScrollEnabled = true;
-//        backgroundColor = .gray
         showsHorizontalScrollIndicator = false
         delegate = self
     }
     
     func addPanel(panelArgs: PanelInformation) {
-        let panel: Panel = Panel(frame: panelArgs.panelFrame)
+        let panel: Panel = Panel(scrollView: self, panelArgs: panelArgs)
         panel.layer.cornerRadius = 10
         panel.layer.masksToBounds = true
         panel.backgroundColor = .green
-        for buttonNumber in panelArgs.numerator..<panelArgs.numerator + 4 {
-            let button: PanelButton = PanelButton(num: buttonNumber)
-            button.addTarget(self, action: #selector(buttonRelisedInside(sender:)), for: .touchUpInside)
-            button.addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchDown)
-            button.addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)
-            button.setTitle(String(buttonNumber), for: .normal)
-            panel.posSubviewByRect(subView: button, params: panelArgs.cordinates[buttonNumber % 4])
-            panel.buttons.append(button)
-        }
         addSubview(panel)
         panels.append(panel)
     }
     
-    //Mark: - Иногда при резком отпускании вбок кнопка обратно не отжимается, потом поправить
+    //MARK: - Иногда при резком отпускании вбок кнопка обратно не отжимается, потом поправить
     
-    @objc func buttonPressed(sender: PanelButton) {
-        print("touched: ", sender.number)
-        sender.backgroundColor = .yellow
-    }
-    
-    @objc func buttonReleasedOutside(sender: PanelButton) {
-        print("realised outsied")
-        sender.backgroundColor = .red
-    }
-    
-    @objc func buttonRelisedInside(sender: PanelButton) {
-        viewConroller?.itemSelected(number: sender.number)
-        sender.backgroundColor = .red
+    func call(number: Int) {
+        viewConroller?.call(number: number)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -160,8 +173,9 @@ class SinglePlayerViewController : UIViewController, Callable {
                                  params: AllParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
     }
     
-    func itemSelected(number: Int) {
+    func call(number: Int) {
         print("to level: ", number)
+        (navigationController as! MainNavigationController).toGameSceneViewController()
     }
 
     @objc func toMenuScreen() {
@@ -177,9 +191,9 @@ class PanelInformation {
     init(frame: CGRect, x_list : [CGFloat], y_list : [CGFloat], k : CGFloat, s : CGFloat) {
         cordinates  = []
         panelFrame = frame
-        for i in x_list {
-            for j in y_list {
-                cordinates.append(AllParameters(centerPoint: CGPoint(x: i, y: j), k: k, square: s))
+        for i in y_list {
+            for j in x_list {
+                cordinates.append(AllParameters(centerPoint: CGPoint(x: j, y: i), k: k, square: s))
             }
         }
         numerator = 0
