@@ -2,7 +2,7 @@
 //  SinglePlayerViewController.swift
 //  Guns_and_Dungeons
 //
-//  Copyright © 2019 Александр Потапов (который раз уже). All rights reserved.
+//  Copyright © 2019 Александр Потапов . All rights reserved.
 //
 
 import Foundation

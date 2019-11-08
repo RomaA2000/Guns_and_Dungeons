@@ -2,9 +2,10 @@
 //  GameScene.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 18.10.2019.
-//  Copyright © 2019 Алесандр Потапов. All rights reserved.
+//  Created by Роман Агеев on 18.10.2019.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
+
 
 import SpriteKit
 import GameplayKit
@@ -19,12 +20,12 @@ class GameScene: SKScene {
         let noise = GKNoise.init(source)
         //Create our map,
         //sampleCount = to the number of tiles in the grid (row, col)
-        let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(11, 11), seamless: true)
+        let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(10, 10), seamless: true)
         return map
     }
     
     var player: SKSpriteNode = {
-        var sprite = SKSpriteNode(imageNamed: "bot")
+        var sprite = SKSpriteNode(imageNamed: "grena")
         sprite.position = CGPoint.zero
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody!.affectedByGravity = false;
@@ -46,14 +47,14 @@ class GameScene: SKScene {
             for row in 0..<10 {
                 let val = noiseMap.value(at: vector2(Int32(row),Int32(col)))
                 switch val {
-                case -1.0..<(0.0):
+                case -1.0..<(0.3):
                     if let g = tileSet.tileGroups.first(where: {
-                        ($0.name ?? "") == "Water"}) {
+                        ($0.name ?? "") == ""}) {
                         map.setTileGroup(g, forColumn: col, row: row)
                     }
                 default:
                     if let g = tileSet.tileGroups.first(where: {
-                        ($0.name ?? "") == "Grass"}) {
+                        ($0.name ?? "") == "Sand"}) {
                         map.setTileGroup(g, forColumn: col, row: row)
                     }
                 }
