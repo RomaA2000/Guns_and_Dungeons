@@ -38,6 +38,7 @@ class GameScene: SKScene {
         addChild(grena)
     }
     
+    
     func touchDown(atPoint pos : CGPoint) {
         
     }
