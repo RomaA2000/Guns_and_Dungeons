@@ -13,6 +13,11 @@ import GameplayKit
 class GameScene: SKScene {
     var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 10, rows: 10, tileSize: CGSize(width: 128, height: 128))
     
+    let cameraNode: SKCameraNode = {
+        let cameraNode = SKCameraNode()
+        return cameraNode
+    }()
+    
     func createNoiseMap() -> GKNoiseMap {
         //Get our noise source, this can be customized further
         let source = GKPerlinNoiseSource()
@@ -25,7 +30,7 @@ class GameScene: SKScene {
     }
     
     var player: SKSpriteNode = {
-        var sprite = SKSpriteNode(imageNamed: "grena")
+        var sprite = SKSpriteNode(imageNamed: "bot")
         sprite.position = CGPoint.zero
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody!.affectedByGravity = false;
@@ -63,8 +68,15 @@ class GameScene: SKScene {
         addChild(map)
         addChild(player)
         addChild(grena)
+//        addChild(cameraNode)
+        camera = cameraNode
+        player.addChild(cameraNode)
+        print(size)
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        
+    }
     
     func touchDown(atPoint pos : CGPoint) {
         
@@ -82,8 +94,11 @@ class GameScene: SKScene {
         if let touch = touches.first {
             let location = touch.location(in: self)
             print(location)
+            print(player.position)
+            print("//")
             let move = SKAction.move(to: location, duration: 1)
             player.run(move)
+//            scene?.run(move)
         }
     }
     
@@ -92,14 +107,10 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+//        camera?.position = touches.first!.location(in: self)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
 }
