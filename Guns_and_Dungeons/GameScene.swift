@@ -12,7 +12,12 @@ import GameplayKit
 
 class GameScene: SKScene {
     var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 20, rows: , tileSize: CGSize(width:                128, height: 128))
-    
+
+    let cameraNode: SKCameraNode = {
+        let cameraNode = SKCameraNode()
+        return cameraNode
+    }()
+
     func createNoiseMap() -> GKNoiseMap {
         //Get our noise source, this can be customized further
         let source = GKPerlinNoiseSource()
@@ -23,22 +28,22 @@ class GameScene: SKScene {
         let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(100, 100), seamless: true)
         return map
     }
-    
+
     var player: SKSpriteNode = {
-        var sprite = SKSpriteNode(imageNamed: "grena")
+        var sprite = SKSpriteNode(imageNamed: "bot")
         sprite.position = CGPoint.zero
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody!.affectedByGravity = false;
         return sprite
     }()
-    
+
     var grena: SKSpriteNode = {
         var sprite = SKSpriteNode(imageNamed: "grena")
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody!.affectedByGravity = false;
         return sprite
     }()
-    
+
     override func didMove(to view: SKView) {
         let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
         let noiseMap = createNoiseMap()
@@ -63,41 +68,49 @@ class GameScene: SKScene {
         addChild(map)
         addChild(player)
         addChild(grena)
+//        addChild(cameraNode)
+        camera = cameraNode
+        player.addChild(cameraNode)
+        print(size)
     }
-    
+
+    override func update(_ currentTime: TimeInterval) {
+
+    }
+
     func touchDown(atPoint pos : CGPoint) {
-        
+
     }
-    
+
     func touchMoved(toPoint pos : CGPoint) {
-        
+
     }
-    
+
     func touchUp(atPoint pos : CGPoint) {
-        
+
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.location(in: self)
-            let move = SKAction.move(to: location, duration: 5)
+            print(location)
+            print(player.position)
+            print("//")
+            let move = SKAction.move(to: location, duration: 1)
             player.run(move)
+//            scene?.run(move)
         }
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+//        camera?.position = touches.first!.location(in: self)
     }
-    
+
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+
     }
 }
