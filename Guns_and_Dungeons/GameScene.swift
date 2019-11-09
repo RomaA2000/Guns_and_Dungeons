@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 10, rows: 10, tileSize: CGSize(width: 128, height: 128))
+    var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 20, rows: , tileSize: CGSize(width:                128, height: 128))
     
     func createNoiseMap() -> GKNoiseMap {
         //Get our noise source, this can be customized further
@@ -20,7 +20,7 @@ class GameScene: SKScene {
         let noise = GKNoise.init(source)
         //Create our map,
         //sampleCount = to the number of tiles in the grid (row, col)
-        let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(10, 10), seamless: true)
+        let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(100, 100), seamless: true)
         return map
     }
     
@@ -43,8 +43,8 @@ class GameScene: SKScene {
         let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
         let noiseMap = createNoiseMap()
         map.enableAutomapping = true
-        for col in 0..<10 {
-            for row in 0..<10 {
+        for col in 0..<100 {
+            for row in 0..<100 {
                 let val = noiseMap.value(at: vector2(Int32(row),Int32(col)))
                 switch val {
                 case -1.0..<(0.3):
@@ -80,8 +80,7 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.location(in: self)
-            print(location)
-            let move = SKAction.move(to: location, duration: 1)
+            let move = SKAction.move(to: location, duration: 5)
             player.run(move)
         }
     }
