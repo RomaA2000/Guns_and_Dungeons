@@ -10,14 +10,18 @@
 import SpriteKit
 import GameplayKit
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
+
+    let moveJoystick = AnalogJoystick(withDiameter: 100)
+
     var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 10, rows: 10, tileSize: CGSize(width:                128, height: 128))
 
     let cameraNode: SKCameraNode = {
         let cameraNode = SKCameraNode()
         return cameraNode
     }()
-    
+
     func createNoiseMap() -> GKNoiseMap {
         //Get our noise source, this can be customized further
         let source = GKPerlinNoiseSource()
@@ -41,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }()
 
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
         let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
         let noiseMap = createNoiseMap()
         map.enableAutomapping = true
@@ -61,7 +66,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
              }
         }
-        
         addChild(map)
         addChild(player)
         addChild(grena)
@@ -69,79 +73,83 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(wall)
         camera = cameraNode
         player.addChild(cameraNode)
-        print(size)
-        physicsWorld.contactDelegate = self
+        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width, height: frame.height))
+        moveJoystickHiddenArea.joystick = moveJoystick
+        moveJoystick.isMoveable = true
+        player.addChild(moveJoystickHiddenArea)
+        view.isMultipleTouchEnabled = true
     }
-    
-    func explode(bullet: SKNode, enemy: SKNode) {
-        bullet.removeFromParent()
-        print("explode")
-    }
-    
-    
-    func didBegin(_ contact: SKPhysicsContact) {
-        print("contact")
-        if contact.bodyA.node?.name == "bullet" {
-            explode(bullet: contact.bodyA.node!, enemy: contact.bodyB.node!)
-        } else if contact.bodyB.node?.name == "bullet" {
-            explode(bullet: contact.bodyB.node!, enemy: contact.bodyA.node!)
-        }
-        if (contact.bodyA.node?.name == "wall" && contact.bodyB.node?.name == "player") {
-            print("p vs w")
-            (contact.bodyB.node as? Player)!.removeAction(forKey: "walk")
-        } else if (contact.bodyB.node?.name == "wall" && contact.bodyA.node?.name == "player") {
-            print("p vs w")
-            (contact.bodyA.node as? Player)!.removeAction(forKey: "walk")
-            
-        }
-    }
-    
+
+//    func explode(bullet: SKNode, enemy: SKNode) {
+//        bullet.removeFromParent()
+//        print("explode")
+//    }
+
+
+//    func didBegin(_ contact: SKPhysicsContact) {
+//        print("contact")
+//        if contact.bodyA.node?.name == "bullet" {
+//            explode(bullet: contact.bodyA.node!, enemy: contact.bodyB.node!)
+//        } else if contact.bodyB.node?.name == "bullet" {
+//            explode(bullet: contact.bodyB.node!, enemy: contact.bodyA.node!)
+//        }
+//        if (contact.bodyA.node?.name == "wall" && contact.bodyB.node?.name == "player") {
+//            print("p vs w")
+//            (contact.bodyB.node as? Player)!.removeAction(forKey: "walk")
+//        } else if (contact.bodyB.node?.name == "wall" && contact.bodyA.node?.name == "player") {
+//            print("p vs w")
+//            (contact.bodyA.node as? Player)!.removeAction(forKey: "walk")
+//
+//        }
+//    }
+
     override func update(_ currentTime: TimeInterval) {
-//        player.physicsBody?.velocity
-    }
-
-    func touchDown(atPoint pos : CGPoint) {
-        
-    }
-
-    func touchMoved(toPoint pos : CGPoint) {
 
     }
 
-    func touchUp(atPoint pos : CGPoint) {
-        
-    }
+//    func touchDown(atPoint pos : CGPoint) {
+//
+//    }
+//
+//    func touchMoved(toPoint pos : CGPoint) {
+//
+//    }
+//
+//    func touchUp(atPoint pos : CGPoint) {
+//
+//    }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let location = touch.location(in: self)
-            let move = SKAction.move(to: location, duration: 1)
-            
-            
-            player.zRotation += 0.5
-            camera?.zRotation -= 0.5
-        
-            player.run(move)
-            player.startMove()
-            
-            let bullet = Bullet(atlasName: "AnimatedTextures")
-            bullet.name = "bullet"
-            bullet.position = CGPoint(x: player.position.x + 50, y: player.position.y)
-            addChild(bullet)
-            let action = SKAction.move(by: CGVector(dx: 1000, dy: 0), duration: 2)
-            bullet.physicsBody?.contactTestBitMask = bullet.physicsBody!.collisionBitMask
-            bullet.run(action)
-        }
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        camera?.position = touches.first!.location(in: self)
-        player.stopMove()
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+//            let location = touch.location(in: self)
+//            let move = SKAction.move(to: location, duration: 1)
+//
+//
+//            player.zRotation += 0.5
+//            camera?.zRotation -= 0.5
+//
+//            player.run(move)
+//            player.startMove()
+//
+//            let bullet = Bullet(atlasName: "AnimatedTextures")
+//            bullet.name = "bullet"
+//            bullet.position = CGPoint(x: player.position.x + 50, y: player.position.y)
+//            addChild(bullet)
+//            let action = SKAction.move(by: CGVector(dx: 1000, dy: 0), duration: 2)
+//            bullet.physicsBody?.contactTestBitMask = bullet.physicsBody!.collisionBitMask
+//            bullet.run(action)
+//        }
+////    }
+//
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+////        camera?.position = touches.first!.location(in: self)
+//        player.stopMove()
+//    }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 
