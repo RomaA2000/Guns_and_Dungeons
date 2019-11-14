@@ -10,10 +10,10 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
-    
+
     let walkAnimation: SKAction
     var textures: [SKTexture] = []
-    
+
     init(atlasName: String) {
         let textureAtlas = SKTextureAtlas(named: atlasName)
         for i in 0...textureAtlas.textureNames.count - 1 {
