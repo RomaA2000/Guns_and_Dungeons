@@ -1,18 +1,18 @@
 //
-//  Player.swift
+//  Bullet.swift
 //  Guns_and_Dungeons
 //
-//  Created by Роман Агеев on 09.11.2019.
+//  Created by Александр Потапов on 11.11.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class Player: SKSpriteNode {
+class Bullet: SKSpriteNode {
     
-    let walkAnimation: SKAction
     var textures: [SKTexture] = []
+    var flyAnimation: SKAction
     
     init(atlasName: String) {
         let textureAtlas = SKTextureAtlas(named: atlasName)
@@ -20,30 +20,25 @@ class Player: SKSpriteNode {
             let name = "bot3a\(i + 1).png"
             textures.append(SKTexture(imageNamed: name))
         }
-        walkAnimation = SKAction.repeatForever(SKAction.animate(with: textures,
+        flyAnimation = SKAction.repeatForever(SKAction.animate(with: textures,
                                                                 timePerFrame: 0.1,
                                                                 resize: false,
                                                                 restore: true))
         
-        super.init(texture: textures.first!, color: .black, size: textures.first!.size())
+        super.init(texture: SKTexture(imageNamed: "rocket1"), color: .black, size: SKTexture(imageNamed: "rocket1").size())
         position = CGPoint(x: 100, y: 100)
         physicsBody = SKPhysicsBody(circleOfRadius: textures.first!.size().width / 2)
         physicsBody?.affectedByGravity = false
-        name = "player"
 //        blendMode = .replace // if we have no alpha components in sprite's texturea
-    }
-    
-    func startMove() {
-        run(walkAnimation, withKey: "walk")
-    }
-    
-    func stopMove() {
-        removeAction(forKey: "walk")
-        texture = textures.first!
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        
+        print("kek")
     }
     
 }

@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let menuViewController = MenuViewController()
-        mainNavigationController = MainNavigationController(rootViewController: menuViewController)
+//        let menuViewController = MenuViewController()
+        let gameViewController = GameViewController()
+        mainNavigationController = MainNavigationController(rootViewController: gameViewController)
         window?.rootViewController = mainNavigationController
         window?.makeKeyAndVisible()
         // Override point for customization after application launch.
