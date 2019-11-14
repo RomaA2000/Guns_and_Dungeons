@@ -105,7 +105,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //    }
 
     override func update(_ currentTime: TimeInterval) {
-
+        if (moveJoystick.velocity != CGPoint.zero) {
+            player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x, dy: moveJoystick.velocity.y)
+        }
     }
 
 //    func touchDown(atPoint pos : CGPoint) {
