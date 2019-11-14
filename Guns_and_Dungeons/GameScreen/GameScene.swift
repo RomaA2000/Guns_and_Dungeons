@@ -124,14 +124,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.run(move)
             player.startMove()
             
-            
-            
             let bullet = Bullet(atlasName: "AnimatedTextures")
             bullet.name = "bullet"
             bullet.position = CGPoint(x: player.position.x + 50, y: player.position.y)
             addChild(bullet)
             let action = SKAction.move(by: CGVector(dx: 1000, dy: 0), duration: 2)
-            bullet.physicsBody?.contactTestBitMask = bullet.physicsBody!.collisionBitMask 
+            bullet.physicsBody?.contactTestBitMask = bullet.physicsBody!.collisionBitMask
             bullet.run(action)
         }
     }

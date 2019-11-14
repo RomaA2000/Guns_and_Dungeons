@@ -9,13 +9,9 @@
 import Foundation
 import SpriteKit
 
-class Unit: SKSpriteNode {
-    
-    var walkAnimation: SKAction? = nil
-    var staticAnimation: SKAction? = nil;
-    var defaultTexture: SKTexture? = nil;
-    
-    
+protocol AnimatedUnit {
+    var walkAnimation: SKAction? { get }
+    var standAnimation: SKAction? { get }
     
     
 }
