@@ -8,21 +8,27 @@
 import Foundation
 import UIKit
 
+extension UIResponder {
+    func parent<T>(implementing proto: T.Type) -> T? {
+        return sequence(first: self) { $0.next }
+            .dropFirst()
+            .first { $0 is T } as? T
+    }
+}
+
 protocol Callable: class {
     func call(number: Int)
 }
 
 protocol PanelSubview: UIView {
-    init(panel: Callable?, frame: CGRect, num: Int)
+    init(frame: CGRect, num: Int)
 }
 
 class PanelButton : UIButton, PanelSubview {
     let number: Int
-    weak var panel: Callable?
     
-    required init(panel: Callable?, frame: CGRect, num: Int) {
+    required init(frame: CGRect, num: Int) {
         number = num
-        self.panel = panel
         super.init(frame: frame)
         backgroundColor = .red
         addTarget(self, action: #selector(buttonRelisedInside(sender:)), for: .touchUpInside)
@@ -45,29 +51,21 @@ class PanelButton : UIButton, PanelSubview {
     }
     
     @objc func buttonRelisedInside(sender: PanelButton) {
-        panel?.call(number: sender.number)
+        parent(implementing: Callable.self)?.call(number: sender.number)
         sender.backgroundColor = .red
     }
-    
-    
 }
 
-class Panel<Element : PanelSubview>: UIView, Callable {
+class Panel<Element : PanelSubview>: UIView {
     var buttons: [Element] = []
-    weak var scrollView: Callable? = nil
     
-    init(scrollView: Callable?, panelArgs: PanelInformation) {
-        self.scrollView = scrollView
+    init(panelArgs: PanelInformation) {
         super.init(frame: panelArgs.panelFrame)
         for buttonNumber in panelArgs.numerator..<panelArgs.numerator + 4 {
-            let button = Element(panel: self, frame : CGRect(), num: buttonNumber)
+            let button = Element(frame : CGRect(), num: buttonNumber)
             self.posSubviewByRect(subView: button, params: panelArgs.cordinates[buttonNumber % 4])
             buttons.append(button)
         }
-    }
-    
-    func call(number: Int) {
-        scrollView?.call(number: number)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,18 +77,16 @@ class AboutLevels {
      var nowPanel : Int = 0
 }
 
-class PanelsScrollView : UIScrollView, Callable {
+class PanelsScrollView : UIScrollView {
     var panels: [UIView] = []
     let margins: MarnginsInformation
-    weak var viewConroller: Callable? = nil
     
     override init(frame: CGRect = CGRect()) {
         margins = MarnginsInformation()
         super.init(frame: frame)
     }
     
-    init(viewConterller: Callable?, frame: CGRect, panelsNumber: Int, margins: MarnginsInformation) {
-        self.viewConroller = viewConterller
+    init(frame: CGRect, panelsNumber: Int, margins: MarnginsInformation) {
         self.margins = margins
         super.init(frame: frame)
         let locationRect: CGRect = CGRect(x: margins.marginStart, y: 0, width: margins.panelWidth, height: bounds.height)
@@ -112,7 +108,7 @@ class PanelsScrollView : UIScrollView, Callable {
     }
     
     func addPanel(panelArgs: PanelInformation) {
-        let panel = Panel<PanelButton>(scrollView: self, panelArgs: panelArgs)
+        let panel = Panel<PanelButton>(panelArgs: panelArgs)
         panel.layer.cornerRadius = 10
         panel.layer.masksToBounds = true
         panel.backgroundColor = .green
@@ -121,11 +117,6 @@ class PanelsScrollView : UIScrollView, Callable {
     }
     
     //MARK: - Иногда при резком отпускании вбок кнопка обратно не отжимается, потом поправить
-    
-    func call(number: Int) {
-        viewConroller?.call(number: number)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -167,7 +158,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         let margins: MarnginsInformation = MarnginsInformation(marginStart: (scrollFrame.width - panelWidth) / 2,
                                                          marginMiddle: scrollFrame.width * 0.05,
                                                          panelWidth: scrollFrame.width * 0.6)
-        levelPanel = PanelsScrollView(viewConterller: self, frame: getRect(parentFrame: view.bounds,
+        levelPanel = PanelsScrollView(frame: getRect(parentFrame: view.bounds,
                                                 params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
                                                                       k: k_scroll , square: 0.6)),
                                   panelsNumber: 5, margins: margins);

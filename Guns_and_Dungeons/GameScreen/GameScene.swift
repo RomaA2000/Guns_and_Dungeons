@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 switch val {
                 case -1.0..<(0.3):
                     if let g = tileSet.tileGroups.first(where: {
-                        ($0.name ?? "") == ""}) {
+                        ($0.name ?? "") == "Grass"}) {
                         map.setTileGroup(g, forColumn: col, row: row)
                     }
                 default:
@@ -106,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         if (moveJoystick.velocity != CGPoint.zero) {
-            player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x, dy: moveJoystick.velocity.y)
+            player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
         }
     }
 

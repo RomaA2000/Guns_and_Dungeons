@@ -30,7 +30,7 @@ fileprivate func getDiameter(fromDiameter diameter: CGFloat, withRatio ratio: CG
     return diameter * abs(ratio)
 }
 
-// MARK: - TLAnalogJoystickHiddenArea
+// MARK: - AnalogJoystickHiddenArea
 open class TLAnalogJoystickHiddenArea: SKShapeNode {
     private var currJoystick: TLAnalogJoystick?
 
@@ -130,7 +130,6 @@ open class TLAnalogJoystickComponent: SKSpriteNode {
         }
     }
 
-    //MARK: - DESIGNATED
     init(diameter: CGFloat, color: UIColor? = nil, image: UIImage? = nil) {
         let pureColor = color ?? UIColor.black
         let size = CGSize(width: diameter, height: diameter)
