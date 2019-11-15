@@ -165,13 +165,16 @@ class SinglePlayerViewController : UIViewController, Callable {
         view.addSubview(levelPanel)
         backButton = view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
                                  params: AllParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
+    
+            let group = Statistics()
+                
     }
     
     func call(number: Int) {
         print("to level: ", number)
         (navigationController as! MainNavigationController).toGameSceneViewController()
     }
-
+    
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
     }
