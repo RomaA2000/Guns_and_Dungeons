@@ -12,10 +12,6 @@ import CoreData
 
 @objc(Statistics)
 public class Statistics: NSManagedObject {
-
-    init() {
-        self.stars = -1
-        self.levelNumber = -1
-        super.init()
-    }
+    
 }
+
