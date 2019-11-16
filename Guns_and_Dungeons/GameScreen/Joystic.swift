@@ -2,8 +2,8 @@
 //  Wall.swift
 //  Guns_and_Dungeons
 //
-//  Created by Роман Агеев on 14.11.2019.
-//  Copyright © 2019 Роман Агеев. All rights reserved.
+//  Created by Александр Потапов on 14.11.2019.
+//  Copyright © 2019 Роман Карман. All rights reserved.
 //
 import SpriteKit
 

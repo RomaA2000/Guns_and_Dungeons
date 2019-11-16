@@ -33,17 +33,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return map
     }
 
-    var player: Player = Player(atlasName: "AnimatedTextures")
-    var wall: Wall = Wall(textureName: "fon", size: CGSize(width: 100, height: 200))
-
-    var grena: SKSpriteNode = {
-        var sprite = SKSpriteNode(imageNamed: "grena")
-        sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
-        sprite.physicsBody!.affectedByGravity = false;
-        sprite.name = "grena"
-        return sprite
-    }()
-
+    var player: Player!
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
@@ -66,11 +61,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
              }
         }
+        
+        
+        let playerParams = PlayerParams(unitTexturesParams: <#T##UnitTexturesParams#>, unitDataParams: <#T##UnitDataParams#>, id: 0)
+        
+        player = Player(params: <#T##PlayerParams#>)
+        
         addChild(map)
         addChild(player)
-        addChild(grena)
-        wall.position = CGPoint(x: -100, y: -100)
-        addChild(wall)
         camera = cameraNode
         player.addChild(cameraNode)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)

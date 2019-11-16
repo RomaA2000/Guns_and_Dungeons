@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Player: SKSpriteNode {
+class Player2: SKSpriteNode {
 
     let walkAnimation: SKAction
     var textures: [SKTexture] = []
