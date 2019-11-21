@@ -67,7 +67,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                     weapon: nil)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
-        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams)
+        let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
+        
+        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.destoyableUntiParams.animatedUnitParams.animationParams.defaultTexture.size().width / 2)
         player = Player(params: playerParams)
         addChild(map);
         addChild(player)
@@ -116,8 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (contact.bodyA.node?.physicsBody?.categoryBitMask == firstType &&
             contact.bodyB.node?.physicsBody?.categoryBitMask == secondType) {
             return [contact.bodyA.node, contact.bodyB.node]
-        }
-        else if (contact.bodyB.node?.physicsBody?.categoryBitMask == firstType &&
+        } else if (contact.bodyB.node?.physicsBody?.categoryBitMask == firstType &&
                 contact.bodyA.node?.physicsBody?.categoryBitMask == secondType) {
             return [contact.bodyB.node, contact.bodyA.node]
         }
@@ -127,7 +128,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if let bodies = checkCollision(contact: contact, firstType: CategoryMask.player, secondType: CategoryMask.wall) {
             let player = bodies[0]
-            print("kek")
             player?.physicsBody?.velocity = CGVector.zero
             player!.position = CGPoint.zero
         }

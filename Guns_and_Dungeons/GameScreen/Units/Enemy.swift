@@ -17,9 +17,9 @@ class Enemy : MobileUnit {
         name = "enemy"
         physicsBody = SKPhysicsBody(circleOfRadius: self.animation.defaultTexture.size().width / 2)
         physicsBody?.affectedByGravity = false
-        physicsBody?.categoryBitMask = CategoryMask.enemy
+        physicsBody?.categoryBitMask = CategoryMask.ai
         physicsBody?.collisionBitMask = CategoryMask.player
-        physicsBody?.contactTestBitMask = CategoryMask.enemy | CategoryMask.player
+        physicsBody?.contactTestBitMask = CategoryMask.ai | CategoryMask.player
         runDefaultAnimation()
     }
     

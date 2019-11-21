@@ -17,7 +17,7 @@ class Wall: SKSpriteNode {
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = CategoryMask.wall
-        self.physicsBody?.collisionBitMask = CategoryMask.player | CategoryMask.bullet | CategoryMask.enemy
+        self.physicsBody?.collisionBitMask = CategoryMask.player | CategoryMask.bullet | CategoryMask.ai
         self.physicsBody?.contactTestBitMask = self.physicsBody!.collisionBitMask
     }
     

@@ -12,12 +12,10 @@ import CoreData
 
 
 extension Statistics {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Statistics> {
         return NSFetchRequest<Statistics>(entityName: "Statistics")
     }
 
     @NSManaged public var stars: Int16
     @NSManaged public var levelNumber: Int16
-
 }
