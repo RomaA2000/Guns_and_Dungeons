@@ -14,6 +14,7 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let moveJoystick = AnalogJoystick(withDiameter: 100)
+    let fireJoystick = AnalogJoystick(withDiameter: 100)
 
     var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 10, rows: 10, tileSize: CGSize(width:                128, height: 128))
 
@@ -39,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        
         let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
         let noiseMap = createNoiseMap()
         map.enableAutomapping = true
@@ -60,59 +62,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
              }
         }
         
-        //MARK:- test
-        let animationTexturesParams = getAnimation(atlasName: "Enemy", frameName: "bot3a", defaultName: "bot3a1", size: 4)
-        let animatedUnitParams = AnimatedUnitParams(animationParams: animationTexturesParams,
-                                                    location: CGPoint.zero,
-                                                    weapon: nil)
-        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
-        let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
-        let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
         
-        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.destoyableUntiParams.animatedUnitParams.animationParams.defaultTexture.size().width / 2)
-        player = Player(params: playerParams)
+        player = createPlayer()
         addChild(map);
         addChild(player)
         camera = cameraNode
         player.addChild(cameraNode)
         //MARK:- test
         
-        enemy = Enemy(params: EnemyParams(mobileUnitParams: mobileUnitParams, purvewRange: 30));
-        enemy.position = CGPoint(x: 100, y: 100);
-        addChild(enemy)
-        
         wall = Wall(defaultTexture: SKTexture(imageNamed: "fon"), location: CGRect(x: 200, y: 100, width: 100, height: 100))
         addChild(wall)
         
-        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width, height: frame.height))
+        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
-        player.addChild(moveJoystickHiddenArea)
+        cameraNode.addChild(moveJoystickHiddenArea)
+        
+        let fireJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 0, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
+        fireJoystickHiddenArea.joystick = fireJoystick
+        fireJoystick.isMoveable = true
+        cameraNode.addChild(fireJoystickHiddenArea)
+        
         view.isMultipleTouchEnabled = true
     }
-
-//    func explode(bullet: SKNode, enemy: SKNode) {
-//        bullet.removeFromParent()
-//        print("explode")
-//    }
-
-
-//    func didBegin(_ contact: SKPhysicsContact) {
-//        print("contact")
-//        if contact.bodyA.node?.name == "bullet" {
-//            explode(bullet: contact.bodyA.node!, enemy: contact.bodyB.node!)
-//        } else if contact.bodyB.node?.name == "bullet" {
-//            explode(bullet: contact.bodyB.node!, enemy: contact.bodyA.node!)
-//        }
-//        if (contact.bodyA.node?.name == "wall" && contact.bodyB.node?.name == "player") {
-//            print("p vs w")
-//            (contact.bodyB.node as? Player)!.removeAction(forKey: "walk")
-//        } else if (contact.bodyB.node?.name == "wall" && contact.bodyA.node?.name == "player") {
-//            print("p vs w")
-//            (contact.bodyA.node as? Player)!.removeAction(forKey: "walk")
-//
-//        }
-//    }
     
     func checkCollision(contact: SKPhysicsContact, firstType: UInt32, secondType: UInt32) -> [SKNode?]? {
         if (contact.bodyA.node?.physicsBody?.categoryBitMask == firstType &&
@@ -135,57 +107,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
+        if (!fireJoystick.isHidden) {
+            player.zRotation = fireJoystick.angular
+            cameraNode.zRotation = -player.zRotation
+        } else if (!moveJoystick.isHidden) {
+            player.zRotation = moveJoystick.angular
+            cameraNode.zRotation = -player.zRotation
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
-        player.zRotation += 30
+        
     }
-    
-//    func touchDown(atPoint pos : CGPoint) {
-//
-//    }
-//
-//    func touchMoved(toPoint pos : CGPoint) {
-//
-//    }
-//
-//    func touchUp(atPoint pos : CGPoint) {
-//
-//    }
-
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-//            let location = touch.location(in: self)
-//            let move = SKAction.move(to: location, duration: 1)
-//
-//
-//            player.zRotation += 0.5
-//            camera?.zRotation -= 0.5
-//
-//            player.run(move)
-//            player.startMove()
-//
-//            let bullet = Bullet(atlasName: "AnimatedTextures")
-//            bullet.name = "bullet"
-//            bullet.position = CGPoint(x: player.position.x + 50, y: player.position.y)
-//            addChild(bullet)
-//            let action = SKAction.move(by: CGVector(dx: 1000, dy: 0), duration: 2)
-//            bullet.physicsBody?.contactTestBitMask = bullet.physicsBody!.collisionBitMask
-//            bullet.run(action)
-//        }
-////    }
-//
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        camera?.position = touches.first!.location(in: self)
-//        player.stopMove()
-//    }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 
     }
+    
+    func createPlayer() -> Player {
+        let animationTexturesParams = getAnimation(atlasName: "Enemy", frameName: "bot3a", defaultName: "bot3a1", size: 4)
+        let animatedUnitParams = AnimatedUnitParams(animationParams: animationTexturesParams,
+                                                    location: CGPoint.zero,
+                                                    weapon: nil)
+        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
+        let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
+        let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
+        
+        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.destoyableUntiParams.animatedUnitParams.animationParams.defaultTexture.size().width / 2)
+        return Player(params: playerParams)
+    }
+    
 }
