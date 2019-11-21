@@ -9,10 +9,24 @@
 import Foundation
 
 struct CategoryMask {
-    static let player: UInt32 = 0x1 << 1
-    static let bullet: UInt32 = 0x1 << 2
-    static let wall:   UInt32 = 0x1 << 3
-    static let enemy:  UInt32 = 0x1 << 4
+    static let player: UInt32 = 1 << 1
+    static let bullet: UInt32 = 1 << 2
+    static let wall: UInt32 = 1 << 3
+    static let ai: UInt32 = 1 << 4
 }
 
-// убрать, сделать структуру из трех три маски параметрами конструктора AnimatedUnit 
+
+class PhysicsBodyMask {
+    let category : UInt32
+    let contact : UInt32
+    let collision : UInt32
+    init(category : UInt32, collision : UInt32, contact : UInt32) {
+        self.category = category
+        self.collision = collision
+        self.contact = contact
+    }
+}
+
+func physicsBodyMaker(categoryShift : UInt32, collisionShift : UInt32, contactShift : UInt32) -> PhysicsBodyMask {
+    return PhysicsBodyMask(category: 1 << categoryShift, collision: 1 << collisionShift, contact: 1 << contactShift);
+}

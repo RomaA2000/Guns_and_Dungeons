@@ -13,12 +13,12 @@ class Player: MobileUnit {
     init(params: PlayerParams) {
         super.init(params: params.mobileUnitParams)
         name = "player"
-        physicsBody = SKPhysicsBody(circleOfRadius: self.animation.defaultTexture.size().width / 2)
+        physicsBody = params.body
         physicsBody?.affectedByGravity = false
         physicsBody?.allowsRotation = false
-        physicsBody?.categoryBitMask = CategoryMask.player
-        physicsBody?.collisionBitMask = CategoryMask.enemy | CategoryMask.wall
-        physicsBody?.contactTestBitMask = CategoryMask.enemy | CategoryMask.player
+        physicsBody?.categoryBitMask = params.mask.category
+        physicsBody?.collisionBitMask = params.mask.collision
+        physicsBody?.contactTestBitMask = params.mask.contact
         runDefaultAnimation()
     }
     
@@ -28,9 +28,18 @@ class Player: MobileUnit {
 }
 
 class PlayerParams {
-    var mobileUnitParams: MobileUnitParams
-    init(mobileUnitParams: MobileUnitParams) {
+    let mobileUnitParams: MobileUnitParams
+    let mask: PhysicsBodyMask
+    let body : SKPhysicsBody;
+
+    init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, body : SKPhysicsBody) {
         self.mobileUnitParams = mobileUnitParams
+        self.mask = mask
+        self.body = body
+    }
+    
+    convenience init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, radius: CGFloat) {
+        self.init(mobileUnitParams: mobileUnitParams, mask: mask, body: SKPhysicsBody(circleOfRadius: radius))
     }
 }
 
