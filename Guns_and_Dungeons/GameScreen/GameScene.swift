@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let cameraNode = SKCameraNode()
         return cameraNode
     }()
-
+    
     func createNoiseMap() -> GKNoiseMap {
         //Get our noise source, this can be customized further
         let source = GKPerlinNoiseSource()
@@ -34,10 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     var player: Player!
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var enemy: Enemy!
+    var wall: Wall!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -62,16 +60,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
              }
         }
         
-        
-        let playerParams = PlayerParams(unitTexturesParams: <#T##UnitTexturesParams#>, unitDataParams: <#T##UnitDataParams#>, id: 0)
-        
-        player = Player(params: <#T##PlayerParams#>)
-        
-        addChild(map)
+        //MARK:- test
+        let animationTexturesParams = getAnimation(atlasName: "Enemy", frameName: "bot3a", defaultName: "bot3a1", size: 4)
+        let animatedUnitParams = AnimatedUnitParams(animationParams: animationTexturesParams,
+                                                    location: CGPoint.zero,
+                                                    weapon: nil)
+        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
+        let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
+        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams)
+        player = Player(params: playerParams)
+        addChild(map);
         addChild(player)
         camera = cameraNode
         player.addChild(cameraNode)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        //MARK:- test
+        
+        enemy = Enemy(params: EnemyParams(mobileUnitParams: mobileUnitParams, purvewRange: 30));
+        enemy.position = CGPoint(x: 100, y: 100);
+        addChild(enemy)
+        
+        wall = Wall(defaultTexture: SKTexture(imageNamed: "fon"), location: CGRect(x: 200, y: 100, width: 100, height: 100))
+        addChild(wall)
+        
         let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width, height: frame.height))
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
@@ -101,13 +111,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //
 //        }
 //    }
-
-    override func update(_ currentTime: TimeInterval) {
-        if (moveJoystick.velocity != CGPoint.zero) {
-            player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
+    
+    func checkCollision(contact: SKPhysicsContact, firstType: UInt32, secondType: UInt32) -> [SKNode?]? {
+        if (contact.bodyA.node?.physicsBody?.categoryBitMask == firstType &&
+            contact.bodyB.node?.physicsBody?.categoryBitMask == secondType) {
+            return [contact.bodyA.node, contact.bodyB.node]
+        }
+        else if (contact.bodyB.node?.physicsBody?.categoryBitMask == firstType &&
+                contact.bodyA.node?.physicsBody?.categoryBitMask == secondType) {
+            return [contact.bodyB.node, contact.bodyA.node]
+        }
+        return nil
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if let bodies = checkCollision(contact: contact, firstType: CategoryMask.player, secondType: CategoryMask.wall) {
+            let player = bodies[0]
+            print("kek")
+            player?.physicsBody?.velocity = CGVector.zero
+            player!.position = CGPoint.zero
         }
     }
 
+    override func update(_ currentTime: TimeInterval) {
+        player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touch")
+        player.zRotation += 30
+    }
+    
 //    func touchDown(atPoint pos : CGPoint) {
 //
 //    }

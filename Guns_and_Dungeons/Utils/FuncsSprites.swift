@@ -9,11 +9,13 @@
 import Foundation
 import SpriteKit
 
-func getAnimation(atlasName: String, frameName: String, size: Int) -> SKAction {
+func getAnimation(atlasName: String, frameName: String, defaultName: String, size: Int) -> AnimationTexturesParams {
     let textureAtlas = SKTextureAtlas(named: atlasName)
     var texturesArray: [SKTexture] = []
-    for i in 0...size {
+    for i in 1...size {
         texturesArray.append(textureAtlas.textureNamed(frameName + String(i)))
     }
-    return SKAction.repeatForever(SKAction.animate(with: texturesArray, timePerFrame: 0.1, resize: false, restore: false))
+    let animation = SKAction.repeatForever(SKAction.animate(with: texturesArray, timePerFrame: 0.1, resize: false, restore: false))
+    let texture = textureAtlas.textureNamed(defaultName)
+    return AnimationTexturesParams(defaultAnimation: animation, defaultTexture: texture)
 }

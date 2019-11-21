@@ -1,36 +1,39 @@
 //
-//  Player.swift
+//  ContactEnemy.swift
 //  Guns_and_Dungeons
 //
 //  Created by Александр Потапов on 15.11.2019.
-//  Copyright © 2019 Александр Потапов. All rights reserved.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
-class Player: MobileUnit {
-    init(params: PlayerParams) {
+class Enemy : MobileUnit {
+    var purviewRange: Int = 0
+    
+    init(params: EnemyParams) {
+        purviewRange = params.purviewRange
         super.init(params: params.mobileUnitParams)
-        name = "player"
+        name = "enemy"
         physicsBody = SKPhysicsBody(circleOfRadius: self.animation.defaultTexture.size().width / 2)
         physicsBody?.affectedByGravity = false
-        physicsBody?.allowsRotation = false
-        physicsBody?.categoryBitMask = CategoryMask.player
-        physicsBody?.collisionBitMask = CategoryMask.enemy | CategoryMask.wall
+        physicsBody?.categoryBitMask = CategoryMask.enemy
+        physicsBody?.collisionBitMask = CategoryMask.player
         physicsBody?.contactTestBitMask = CategoryMask.enemy | CategoryMask.player
         runDefaultAnimation()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 }
 
-class PlayerParams {
+class EnemyParams {
     var mobileUnitParams: MobileUnitParams
-    init(mobileUnitParams: MobileUnitParams) {
+    var purviewRange: Int;
+    
+    init(mobileUnitParams: MobileUnitParams, purvewRange: Int) {
         self.mobileUnitParams = mobileUnitParams
+        self.purviewRange = purvewRange
     }
 }
-
