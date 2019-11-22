@@ -18,9 +18,9 @@ class MainNavigationController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
-    func toGameSceneViewController() {
+    func toGameSceneViewController(levelNumber: Int) {
         popToRootViewController(animated: false)
-        pushViewController(GameViewController(), animated: false)
+        pushViewController(GameViewController(number: levelNumber), animated: false)
     }
     
     /*
