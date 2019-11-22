@@ -62,7 +62,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
              }
         }
         
-        
         player = createPlayer()
         addChild(map);
         addChild(player)
@@ -136,5 +135,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
         return Player(params: playerParams)
     }
-    
 }

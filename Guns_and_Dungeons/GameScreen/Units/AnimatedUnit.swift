@@ -13,6 +13,7 @@ class AnimatedUnit: SKSpriteNode {
     var weapon: Weapon?
     var defaultTexture: SKTexture
     var defaultAnimation: SKAction
+    
     init(params: AnimatedUnitParams) {
         self.defaultAnimation = params.defaultAnimation
         self.defaultTexture = params.defaultTexture

@@ -12,4 +12,3 @@ import SpriteKit
 class Weapon {
     
 }
-

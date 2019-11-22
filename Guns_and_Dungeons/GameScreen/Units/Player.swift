@@ -11,7 +11,7 @@ import SpriteKit
 
 class Player: MobileUnit {
     init(params: PlayerParams) {
-        super.init(params: params.mobileUnitParams)
+        super.init(params: params)
         name = "player"
         physicsBody = params.body
         physicsBody?.affectedByGravity = false
@@ -27,15 +27,14 @@ class Player: MobileUnit {
     }
 }
 
-class PlayerParams {
-    let mobileUnitParams: MobileUnitParams
+class PlayerParams : MobileUnitParams {
     let mask: PhysicsBodyMask
     let body : SKPhysicsBody;
 
     init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, body : SKPhysicsBody) {
-        self.mobileUnitParams = mobileUnitParams
         self.mask = mask
         self.body = body
+        super.init(mobileUnitParams: mobileUnitParams)
     }
     
     convenience init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, radius: CGFloat) {

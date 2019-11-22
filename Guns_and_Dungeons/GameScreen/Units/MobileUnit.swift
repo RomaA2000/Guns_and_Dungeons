@@ -34,9 +34,9 @@ class MobileUnitParams : DestroyableUnitParams {
         super.init(destroyableUnitParams: destoyableUntiParams)
     }
     
-    init(mobileUntiParams: MobileUnitParams) {
-        self.maxSpeed = mobileUntiParams.maxSpeed
-        self.walkAnimation = mobileUntiParams.walkAnimation
-        super.init(destroyableUnitParams : mobileUntiParams)
+    init(mobileUnitParams: MobileUnitParams) {
+        self.maxSpeed = mobileUnitParams.maxSpeed
+        self.walkAnimation = mobileUnitParams.walkAnimation
+        super.init(destroyableUnitParams : mobileUnitParams)
     }
 }
