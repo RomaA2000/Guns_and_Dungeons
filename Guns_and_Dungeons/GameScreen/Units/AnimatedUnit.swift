@@ -10,19 +10,19 @@ import Foundation
 import SpriteKit
 
 class AnimatedUnit: SKSpriteNode {
-    typealias ATP = AnimationTexturesParams
-    let animation: ATP
     var weapon: Weapon?
-    
+    var defaultTexture: SKTexture
+    var defaultAnimation: SKAction
     init(params: AnimatedUnitParams) {
-        self.animation = params.animationParams
+        self.defaultAnimation = params.defaultAnimation
+        self.defaultTexture = params.defaultTexture
         self.weapon = params.weapon
-        super.init(texture: animation.defaultTexture, color: .black, size: animation.defaultTexture.size())
+        super.init(texture: params.defaultTexture, color: .black, size: defaultTexture.size())
         self.position = params.location
     }
     
     func runDefaultAnimation() {
-        run(animation.defaultAnimation, withKey: "default")
+        run(defaultAnimation, withKey: "default")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,21 +31,32 @@ class AnimatedUnit: SKSpriteNode {
 }
 
 class AnimationTexturesParams {
-    var defaultTexture: SKTexture
-    var defaultAnimation: SKAction
-    init(defaultAnimation: SKAction, defaultTexture: SKTexture) {
-        self.defaultTexture = defaultTexture
+    let defaultTexture: SKTexture
+    let defaultAnimation: SKAction
+    init(defaultTexture: SKTexture, defaultAnimation: SKAction) {
         self.defaultAnimation = defaultAnimation
+        self.defaultTexture = defaultTexture
+    }
+    init(animationTexturesParams: AnimationTexturesParams) {
+        self.defaultAnimation = animationTexturesParams.defaultAnimation
+        self.defaultTexture = animationTexturesParams.defaultTexture
     }
 }
 
-class AnimatedUnitParams {
-    var animationParams: AnimationTexturesParams
-    var location: CGPoint
-    var weapon: Weapon?
-    init(animationParams: AnimationTexturesParams, location: CGPoint, weapon: Weapon?) {
+class AnimatedUnitParams :  AnimationTexturesParams{
+
+    let location: CGPoint
+    let weapon: Weapon?
+    
+    init(animationTexturesParams : AnimationTexturesParams, location: CGPoint, weapon: Weapon?) {
         self.location = location
         self.weapon = weapon
-        self.animationParams = animationParams
+        super.init(animationTexturesParams: animationTexturesParams)
+    }
+    
+     init(animatedUnitParams: AnimatedUnitParams) {
+        self.location = animatedUnitParams.location
+        self.weapon = animatedUnitParams.weapon
+        super.init(animationTexturesParams: animatedUnitParams)
     }
 }

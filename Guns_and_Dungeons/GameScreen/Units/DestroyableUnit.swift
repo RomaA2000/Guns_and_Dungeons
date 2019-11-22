@@ -16,7 +16,7 @@ class DestroyableUnit: AnimatedUnit {
     init(params: DestroyableUnitParams) {
         healthPoints = params.healthPoints
         deathAnimation = params.deathAnimation
-        super.init(params: params.animatedUnitParams)
+        super.init(params: params)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,14 +24,21 @@ class DestroyableUnit: AnimatedUnit {
     }
 }
 
-class DestroyableUnitParams {
-    var animatedUnitParams: AnimatedUnitParams
+class DestroyableUnitParams : AnimatedUnitParams{
+
     var healthPoints: Int
     var deathAnimation: SKAction
+
     init(animatedUnitParams: AnimatedUnitParams, healthPoints: Int, deathAnimation: SKAction) {
-        self.animatedUnitParams = animatedUnitParams
         self.healthPoints = healthPoints
         self.deathAnimation = deathAnimation
+        super.init(animatedUnitParams: animatedUnitParams)
+    }
+
+    init(destroyableUnitParams: DestroyableUnitParams) {
+        self.healthPoints = destroyableUnitParams.healthPoints
+        self.deathAnimation = destroyableUnitParams.deathAnimation
+        super.init(animatedUnitParams: destroyableUnitParams)
     }
 }
 

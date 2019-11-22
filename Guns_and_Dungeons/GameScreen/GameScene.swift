@@ -126,14 +126,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createPlayer() -> Player {
         let animationTexturesParams = getAnimation(atlasName: "Enemy", frameName: "bot3a", defaultName: "bot3a1", size: 4)
-        let animatedUnitParams = AnimatedUnitParams(animationParams: animationTexturesParams,
+        let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
                                                     location: CGPoint.zero,
                                                     weapon: nil)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
         let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
         
-        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.destoyableUntiParams.animatedUnitParams.animationParams.defaultTexture.size().width / 2)
+        let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
         return Player(params: playerParams)
     }
     

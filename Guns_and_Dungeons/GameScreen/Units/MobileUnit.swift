@@ -15,7 +15,7 @@ class MobileUnit: DestroyableUnit {
     init(params: MobileUnitParams) {
         maxSpeed = params.maxSpeed;
         walkAnimation = params.walkAnimation
-        super.init(params: params.destoyableUntiParams)
+        super.init(params: params)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,14 +23,20 @@ class MobileUnit: DestroyableUnit {
     }
 }
 
-class MobileUnitParams {
-    var destoyableUntiParams: DestroyableUnitParams
+class MobileUnitParams : DestroyableUnitParams {
+
     var maxSpeed: Int
     var walkAnimation: SKAction
     
     init(destoyableUntiParams: DestroyableUnitParams, maxSpeed: Int, walkAnimation: SKAction) {
-        self.destoyableUntiParams = destoyableUntiParams
         self.maxSpeed = maxSpeed
         self.walkAnimation = walkAnimation
+        super.init(destroyableUnitParams: destoyableUntiParams)
+    }
+    
+    init(mobileUntiParams: MobileUnitParams) {
+        self.maxSpeed = mobileUntiParams.maxSpeed
+        self.walkAnimation = mobileUntiParams.walkAnimation
+        super.init(destroyableUnitParams : mobileUntiParams)
     }
 }

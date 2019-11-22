@@ -17,5 +17,5 @@ func getAnimation(atlasName: String, frameName: String, defaultName: String, siz
     }
     let animation = SKAction.repeatForever(SKAction.animate(with: texturesArray, timePerFrame: 0.1, resize: false, restore: false))
     let texture = textureAtlas.textureNamed(defaultName)
-    return AnimationTexturesParams(defaultAnimation: animation, defaultTexture: texture)
+    return AnimationTexturesParams(defaultTexture: texture, defaultAnimation: animation)
 }

@@ -15,7 +15,7 @@ class Enemy : MobileUnit {
         purviewRange = params.purviewRange
         super.init(params: params.mobileUnitParams)
         name = "enemy"
-        physicsBody = SKPhysicsBody(circleOfRadius: self.animation.defaultTexture.size().width / 2)
+        physicsBody = SKPhysicsBody(circleOfRadius: self.defaultTexture.size().width / 2)
         physicsBody?.affectedByGravity = false
         physicsBody?.categoryBitMask = CategoryMask.ai
         physicsBody?.collisionBitMask = CategoryMask.player
