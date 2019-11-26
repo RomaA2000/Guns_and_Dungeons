@@ -25,9 +25,9 @@
 		37DF35E3237E9A4A00437375 /* Statistics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF35E1237E9A4A00437375 /* Statistics+CoreDataClass.swift */; };
 		37DF35E4237E9A4A00437375 /* Statistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF35E2237E9A4A00437375 /* Statistics+CoreDataProperties.swift */; };
 		7A01D017237D8E1300D0A4E8 /* Joystic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D016237D8E1300D0A4E8 /* Joystic.swift */; };
-		7A02E2E72388334C002AD8FD /* Level-1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2E62388334C002AD8FD /* Level-1.sks */; };
 		7A02E2E923883638002AD8FD /* Level-2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2E823883638002AD8FD /* Level-2.sks */; };
 		7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2EA23883DDE002AD8FD /* Level-3.sks */; };
+		7A18182B2389391A005ECAF1 /* Level-1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A18182A2389391A005ECAF1 /* Level-1.sks */; };
 		7A1929E9237ED7D400113CB2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1929E8237ED7D400113CB2 /* Player.swift */; };
 		7A1929EC237ED8BD00113CB2 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1929EB237ED8BD00113CB2 /* Enemy.swift */; };
 		7A1929EE237F6D6E00113CB2 /* FuncsSprites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1929ED237F6D6D00113CB2 /* FuncsSprites.swift */; };
@@ -37,7 +37,11 @@
 		7A22859A237EC40300546589 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A228599237EC40300546589 /* Protocols.swift */; };
 		7A22859C237EC5A300546589 /* InformationClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22859B237EC5A300546589 /* InformationClasses.swift */; };
 		7A22859E237ECC6E00546589 /* MobileUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22859D237ECC6E00546589 /* MobileUnit.swift */; };
+		7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2EF82B2388432B00FCA1B6 /* Button.swift */; };
 		7A333600237D417F0044CAA0 /* AnimatedUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3335FF237D417F0044CAA0 /* AnimatedUnit.swift */; };
+		7A3C5D8323898D3000CF991D /* gun1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8023898D3000CF991D /* gun1.png */; };
+		7A3C5D8423898D3000CF991D /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8123898D3000CF991D /* player.atlas */; };
+		7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8223898D3000CF991D /* enemy.atlas */; };
 		7A5AB781238094CF00096A57 /* DestroyableUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB780238094CF00096A57 /* DestroyableUnit.swift */; };
 		7A5AB7832380953900096A57 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7822380953900096A57 /* Weapon.swift */; };
 		7A5AB7852380BA6400096A57 /* EnemiesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7842380BA6400096A57 /* EnemiesController.swift */; };
@@ -85,9 +89,9 @@
 		37DF35E1237E9A4A00437375 /* Statistics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Statistics+CoreDataClass.swift"; path = "Guns_and_Dungeons/Utils/Statistics+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37DF35E2237E9A4A00437375 /* Statistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Statistics+CoreDataProperties.swift"; path = "Guns_and_Dungeons/Utils/Statistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A01D016237D8E1300D0A4E8 /* Joystic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystic.swift; sourceTree = "<group>"; };
-		7A02E2E62388334C002AD8FD /* Level-1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-1.sks"; sourceTree = "<group>"; };
 		7A02E2E823883638002AD8FD /* Level-2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-2.sks"; sourceTree = "<group>"; };
 		7A02E2EA23883DDE002AD8FD /* Level-3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-3.sks"; sourceTree = "<group>"; };
+		7A18182A2389391A005ECAF1 /* Level-1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-1.sks"; sourceTree = "<group>"; };
 		7A1929E8237ED7D400113CB2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		7A1929EB237ED8BD00113CB2 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		7A1929ED237F6D6D00113CB2 /* FuncsSprites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncsSprites.swift; sourceTree = "<group>"; };
@@ -97,7 +101,11 @@
 		7A228599237EC40300546589 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		7A22859B237EC5A300546589 /* InformationClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationClasses.swift; sourceTree = "<group>"; };
 		7A22859D237ECC6E00546589 /* MobileUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileUnit.swift; sourceTree = "<group>"; };
+		7A2EF82B2388432B00FCA1B6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		7A3335FF237D417F0044CAA0 /* AnimatedUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedUnit.swift; sourceTree = "<group>"; };
+		7A3C5D8023898D3000CF991D /* gun1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gun1.png; sourceTree = "<group>"; };
+		7A3C5D8123898D3000CF991D /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
+		7A3C5D8223898D3000CF991D /* enemy.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy.atlas; sourceTree = "<group>"; };
 		7A5AB780238094CF00096A57 /* DestroyableUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyableUnit.swift; sourceTree = "<group>"; };
 		7A5AB7822380953900096A57 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		7A5AB7842380BA6400096A57 /* EnemiesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnemiesController.swift; path = ../EnemiesController.swift; sourceTree = "<group>"; };
@@ -133,13 +141,15 @@
 		37369D0623774915007DC726 /* GameScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7A35E6F52389E95400E0D8C2 /* Map */,
+				7A3C5D7E23898D2600CF991D /* Textures */,
+				7A2EF82D23884E7B00FCA1B6 /* Interface */,
 				7A1929EA237ED86900113CB2 /* Units */,
 				7A8989F6237DD6FC00801E32 /* Enemy.atlas */,
 				37606AC72359B98800FEAE6D /* Actions.sks */,
 				37606AC52359B98800FEAE6D /* GameScene.sks */,
 				37606ACB2359B98800FEAE6D /* GameViewController.swift */,
 				37606AC92359B98800FEAE6D /* GameScene.swift */,
-				7A01D016237D8E1300D0A4E8 /* Joystic.swift */,
 			);
 			path = GameScreen;
 			sourceTree = "<group>";
@@ -223,7 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				372651412374B4E5007C841D /* MyTileSet.sks */,
-				7A02E2E62388334C002AD8FD /* Level-1.sks */,
+				7A18182A2389391A005ECAF1 /* Level-1.sks */,
 				7A02E2E823883638002AD8FD /* Level-2.sks */,
 				7A02E2EA23883DDE002AD8FD /* Level-3.sks */,
 			);
@@ -242,9 +252,43 @@
 				7ABF54F323849CD3006C2089 /* Enemies.swift */,
 				7A5AB7842380BA6400096A57 /* EnemiesController.swift */,
 				7ABF54F523849E19006C2089 /* CollisionMasks.swift */,
-				7A5DCD292384AB030077D876 /* Wall.swift */,
 			);
 			path = Units;
+			sourceTree = "<group>";
+		};
+		7A2EF82D23884E7B00FCA1B6 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7A01D016237D8E1300D0A4E8 /* Joystic.swift */,
+				7A2EF82B2388432B00FCA1B6 /* Button.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		7A35E6F52389E95400E0D8C2 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7A5DCD292384AB030077D876 /* Wall.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		7A3C5D7E23898D2600CF991D /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C5D8223898D3000CF991D /* enemy.atlas */,
+				7A3C5D7F23898D3000CF991D /* guns */,
+				7A3C5D8123898D3000CF991D /* player.atlas */,
+			);
+			path = Textures;
+			sourceTree = "<group>";
+		};
+		7A3C5D7F23898D3000CF991D /* guns */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C5D8023898D3000CF991D /* gun1.png */,
+			);
+			path = guns;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,14 +372,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3C5D8423898D3000CF991D /* player.atlas in Resources */,
+				7A3C5D8323898D3000CF991D /* gun1.png in Resources */,
 				37606AC62359B98800FEAE6D /* GameScene.sks in Resources */,
 				7A02E2E923883638002AD8FD /* Level-2.sks in Resources */,
 				37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */,
+				7A18182B2389391A005ECAF1 /* Level-1.sks in Resources */,
 				7A8989F7237DD6FC00801E32 /* Enemy.atlas in Resources */,
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
-				7A02E2E72388334C002AD8FD /* Level-1.sks in Resources */,
 				7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */,
 				372651422374B4E5007C841D /* MyTileSet.sks in Resources */,
+				7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */,
 				37606AC82359B98800FEAE6D /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +434,7 @@
 				3791A8F32359C3E500212BBC /* FuncView.swift in Sources */,
 				7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */,
 				7A22859E237ECC6E00546589 /* MobileUnit.swift in Sources */,
+				7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

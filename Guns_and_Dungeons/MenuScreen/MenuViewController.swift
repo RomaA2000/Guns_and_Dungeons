@@ -21,14 +21,13 @@ class MenuViewController: UIViewController {
         let sq : CGFloat = 0.08
         let kw : CGFloat = 5
         singlePlayerButton = view.addButton(label: "Single player Texture", target: self, selector: #selector(toSinglePlayerScreen),
-                                            params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
+                                            params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
         multiPlayerButton = view.addButton(label: "Multi player Texture", target: self, selector: #selector(toMultiPlayerScreen),
-                                           params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))
+                                           params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))
         shopButton =  view.addButton(label: "Shop", target: self, selector: #selector(toShopScreen),
-                                     params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.7), k: kw, square: sq))
+                                     params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.7), k: kw, square: sq))
         settingsButton = view.addButton(label: "Settings", target: self, selector: #selector(toSettingScreen),
-                                        params: AllParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1, square: 0.01))
-        // Do any additional setup after loading the view.
+                                        params: LocationParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1, square: 0.01))
     }
     
     @objc func toSinglePlayerScreen() {

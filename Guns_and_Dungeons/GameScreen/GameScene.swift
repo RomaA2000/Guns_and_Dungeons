@@ -20,22 +20,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player: Player!
     var enemy: Enemy!
     var wall: Wall!
+    var pauseButton: Button!
     
     override func didMove(to view: SKView) {
+        
+        
+        
         physicsWorld.contactDelegate = self
-        //map
         
-        
-       
-        //map
         player = createPlayer()
         addChild(player)
         camera = cameraNode
         player.addChild(cameraNode)
         //MARK:- test
-        
-        wall = Wall(defaultTexture: SKTexture(imageNamed: "fon"), location: CGRect(x: 200, y: 100, width: 100, height: 100))
-        addChild(wall)
+
         
         let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
         moveJoystickHiddenArea.joystick = moveJoystick
@@ -89,7 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createPlayer() -> Player {
-        let animationTexturesParams = getAnimation(atlasName: "Enemy", frameName: "bot3a", defaultName: "bot3a1", size: 4)
+        let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
                                                     location: CGPoint.zero,
                                                     weapon: nil)

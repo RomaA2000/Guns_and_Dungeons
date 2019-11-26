@@ -33,7 +33,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         view.backgroundColor = .blue
         let k_scroll = view.bounds.width / (0.6 * view.bounds.height)
         let scrollFrame: CGRect = getRect(parentFrame: view.bounds,
-                                          params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
+                                          params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
                                                                 k: k_scroll,
                                                                 square: 0.6))
         let panelWidth: CGFloat = 0.6 * scrollFrame.width
@@ -41,12 +41,12 @@ class SinglePlayerViewController : UIViewController, Callable {
                                                                marginMiddle: scrollFrame.width * 0.05,
                                                                panelWidth: scrollFrame.width * 0.6)
         levelPanel = PanelsScrollView(frame: getRect(parentFrame: view.bounds,
-                                                     params: AllParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
+                                                     params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
                                                                            k: k_scroll , square: 0.6)),
                                       panelsNumber: 5, margins: margins);
         view.addSubview(levelPanel)
         backButton = view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
-                                    params: AllParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
+                                    params: LocationParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
         
         let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "levelNumber", ascending: true)]

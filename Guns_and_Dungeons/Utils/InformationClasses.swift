@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class PanelInformation {
-    var cordinates : [AllParameters]
+    var cordinates : [LocationParameters]
     var numerator: Int
     var panelFrame: CGRect
     init(frame: CGRect, x_list : [CGFloat], y_list : [CGFloat], k : CGFloat, s : CGFloat) {
@@ -18,7 +18,7 @@ class PanelInformation {
         panelFrame = frame
         for i in y_list {
             for j in x_list {
-                cordinates.append(AllParameters(centerPoint: CGPoint(x: j, y: i), k: k, square: s))
+                cordinates.append(LocationParameters(centerPoint: CGPoint(x: j, y: i), k: k, square: s))
             }
         }
         numerator = 0

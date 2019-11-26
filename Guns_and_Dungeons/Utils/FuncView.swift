@@ -19,7 +19,7 @@ func calcCenter(coord : CGPoint, frame : CGSize, size : CGSize) -> CGPoint {
                    y: calcFloat(coord: coord.y, length: frame.height, size: size.height))
 }
 
-func getRect(parentFrame : CGRect, params : AllParameters) -> CGRect {
+func getRect(parentFrame : CGRect, params : LocationParameters) -> CGRect {
     let s : CGFloat = params.square * parentFrame.width * parentFrame.height
     let height : CGFloat = sqrt(CGFloat(s) / params.k)
     let width : CGFloat = params.k * height
@@ -29,19 +29,18 @@ func getRect(parentFrame : CGRect, params : AllParameters) -> CGRect {
 }
 
 extension UIView {
-    func posSubviewByRect(subView : UIView, params : AllParameters) {
+    func posSubviewByRect(subView : UIView, params : LocationParameters) {
         subView.frame = getRect(parentFrame: self.frame, params: params)
         self.addSubview(subView)
     }
     
-    func addButton(label : String, target: Any?, selector: Selector, params : AllParameters) -> UIButton {
+    func addButton(label : String, target: Any?, selector: Selector, params : LocationParameters) -> UIButton {
         let result = UIButton();
         result.addTarget(target, action: selector, for: .touchUpInside)
         result.setUpButton(label : label, color : .black, translatesMask: true)
         self.posSubviewByRect(subView: result, params: params)
         return result
     }
-    
 }
 
 extension Array {
