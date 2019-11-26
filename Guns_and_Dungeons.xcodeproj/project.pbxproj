@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37076175238DA45400D617D5 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37076174238DA45400D617D5 /* Geometry.swift */; };
 		372651422374B4E5007C841D /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 372651412374B4E5007C841D /* MyTileSet.sks */; };
 		37606AC42359B98800FEAE6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AC32359B98800FEAE6D /* AppDelegate.swift */; };
 		37606AC62359B98800FEAE6D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37606AC52359B98800FEAE6D /* GameScene.sks */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37076174238DA45400D617D5 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		372651412374B4E5007C841D /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		37606AC02359B98800FEAE6D /* Guns_and_Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guns_and_Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37606AC32359B98800FEAE6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				37606AD02359B98E00FEAE6D /* Assets.xcassets */,
 				37606AD22359B98E00FEAE6D /* LaunchScreen.storyboard */,
 				37606AD52359B98E00FEAE6D /* Info.plist */,
+				37076174238DA45400D617D5 /* Geometry.swift */,
 			);
 			path = Guns_and_Dungeons;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				7A1929EE237F6D6E00113CB2 /* FuncsSprites.swift in Sources */,
 				7A5AB781238094CF00096A57 /* DestroyableUnit.swift in Sources */,
 				37DF35DA237E969500437375 /* LevelsInfo.xcdatamodeld in Sources */,
+				37076175238DA45400D617D5 /* Geometry.swift in Sources */,
 				37DF35E4237E9A4A00437375 /* Statistics+CoreDataProperties.swift in Sources */,
 				7A89F620235A1F7600DEB50A /* SinglePlayerViewController.swift in Sources */,
 				37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */,
