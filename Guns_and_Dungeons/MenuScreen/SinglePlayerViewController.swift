@@ -73,8 +73,8 @@ class SinglePlayerViewController : UIViewController, Callable {
     }
     
     func call(number: Int) {
-        print("to level: ", number)
-        (navigationController as! MainNavigationController).toGameSceneViewController()
+        print("to level: ", number + 1)
+        (navigationController as! MainNavigationController).toGameSceneViewController(levelNumber: number + 1)
     }
     
     @objc func toMenuScreen() {

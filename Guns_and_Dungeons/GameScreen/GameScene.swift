@@ -15,24 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let moveJoystick = AnalogJoystick(withDiameter: 100)
     let fireJoystick = AnalogJoystick(withDiameter: 100)
-
-    var map : SKTileMapNode = SKTileMapNode(tileSet: SKTileSet(named: "Sample Grid Tile Set")!, columns: 10, rows: 10, tileSize: CGSize(width:                128, height: 128))
-
-    let cameraNode: SKCameraNode = {
-        let cameraNode = SKCameraNode()
-        return cameraNode
-    }()
-    
-    func createNoiseMap() -> GKNoiseMap {
-        //Get our noise source, this can be customized further
-        let source = GKPerlinNoiseSource()
-        //Initalize our GKNoise object with our source
-        let noise = GKNoise.init(source)
-        //Create our map,
-        //sampleCount = to the number of tiles in the grid (row, col)
-        let map = GKNoiseMap.init(noise, size: vector2(1.0, 1.0), origin: vector2(0, 0), sampleCount: vector2(10, 10), seamless: true)
-        return map
-    }
+    let cameraNode: SKCameraNode = SKCameraNode()
 
     var player: Player!
     var enemy: Enemy!
@@ -40,30 +23,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        //map
         
-        let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
-        let noiseMap = createNoiseMap()
-        map.enableAutomapping = true
-        for col in 0..<10 {
-            for row in 0..<10 {
-                let val = noiseMap.value(at: vector2(Int32(row),Int32(col)))
-                switch val {
-                case -1.0..<(0.3):
-                    if let g = tileSet.tileGroups.first(where: {
-                        ($0.name ?? "") == "Grass"}) {
-                        map.setTileGroup(g, forColumn: col, row: row)
-                    }
-                default:
-                    if let g = tileSet.tileGroups.first(where: {
-                        ($0.name ?? "") == "Sand"}) {
-                        map.setTileGroup(g, forColumn: col, row: row)
-                    }
-                }
-             }
-        }
         
+       
+        //map
         player = createPlayer()
-        addChild(map);
         addChild(player)
         camera = cameraNode
         player.addChild(cameraNode)
