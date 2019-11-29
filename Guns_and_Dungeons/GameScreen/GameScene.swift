@@ -12,6 +12,8 @@ import GameplayKit
 
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    weak var viewController: GameViewController?
 
     let moveJoystick = AnalogJoystick(withDiameter: 100)
     let fireJoystick = AnalogJoystick(withDiameter: 100)
@@ -23,8 +25,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pauseButton: Button!
     
     override func didMove(to view: SKView) {
-        
-        
         
         physicsWorld.contactDelegate = self
         
@@ -60,6 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
         if let bodies = checkCollision(contact: contact, firstType: CategoryMask.player, secondType: CategoryMask.wall) {
             let player = bodies[0]
             player?.physicsBody?.velocity = CGVector.zero
@@ -70,6 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
         if (!fireJoystick.isHidden) {
+            viewController?.toLevelSelectionScreen() // test
             player.zRotation = fireJoystick.angular
             cameraNode.zRotation = -player.zRotation
         } else if (!moveJoystick.isHidden) {
@@ -98,4 +100,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
         return Player(params: playerParams)
     }
+
 }

@@ -9,21 +9,6 @@
 import UIKit
 import SpriteKit
 
-class PanelInformation {
-    var cordinates : [LocationParameters]
-    var numerator: Int
-    var panelFrame: CGRect
-    init(frame: CGRect, x_list : [CGFloat], y_list : [CGFloat], k : CGFloat, s : CGFloat) {
-        cordinates = []
-        panelFrame = frame
-        for i in y_list {
-            for j in x_list {
-                cordinates.append(LocationParameters(centerPoint: CGPoint(x: j, y: i), k: k, square: s))
-            }
-        }
-        numerator = 0
-    }
-}
 
 class MarnginsInformation {
     var marginStart: CGFloat

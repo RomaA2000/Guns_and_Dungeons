@@ -3,15 +3,17 @@
 //  Guns_and_Dungeons
 //
 //  Created by Александр Потапов on 15.11.2019.
-//  Copyright © 2019 Роман Агеев. All rights reserved.
+//  Copyright © 2019 Александр Потапов. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
 
-class PanelsScrollView : UIScrollView {
-    var panels: [UIView] = []
+class PanelsScrollView<Element: UIView> : UIScrollView, UIScrollViewDelegate {
+//    typealias PanelView = Panel<Element>
+    
+    var panels: [Panel] = []
     let margins: MarnginsInformation
     
     override init(frame: CGRect = CGRect()) {
@@ -19,19 +21,20 @@ class PanelsScrollView : UIScrollView {
         super.init(frame: frame)
     }
     
-    init(frame: CGRect, panelsNumber: Int, margins: MarnginsInformation) {
+    init(parrentBounds: CGRect, panelsNumber: Int) {
+        let k_scroll = parrentBounds.size.width / (0.6 * parrentBounds.size.height)
+        let panelParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4), k: k_scroll , square: 0.6)
+        let scrollFrame = getRect(parentFrame: parrentBounds, params: panelParams)
+        let panelWidth: CGFloat = 0.6 * scrollFrame.width
+        let margins: MarnginsInformation = MarnginsInformation(marginStart: (scrollFrame.width - panelWidth) / 2,
+                                                               marginMiddle: scrollFrame.width * 0.05,
+                                                               panelWidth: scrollFrame.width * 0.6)
         self.margins = margins
-        super.init(frame: frame)
-        let locationRect: CGRect = CGRect(x: margins.marginStart, y: 0, width: margins.panelWidth, height: bounds.height)
-        let panelArgs: PanelInformation = PanelInformation(frame: locationRect,
-                                                           x_list: [CGFloat(0.30), CGFloat(0.70)],
-                                                           y_list: [CGFloat(0.25), CGFloat(0.75)],
-                                                           k: CGFloat(1),
-                                                           s: CGFloat(0.1))
+        super.init(frame: scrollFrame)
+        var locationRect: CGRect = CGRect(x: margins.marginStart, y: 0, width: margins.panelWidth, height: bounds.height)
         for _ in 0..<panelsNumber {
-            addPanel(panelArgs: panelArgs)
-            panelArgs.numerator += 4
-            panelArgs.panelFrame.origin.x += margins.marginMiddle + margins.panelWidth
+            addPanel(frame: locationRect, image: nil)
+            locationRect.origin.x += margins.marginMiddle + margins.panelWidth
         }
         
         contentSize = CGSize(width: 2 * margins.marginStart + CGFloat(panelsNumber) * margins.panelWidth + CGFloat(panelsNumber - 1) * margins.marginMiddle, height: bounds.height)
@@ -40,22 +43,14 @@ class PanelsScrollView : UIScrollView {
         delegate = self
     }
     
-    func addPanel(panelArgs: PanelInformation) {
-        let panel = Panel<PanelButton>(panelArgs: panelArgs)
+    func addPanel(frame: CGRect, image: UIImage?) {
+        let panel = Panel(frame: frame, defaultImage: image)
         panel.layer.cornerRadius = 10
         panel.layer.masksToBounds = true
         panel.backgroundColor = .green
         addSubview(panel)
         panels.append(panel)
     }
-    
-    //MARK: - Иногда при резком отпускании вбок кнопка обратно не отжимается, потом поправить
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension PanelsScrollView: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let position = targetContentOffset.pointee.x + bounds.width / 2
@@ -71,5 +66,11 @@ extension PanelsScrollView: UIScrollViewDelegate {
         }
         targetX = panels[idx].center.x - bounds.width / 2
         targetContentOffset.pointee.x = targetX
+    }
+    
+    
+    //MARK: - Иногда при резком отпускании вбок кнопка обратно не отжимается, потом поправить
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

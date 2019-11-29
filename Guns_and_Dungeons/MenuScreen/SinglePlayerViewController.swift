@@ -23,7 +23,7 @@ class AboutLevels {
 
 class SinglePlayerViewController : UIViewController, Callable {
     
-    var levelPanel : PanelsScrollView = PanelsScrollView()
+    var levelPanel : PanelsScrollView = PanelsScrollView<PanelButton>()
     var backButton: UIButton = UIButton()
     static let stack = DataBaseController()
     private typealias SPVC = SinglePlayerViewController
@@ -31,45 +31,61 @@ class SinglePlayerViewController : UIViewController, Callable {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
-        let k_scroll = view.bounds.width / (0.6 * view.bounds.height)
-        let scrollFrame: CGRect = getRect(parentFrame: view.bounds,
-                                          params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
-                                                                k: k_scroll,
-                                                                square: 0.6))
-        let panelWidth: CGFloat = 0.6 * scrollFrame.width
-        let margins: MarnginsInformation = MarnginsInformation(marginStart: (scrollFrame.width - panelWidth) / 2,
-                                                               marginMiddle: scrollFrame.width * 0.05,
-                                                               panelWidth: scrollFrame.width * 0.6)
-        levelPanel = PanelsScrollView(frame: getRect(parentFrame: view.bounds,
-                                                     params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4),
-                                                                           k: k_scroll , square: 0.6)),
-                                      panelsNumber: 5, margins: margins);
-        view.addSubview(levelPanel)
+        
         backButton = view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
                                     params: LocationParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
+        makePanelScrollView(levelsNumber: 20, levelsPerPanel: 4)
+    }
+    
+    func makePanelScrollView(levelsNumber: Int, levelsPerPanel: Int) {
+        levelPanel = PanelsScrollView(parrentBounds: view.bounds, panelsNumber: levelsNumber / levelsPerPanel)
+        view.addSubview(levelPanel)
         
-        let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "levelNumber", ascending: true)]
+        var statistics: [Statistics] = []
         
         SPVC.stack.context.perform {
             let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
-            let contacts = try! request.execute()
-            print(contacts)
+            request.sortDescriptors = [NSSortDescriptor(key: "levelNumber", ascending: true)]
+            statistics = try! request.execute()
         }
-        //        let level0 = Statistics(context: SPVC.stack.context)
-        //        level0.levelNumber = 0
-        //        level0.stars = -1
-        //        try! SPVC.stack.context.save()
-        //
-        //        let level1 = Statistics(context: SPVC.stack.context)
-        //        level1.levelNumber = 1
-        //        level1.stars = -1
-        //        try! SPVC.stack.context.save()
-        //
-        //        let level2 = Statistics(context: SPVC.stack.context)
-        //        level2.levelNumber = 2
-        //        level2.stars = -1
-        //        try! SPVC.stack.context.save()
+        
+        let panelFrame: CGRect = levelPanel.panels.first!.frame
+        let buttonFrame: CGRect = CGRect(origin: CGPoint(),
+                                         size: getRectSize(parentFrame: panelFrame, params: SizeParameters(k: 1.5, square: 0.08)))
+        
+        let buttonsPerPanel: Int = 4
+        let lockedImage: UIImage? =  UIImage(named: "locked")
+        let unlockedImage: UIImage? = nil //UIImage(named: "unlocked")
+        for panelNumber in 0..<levelPanel.panels.count {
+            var levelButtons: [PanelButton] = []
+            for buttonOnPanelNumber in 0..<buttonsPerPanel {
+                let number: Int = panelNumber * buttonsPerPanel + buttonOnPanelNumber
+                let buttonParams: ButtonParams = ButtonParams(frame: buttonFrame, defaultTexture: lockedImage, pressedTexture: nil, label: "Level \(number + 1)")
+                let panelButtonParams: PanelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: nil, number: number, stars: 3)
+                let button: PanelButton = PanelButton(params: panelButtonParams)
+                levelButtons.append(button)
+            }
+            levelPanel.panels[panelNumber].addViews(views: levelButtons)
+        }
+    }
+    
+    func setStatistics(statistics: LevelStatistics) {
+        print("saving")
+        SPVC.stack.context.perform {
+            let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
+            let dataBaseLevelStatistiks = try! request.execute()
+            if (dataBaseLevelStatistiks.count < statistics.levelNumber) {
+                let updatedStatistics = Statistics(context: SPVC.stack.context)
+                updatedStatistics.levelNumber = Int16(statistics.levelNumber)
+                updatedStatistics.stars = Int16(statistics.stars)
+                do {
+                    try SPVC.stack.context.save()
+                }
+                catch {
+                    print("Unexpected error while  saving")
+                }
+            }
+        }
     }
     
     func call(number: Int) {
@@ -79,6 +95,10 @@ class SinglePlayerViewController : UIViewController, Callable {
     
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    deinit {
+        print("deinit vc")
     }
 }
 

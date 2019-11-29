@@ -19,8 +19,15 @@ class MainNavigationController: UINavigationController {
     }
     
     func toGameSceneViewController(levelNumber: Int) {
-        popToRootViewController(animated: false)
-        pushViewController(GameViewController(number: levelNumber), animated: false)
+//        popToRootViewController(animated: false)
+        pushViewController(GameViewController(number: levelNumber), animated: true)
+    }
+    
+    func toLevelSelectionViewController(statistics: LevelStatistics) {
+        popViewController(animated: true)
+        print("go back")
+        let singlePlayerViewController = topViewController as! SinglePlayerViewController
+        singlePlayerViewController.setStatistics(statistics: statistics)
     }
     
     /*

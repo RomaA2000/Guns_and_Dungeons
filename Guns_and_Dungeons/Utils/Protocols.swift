@@ -11,7 +11,3 @@ import UIKit
 protocol Callable: class {
     func call(number: Int)
 }
-
-protocol PanelSubview: UIView {
-    init(frame: CGRect, num: Int)
-}

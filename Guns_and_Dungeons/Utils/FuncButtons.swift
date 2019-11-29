@@ -21,8 +21,12 @@ class SizeParameters {
 class LocationParameters : SizeParameters {
     var centerPoint : CGPoint = CGPoint()
     init(centerPoint : CGPoint, k : CGFloat, square : CGFloat) {
-        super.init(k : k, square : square)
         self.centerPoint = centerPoint
+        super.init(k : k, square : square)
+    }
+    init(copy: LocationParameters) {
+        self.centerPoint = copy.centerPoint
+        super.init(k: copy.k, square: copy.square)
     }
 }
 

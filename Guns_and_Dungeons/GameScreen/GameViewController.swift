@@ -13,6 +13,7 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     var levelNumber: Int = 0
+    var gameScene: SKScene?
     
     convenience init(number: Int) {
         self.init()
@@ -25,16 +26,17 @@ class GameViewController: UIViewController {
         
         self.view = sceneView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "Level-\(levelNumber)") {
+                gameScene = scene
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                
+                (scene as? GameScene)?.viewController = self
                 // Present the scene
                 view.presentScene(scene)
             }
@@ -43,6 +45,12 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+    }
+    
+    func toLevelSelectionScreen() {
+        gameScene?.isPaused = true
+        let mainNavigationController = navigationController as! MainNavigationController
+        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: Int16(levelNumber), stars: 1))
     }
 
     override var shouldAutorotate: Bool {
