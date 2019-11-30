@@ -16,17 +16,19 @@ protocol PanelSubview: UIView {
 
 class Panel: UIImageView {
     
+    var panelSubviews: [UIView] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
     convenience init(frame: CGRect, defaultImage: UIImage?) {
         self.init(frame: frame)
-//        self.image = defaultImage
+        self.image = defaultImage
         self.isUserInteractionEnabled = true
     }
     
-    func addViews(views: [UIView]) {
+    func addSubviewsEvenly(views: [UIView]) {
         let number: Int = views.count
         guard number % 2 == 0, let viewSize = views.first?.frame.size else { return }
         var rows: Int = 2
@@ -52,6 +54,7 @@ class Panel: UIImageView {
                 let viewSize: CGSize = views[current_view].frame.size
                 views[current_view].frame.origin = CGPoint(x: x - viewSize.width / 2, y: y - viewSize.height / 2)
                 addSubview(views[current_view])
+                panelSubviews.append(views[current_view])
                 current_view += 1
             }
         }

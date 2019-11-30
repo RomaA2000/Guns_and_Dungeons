@@ -49,8 +49,10 @@ class GameViewController: UIViewController {
     
     func toLevelSelectionScreen() {
         gameScene?.isPaused = true
+        gameScene?.physicsWorld.speed = 0
+        gameScene?.willMove(from: self.view as! SKView)
         let mainNavigationController = navigationController as! MainNavigationController
-        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: Int16(levelNumber), stars: 1))
+        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: Int16(levelNumber), stars: 2))
     }
 
     override var shouldAutorotate: Bool {

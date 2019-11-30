@@ -3,7 +3,7 @@
 //  Guns_and_Dungeons
 //
 //  Created by Роман Агеев on 18.10.2019.
-//  Copyright © 2019 Роман Агеев. All rights reserved.
+//  Copyright © 2019 Александр Потапов. All rights reserved.
 //
 
 
@@ -19,14 +19,12 @@ class MainNavigationController: UINavigationController {
     }
     
     func toGameSceneViewController(levelNumber: Int) {
-//        popToRootViewController(animated: false)
         pushViewController(GameViewController(number: levelNumber), animated: true)
     }
     
     func toLevelSelectionViewController(statistics: LevelStatistics) {
         popViewController(animated: true)
-        print("go back")
-        let singlePlayerViewController = topViewController as! SinglePlayerViewController
+        let singlePlayerViewController = self.topViewController as! SinglePlayerViewController
         singlePlayerViewController.setStatistics(statistics: statistics)
     }
     

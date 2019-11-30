@@ -8,29 +8,28 @@
 
 import UIKit
 
-class PanelButton : UIButton, PanelSubview {
-    typealias Params = PanelButtonParams
-    let number: Int
-    let defaultTexture: UIImage?
-    let pressedTexture: UIImage?
+class PanelButton : UIButton {
+    var number: Int
+    var defaultTexture: UIImage?
+    var pressedTexture: UIImage?
+    var starTexture:    UIImage?
+    var starsNumber: Int = 0
     
     required init(params: PanelButtonParams) {
         self.number = params.number
         self.defaultTexture = params.defaultTexture
         self.pressedTexture = params.pressedTexture
+        self.starTexture = params.starTexture
         super.init(frame: params.frame) // need to locate manualy
         self.setImage(defaultTexture, for: .normal)
-        backgroundColor = .red
+        self.setImage(pressedTexture, for: .selected)
+        backgroundColor = .black
         addTarget(self, action: #selector(buttonRelisedInside(sender:)), for: .touchUpInside)
         addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchDown)
         addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)
         setTitle("Level \(number + 1)", for: .normal)
-        for starNumber in 1...params.stars {
-            let star: UIImageView = UIImageView(image: params.starTexture)
-            let location = LocationParameters(centerPoint: CGPoint(x: 0.25 * CGFloat(starNumber), y: 0.8), k: 1, square: 0.01)
-            self.posSubviewByRect(subView: star, location: location)
-            print(star.frame)
-        }
+        setStars(stars: params.stars)
+        print("stars: ", params.stars)
     }
     
     required init?(coder: NSCoder) {
@@ -40,20 +39,29 @@ class PanelButton : UIButton, PanelSubview {
         super.init(coder: coder)
     }
     
+    func setStars(stars: Int) {
+        guard stars > 0, stars > self.starsNumber else { return }
+        for starNumber in self.starsNumber + 1 ... stars {
+            let star: UIImageView = UIImageView(image: self.starTexture)
+            let location = LocationParameters(centerPoint: CGPoint(x: 0.25 * CGFloat(starNumber), y: 0.8), k: 1, square: 0.01)
+            self.posSubviewByRect(subView: star, location: location)
+            print(star.frame)
+        }
+        self.starsNumber = stars
+    }
+    
     @objc func buttonPressed(sender: PanelButton) {
-        print("touched: ", sender.number)
         backgroundColor = .yellow
+        self.imageView?.alpha = 0.5
     }
     
     @objc func buttonReleasedOutside(sender: PanelButton) {
-        print("realised outsied")
-        backgroundColor = .red
+        self.imageView?.alpha = 1
     }
     
     @objc func buttonRelisedInside(sender: PanelButton) {
-        print("relised")
         parent(implementing: Callable.self)?.call(number: sender.number)
-        sender.backgroundColor = .red
+        self.imageView?.alpha = 0.5
     }
 }
 
@@ -64,7 +72,7 @@ class ButtonParams {
     let pressedTexture: UIImage?
     let label: String
     
-    init(frame: CGRect, defaultTexture: UIImage?, pressedTexture: UIImage?, label: String) {
+    init(frame: CGRect, defaultTexture: UIImage?, pressedTexture: UIImage? = nil, label: String = "") {
         self.frame = frame
         self.defaultTexture = defaultTexture
         self.pressedTexture = pressedTexture
@@ -83,7 +91,7 @@ class PanelButtonParams: ButtonParams {
     let starTexture: UIImage?
     let stars: Int
     let number: Int
-    init(buttonParams: ButtonParams, starTexture: UIImage?, number: Int, stars: Int) {
+    init(buttonParams: ButtonParams, starTexture: UIImage?, number: Int = 0, stars: Int = 0) {
         self.stars = stars
         self.starTexture = starTexture
         self.number = number
