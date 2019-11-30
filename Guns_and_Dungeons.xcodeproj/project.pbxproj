@@ -47,6 +47,7 @@
 		7A5AB7832380953900096A57 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7822380953900096A57 /* Weapon.swift */; };
 		7A5AB7852380BA6400096A57 /* EnemiesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7842380BA6400096A57 /* EnemiesController.swift */; };
 		7A5DCD2A2384AB030077D876 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DCD292384AB030077D876 /* Wall.swift */; };
+		7A6A06BB2392E758005BCB1D /* Level-4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A06BA2392E758005BCB1D /* Level-4.sks */; };
 		7A7101DB238DD1AE000AE1E3 /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7101DA238DD1AE000AE1E3 /* LevelStatistics.swift */; };
 		7A8989F7237DD6FC00801E32 /* Enemy.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A8989F6237DD6FC00801E32 /* Enemy.atlas */; };
 		7A89F620235A1F7600DEB50A /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F61F235A1F7600DEB50A /* SinglePlayerViewController.swift */; };
@@ -113,6 +114,7 @@
 		7A5AB7822380953900096A57 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		7A5AB7842380BA6400096A57 /* EnemiesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnemiesController.swift; path = ../EnemiesController.swift; sourceTree = "<group>"; };
 		7A5DCD292384AB030077D876 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		7A6A06BA2392E758005BCB1D /* Level-4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-4.sks"; sourceTree = "<group>"; };
 		7A7101DA238DD1AE000AE1E3 /* LevelStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStatistics.swift; sourceTree = "<group>"; };
 		7A8989F6237DD6FC00801E32 /* Enemy.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Enemy.atlas; sourceTree = "<group>"; };
 		7A89F61F235A1F7600DEB50A /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				7A18182A2389391A005ECAF1 /* Level-1.sks */,
 				7A02E2E823883638002AD8FD /* Level-2.sks */,
 				7A02E2EA23883DDE002AD8FD /* Level-3.sks */,
+				7A6A06BA2392E758005BCB1D /* Level-4.sks */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				7A8989F7237DD6FC00801E32 /* Enemy.atlas in Resources */,
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
 				7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */,
+				7A6A06BB2392E758005BCB1D /* Level-4.sks in Resources */,
 				372651422374B4E5007C841D /* MyTileSet.sks in Resources */,
 				7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */,
 				37606AC82359B98800FEAE6D /* Actions.sks in Resources */,

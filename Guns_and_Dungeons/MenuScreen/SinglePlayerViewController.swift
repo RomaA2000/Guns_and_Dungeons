@@ -62,7 +62,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         
         var buttons : [PanelButton] = []
         var panelNumber = 0
-        
+       
         // Unlocked levels
         for number in 0..<statistics.count {
             if buttons.count == levelsPerPanel {
