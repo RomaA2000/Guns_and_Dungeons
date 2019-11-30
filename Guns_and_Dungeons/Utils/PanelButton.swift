@@ -91,7 +91,7 @@ class PanelButtonParams: ButtonParams {
     let starTexture: UIImage?
     let stars: Int
     let number: Int
-    init(buttonParams: ButtonParams, starTexture: UIImage?, number: Int = 0, stars: Int = 0) {
+    init(buttonParams: ButtonParams, starTexture: UIImage? = nil, number: Int = 0, stars: Int = 0) {
         self.stars = stars
         self.starTexture = starTexture
         self.number = number

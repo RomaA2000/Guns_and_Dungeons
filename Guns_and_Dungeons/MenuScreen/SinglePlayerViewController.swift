@@ -60,10 +60,6 @@ class SinglePlayerViewController : UIViewController, Callable {
         let buttonFrame: CGRect = CGRect(origin: CGPoint(),
                                          size: getRectSize(parentFrame: panelFrame, params: SizeParameters(k: 1.5, square: 0.08)))
         
-        let lockedImage: UIImage? = UIImage(named: "locked")
-        let unlockedImage: UIImage? = UIImage(named: "unlocked")
-        let starImage: UIImage? = UIImage(named: "star")
-        
         var buttons : [PanelButton] = []
         var panelNumber = 0
         
@@ -73,28 +69,37 @@ class SinglePlayerViewController : UIViewController, Callable {
                 addButtonsToPanel(panelNumber: &panelNumber, buttons: &buttons)
             }
             let stars = Int(statistics[number].stars)
-            let buttonParams = ButtonParams(frame: buttonFrame, defaultTexture: unlockedImage, pressedTexture: nil)
-            let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: number, stars: stars)
-            let unlockedButton = PanelButton(params: panelButtonParams)
-            buttons.append(unlockedButton)
+            buttons.append(makeUnlockedPanelButton(frame: buttonFrame, number: number, stars: stars))
         }
         
         // Last unlocked
-        let buttonParams = ButtonParams(frame: buttonFrame, defaultTexture: unlockedImage, pressedTexture: nil)
-        let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: statistics.count)
-        let lastUnlocked = PanelButton(params: panelButtonParams)
-        buttons.append(lastUnlocked)
+        guard statistics.count < levelsNumber else { return }
+        buttons.append(makeUnlockedPanelButton(frame: buttonFrame, number: statistics.count, stars: 0))
         
         // Locked levels
         for _ in statistics.count + 1 ... levelsNumber {
             if buttons.count == levelsPerPanel {
                 addButtonsToPanel(panelNumber: &panelNumber, buttons: &buttons)
             }
-            let buttonParams = ButtonParams(frame: buttonFrame, defaultTexture: lockedImage, pressedTexture: nil, label: "")
-            let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage)
-            let lockedButton = PanelButton(params: panelButtonParams)
-            buttons.append(lockedButton)
+            buttons.append(makeLockedPanelButton(frame: buttonFrame))
         }
+    }
+    
+    func makeLockedPanelButton(frame: CGRect) -> PanelButton {
+        let lockedImage = UIImage(named: "locked")
+        let buttonParams = ButtonParams(frame: frame, defaultTexture: lockedImage, pressedTexture: nil, label: "")
+        let button = PanelButton(params: PanelButtonParams(buttonParams: buttonParams))
+        button.isEnabled = false
+        return button
+    }
+    
+    func makeUnlockedPanelButton(frame: CGRect, number: Int, stars: Int = 0) -> PanelButton {
+        let unlockedImage = UIImage(named: "unlocked")
+        let starImage = UIImage(named: "star")
+        let buttonParams = ButtonParams(frame: frame, defaultTexture: unlockedImage, pressedTexture: nil)
+        let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: number, stars: stars)
+        let button = PanelButton(params: panelButtonParams)
+        return button
     }
     
     func addButtonsToPanel(panelNumber: inout Int, buttons: inout [PanelButton]) {
@@ -107,7 +112,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         let button = levelPanel.panels[number / levelsPerPanel].panelSubviews[number % levelsPerPanel] as! PanelButton
         button.setStars(stars: stars)
         guard number + 1 < levelsNumber else { return }
-        let nextButton = levelPanel.panels[(number + 1) / levelsPerPanel].panelSubviews[(number + 1) % levelsPerPanel] as! PanelButton
+        ///TODO:  unlock next level
         
     }
     
