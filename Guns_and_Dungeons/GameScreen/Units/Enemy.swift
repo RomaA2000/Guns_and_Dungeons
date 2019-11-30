@@ -13,7 +13,7 @@ class Enemy : MobileUnit {
     
     init(params: EnemyParams) {
         purviewRange = params.purviewRange
-        super.init(params: params.mobileUnitParams)
+        super.init(params: params)
         name = "enemy"
         physicsBody = SKPhysicsBody(circleOfRadius: self.defaultTexture.size().width / 2)
         physicsBody?.affectedByGravity = false
@@ -28,12 +28,11 @@ class Enemy : MobileUnit {
     }
 }
 
-class EnemyParams {
-    var mobileUnitParams: MobileUnitParams
+class EnemyParams : MobileUnitParams {
     var purviewRange: Int;
     
     init(mobileUnitParams: MobileUnitParams, purvewRange: Int) {
-        self.mobileUnitParams = mobileUnitParams
         self.purviewRange = purvewRange
+        super.init(mobileUnitParams: mobileUnitParams)
     }
 }
