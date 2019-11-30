@@ -114,11 +114,11 @@ extension Line {
     }
     
     static func >= (line1 : Line, line2 : Line) -> Bool {
-        return (line2 > line1) || (line2 == line1);
+        return (line1 > line2) || (line2 == line1);
     }
     
     static func <= (line1 : Line, line2 : Line) -> Bool {
-        return (line2 < line1) || (line2 == line1);
+        return (line1 < line2) || (line2 == line1);
     }
 }
 
