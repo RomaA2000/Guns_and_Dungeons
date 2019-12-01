@@ -9,14 +9,10 @@
 import Foundation
 import UIKit
 
-protocol PanelSubview: UIView {
-    associatedtype Params
-    init(params: Params)
-}
-
-class Panel: UIImageView {
+class Panel<Element: PanelSubview>: UIImageView {
+    typealias Params = Element.Params
     
-    var panelSubviews: [UIView] = []
+    var panelSubviews: [Element] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,9 +24,14 @@ class Panel: UIImageView {
         self.isUserInteractionEnabled = true
     }
     
-    func addSubviewsEvenly(views: [UIView]) {
-        let number: Int = views.count
-        guard number % 2 == 0, let viewSize = views.first?.frame.size else { return }
+    func addSubviewsEvenly(elementsParams: [Params]) {
+        let params = elementsParams
+        for param in params {
+            param.setFrame(frame: getRect(parentFrame: self.frame, params: param.getLocationParams()))
+        }
+        let elements: [Element] = params.map({ return Element(params: $0) })
+        let number: Int = elements.count
+        guard number % 2 == 0, let viewSize = elements.first?.frame.size else { return }
         var rows: Int = 2
         var colomns: Int = number / 2
         let bias: Int = Int(sqrt(Double(number)))
@@ -48,16 +49,27 @@ class Panel: UIImageView {
         let y_arr: [CGFloat] = Array(stride(from: y_dist + viewSize.height / 2,
                                             to: self.bounds.height - 1, by: y_dist + viewSize.height))
         guard x_arr.count * y_arr.count == number else { return }
-        var current_view: Int = 0
+        var current_element: Int = 0
         for y in y_arr {
             for x in x_arr {
-                let viewSize: CGSize = views[current_view].frame.size
-                views[current_view].frame.origin = CGPoint(x: x - viewSize.width / 2, y: y - viewSize.height / 2)
-                addSubview(views[current_view])
-                panelSubviews.append(views[current_view])
-                current_view += 1
+                let viewSize: CGSize = elements[current_element].frame.size
+                elements[current_element].frame.origin = CGPoint(x: x - viewSize.width / 2, y: y - viewSize.height / 2)
+                addSubview(elements[current_element])
+                panelSubviews.append(elements[current_element])
+                current_element += 1
             }
         }
+    }
+    
+    func setElement(number: Int, elementParams: Params) {
+        guard number < panelSubviews.count else { fatalError() }
+        let lastFrame: CGRect = panelSubviews[number].frame
+        let params: Params = elementParams
+        params.setFrame(frame: lastFrame)
+        panelSubviews[number].removeFromSuperview()
+        let newElement = Element(params: params)
+        addSubview(newElement)
+        panelSubviews[number] = newElement
     }
     
     required init?(coder aDecoder: NSCoder) {

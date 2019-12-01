@@ -25,7 +25,7 @@ class MainNavigationController: UINavigationController {
     func toLevelSelectionViewController(statistics: LevelStatistics) {
         popViewController(animated: true)
         let singlePlayerViewController = self.topViewController as! SinglePlayerViewController
-        singlePlayerViewController.setStatistics(statistics: statistics)
+        singlePlayerViewController.setStatistics(levelStatistics: statistics)
     }
     
     /*

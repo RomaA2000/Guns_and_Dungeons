@@ -19,6 +19,28 @@ func calcCenter(coord : CGPoint, frame : CGSize, size : CGSize) -> CGPoint {
                    y: calcFloat(coord: coord.y, length: frame.height, size: size.height))
 }
 
+class SizeParameters {
+    var k : CGFloat = CGFloat()
+    var square : CGFloat = CGFloat()
+    init(k : CGFloat, square : CGFloat) {
+        self.k = k;
+        self.square = square;
+    }
+}
+
+class LocationParameters : SizeParameters {
+    var centerPoint : CGPoint = CGPoint()
+    init(centerPoint : CGPoint, k : CGFloat, square : CGFloat) {
+        self.centerPoint = centerPoint
+        super.init(k : k, square : square)
+    }
+    init(copy: LocationParameters) {
+        self.centerPoint = copy.centerPoint
+        super.init(k: copy.k, square: copy.square)
+    }
+}
+
+
 func getRectSize(parentFrame: CGRect, params: SizeParameters) -> CGSize {
     let s : CGFloat = params.square * parentFrame.width * parentFrame.height
     let height : CGFloat = sqrt(CGFloat(s) / params.k)
@@ -66,3 +88,5 @@ extension Array {
         return low
     }
 }
+
+
