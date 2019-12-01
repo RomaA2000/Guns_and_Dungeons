@@ -9,19 +9,31 @@
 import Foundation
 import UIKit
 
+protocol PanelSuviewParams: class {
+    func setFrame(frame: CGRect)
+    func getLocationParams() -> LocationParameters
+}
 
-class PanelsScrollView<Element: UIView> : UIScrollView, UIScrollViewDelegate {
-//    typealias PanelView = Panel<Element>
+protocol PanelSubview: UIView {
+    associatedtype Params: PanelSuviewParams
+    init(params: Params)
+}
+
+class PanelsScrollView<Element: PanelSubview> : UIScrollView, UIScrollViewDelegate {
+    typealias PanelType = Panel<Element>
     
-    var panels: [Panel] = []
+    var panels: [PanelType] = []
     let margins: MarnginsInformation
+    let elementsPerPanel: Int
     
-    override init(frame: CGRect = CGRect()) {
+    init(frame: CGRect = CGRect(), elementsPerPanel: Int) {
+        self.elementsPerPanel = elementsPerPanel
         margins = MarnginsInformation()
         super.init(frame: frame)
     }
     
-    init(parrentBounds: CGRect, panelsNumber: Int) {
+    init(parrentBounds: CGRect, panelsNumber: Int, elementsPerPanel: Int) {
+        self.elementsPerPanel = elementsPerPanel
         let k_scroll = parrentBounds.size.width / (0.6 * parrentBounds.size.height)
         let panelParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4), k: k_scroll , square: 0.6)
         let scrollFrame = getRect(parentFrame: parrentBounds, params: panelParams)
@@ -44,12 +56,25 @@ class PanelsScrollView<Element: UIView> : UIScrollView, UIScrollViewDelegate {
     }
     
     func addPanel(frame: CGRect, image: UIImage?) {
-        let panel = Panel(frame: frame, defaultImage: image)
+        let panel = PanelType(frame: frame, defaultImage: image)
         panel.layer.cornerRadius = 10
         panel.layer.masksToBounds = true
         panel.backgroundColor = .green
         addSubview(panel)
         panels.append(panel)
+    }
+    
+    func createElementsOnPanels(params: [Element.Params]) {
+        for elementsNumber in 0..<panels.count {
+            let leftBound: Int = elementsNumber * elementsPerPanel
+            let rightBound: Int = (elementsNumber + 1) * elementsPerPanel
+            panels[elementsNumber].addSubviewsEvenly(elementsParams: Array(params[leftBound..<rightBound]))
+        }
+    }
+    
+    func setElement(number: Int, params: Element.Params) {
+        guard number < panels.count * elementsPerPanel else { fatalError("") }
+        panels[number / elementsPerPanel].setElement(number: number % elementsPerPanel, elementParams: params)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -67,7 +92,6 @@ class PanelsScrollView<Element: UIView> : UIScrollView, UIScrollViewDelegate {
         targetX = panels[idx].center.x - bounds.width / 2
         targetContentOffset.pointee.x = targetX
     }
-    
     
     //MARK: - Иногда при резком отпускании вбок кнопка обратно не отжимается, потом поправить
     required init?(coder aDecoder: NSCoder) {
