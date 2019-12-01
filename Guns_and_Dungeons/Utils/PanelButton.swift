@@ -8,7 +8,9 @@
 
 import UIKit
 
-class PanelButton : UIButton {
+class PanelButton : UIButton, PanelSubview {
+    typealias Panel = PanelButtonParams
+    
     var number: Int
     var defaultTexture: UIImage?
     var pressedTexture: UIImage?
@@ -20,7 +22,7 @@ class PanelButton : UIButton {
         self.defaultTexture = params.defaultTexture
         self.pressedTexture = params.pressedTexture
         self.starTexture = params.starTexture
-        super.init(frame: params.frame) // need to locate manualy
+        super.init(frame: params.frame)
         self.setImage(defaultTexture, for: .normal)
         self.setImage(pressedTexture, for: .selected)
         backgroundColor = .black
@@ -67,34 +69,46 @@ class PanelButton : UIButton {
 
 
 class ButtonParams {
-    let frame: CGRect
+    let locationParameters: LocationParameters
     let defaultTexture: UIImage?
     let pressedTexture: UIImage?
     let label: String
     
-    init(frame: CGRect, defaultTexture: UIImage?, pressedTexture: UIImage? = nil, label: String = "") {
-        self.frame = frame
+    init(location: LocationParameters, defaultTexture: UIImage?, pressedTexture: UIImage? = nil, label: String = "") {
+        self.locationParameters = location
         self.defaultTexture = defaultTexture
         self.pressedTexture = pressedTexture
         self.label = label
     }
 
     init(copy: ButtonParams) {
-        self.frame = copy.frame
+        self.locationParameters = copy.locationParameters
         self.defaultTexture = copy.defaultTexture
         self.pressedTexture = copy.pressedTexture
         self.label = copy.label
     }
 }
 
-class PanelButtonParams: ButtonParams {
+class PanelButtonParams: ButtonParams, PanelSuviewParams {
+    
     let starTexture: UIImage?
     let stars: Int
     let number: Int
+    var frame: CGRect
+    
+    func setFrame(frame: CGRect) {
+        self.frame = frame
+    }
+    
+    func getLocationParams() -> LocationParameters {
+        return self.locationParameters
+    }
+    
     init(buttonParams: ButtonParams, starTexture: UIImage? = nil, number: Int = 0, stars: Int = 0) {
         self.stars = stars
         self.starTexture = starTexture
         self.number = number
+        self.frame = CGRect()
         super.init(copy: buttonParams)
     }
 }

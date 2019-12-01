@@ -10,10 +10,10 @@ import Foundation
 
 class LevelStatistics {
     
-    let stars: Int16
-    let levelNumber: Int16
+    let stars: Int
+    let levelNumber: Int
     
-    init(levelNumber: Int16, stars: Int16) {
+    init(levelNumber: Int, stars: Int) {
         self.stars = stars
         self.levelNumber = levelNumber
     }

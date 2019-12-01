@@ -23,7 +23,7 @@ class AboutLevels {
 
 class SinglePlayerViewController : UIViewController, Callable {
     
-    var levelPanel : PanelsScrollView = PanelsScrollView<PanelButton>()
+    var levelPanel : PanelsScrollView<PanelButton>!
     var backButton: UIButton = UIButton()
     static let stack = DataBaseController()
     var levelsPerPanel: Int = 4
@@ -41,13 +41,12 @@ class SinglePlayerViewController : UIViewController, Callable {
     }
     
     func makePanelScrollView() {
-        levelPanel = PanelsScrollView(parrentBounds: view.bounds, panelsNumber: levelsNumber / levelsPerPanel)
+        levelPanel = PanelsScrollView(parrentBounds: view.bounds, panelsNumber: 5, elementsPerPanel: 4)
         view.addSubview(levelPanel)
         
         var statistics: [Statistics] = []
-        
         let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
-        
+        request.sortDescriptors = [NSSortDescriptor(key: "levelNumber", ascending: false)]
         do {
             statistics = try SPVC.stack.context.fetch(request)
         }
@@ -55,89 +54,78 @@ class SinglePlayerViewController : UIViewController, Callable {
             statistics = []
         }
         
-        print("stat: ", statistics.count)
         let panelFrame: CGRect = levelPanel.panels.first!.frame
         let buttonFrame: CGRect = CGRect(origin: CGPoint(),
                                          size: getRectSize(parentFrame: panelFrame, params: SizeParameters(k: 1.5, square: 0.08)))
         
-        var buttons : [PanelButton] = []
-        var panelNumber = 0
-       
-        // Unlocked levels
-        for number in 0..<statistics.count {
-            if buttons.count == levelsPerPanel {
-                addButtonsToPanel(panelNumber: &panelNumber, buttons: &buttons)
+        var buttonsParams : [PanelButtonParams] = []
+        for number in 0..<levelsNumber {
+            if (number < statistics.count) {
+                buttonsParams.append(makeUnlockedButtonParams(number: number, stars: Int(statistics[number].stars)))
             }
-            let stars = Int(statistics[number].stars)
-            buttons.append(makeUnlockedPanelButton(frame: buttonFrame, number: number, stars: stars))
-        }
-        
-        // Last unlocked
-        guard statistics.count < levelsNumber else { return }
-        buttons.append(makeUnlockedPanelButton(frame: buttonFrame, number: statistics.count, stars: 0))
-        
-        // Locked levels
-        for _ in statistics.count + 1 ... levelsNumber {
-            if buttons.count == levelsPerPanel {
-                addButtonsToPanel(panelNumber: &panelNumber, buttons: &buttons)
+            else if (number == statistics.count) {
+                buttonsParams.append(makeUnlockedButtonParams(number: number, stars: 0))
             }
-            buttons.append(makeLockedPanelButton(frame: buttonFrame))
+            else {
+                buttonsParams.append(makeLockedButtonParams())
+            }
         }
+        levelPanel.createElementsOnPanels(params: buttonsParams)
     }
     
-    func makeLockedPanelButton(frame: CGRect) -> PanelButton {
+    func makeLockedButtonParams() -> PanelButtonParams {
         let lockedImage = UIImage(named: "locked")
-        let buttonParams = ButtonParams(frame: frame, defaultTexture: lockedImage, pressedTexture: nil, label: "")
-        let button = PanelButton(params: PanelButtonParams(buttonParams: buttonParams))
-        button.isEnabled = false
-        return button
+        let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
+        let buttonParams = ButtonParams(location: location, defaultTexture: lockedImage, pressedTexture: nil, label: "")
+        return PanelButtonParams(buttonParams: buttonParams)
     }
     
-    func makeUnlockedPanelButton(frame: CGRect, number: Int, stars: Int = 0) -> PanelButton {
+    func makeUnlockedButtonParams(number: Int, stars: Int = 0) -> PanelButtonParams {
         let unlockedImage = UIImage(named: "unlocked")
         let starImage = UIImage(named: "star")
-        let buttonParams = ButtonParams(frame: frame, defaultTexture: unlockedImage, pressedTexture: nil)
+        let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
+        let buttonParams = ButtonParams(location: location, defaultTexture: unlockedImage, pressedTexture: nil)
         let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: number, stars: stars)
-        let button = PanelButton(params: panelButtonParams)
-        return button
-    }
-    
-    func addButtonsToPanel(panelNumber: inout Int, buttons: inout [PanelButton]) {
-        levelPanel.panels[panelNumber].addSubviewsEvenly(views: buttons)
-        buttons = []
-        panelNumber += 1
+        return panelButtonParams
     }
     
     func updateLevelButton(number: Int, stars: Int = 0) {
-        let button = levelPanel.panels[number / levelsPerPanel].panelSubviews[number % levelsPerPanel] as! PanelButton
-        button.setStars(stars: stars)
-        guard number + 1 < levelsNumber else { return }
-        ///TODO:  unlock next level
-        
+        levelPanel.setElement(number: number, params: makeUnlockedButtonParams(number: number, stars: stars))
     }
     
-    func setStatistics(statistics: LevelStatistics) {
-        SPVC.stack.context.perform {
-            let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
-            let dataBaseLevelStatistiks = try! request.execute()
-            if (dataBaseLevelStatistiks.count < statistics.levelNumber) {
-                let updatedStatistics = Statistics(context: SPVC.stack.context)
-                updatedStatistics.levelNumber = Int16(statistics.levelNumber)
-                updatedStatistics.stars = Int16(statistics.stars)
-                do {
-                    try SPVC.stack.context.save()
-                }
-                catch {
-                    print("Unexpected error while  saving")
-                }
-                self.updateLevelButton(number: Int(updatedStatistics.levelNumber - 1), stars: Int(updatedStatistics.stars))
-            }
+    func setStatistics(levelStatistics: LevelStatistics) {
+        let statistics: [Statistics] = getStatistics()
+        if (levelStatistics.levelNumber == statistics.count) {
+            updateLevelButton(number: levelStatistics.levelNumber, stars: levelStatistics.stars)
+            saveStatistics(levelStatistics: levelStatistics)
+            updateLevelButton(number: levelStatistics.levelNumber + 1)
         }
+        else if (levelStatistics.stars > statistics[levelStatistics.levelNumber].stars) {
+            updateLevelButton(number: levelStatistics.levelNumber, stars: levelStatistics.stars)
+            saveStatistics(levelStatistics: levelStatistics)
+        }
+    }
+    
+    func saveStatistics(levelStatistics: LevelStatistics) {
+        SPVC.stack.context.perform {
+            let updatedStatistics = Statistics(context: SPVC.stack.context)
+            updatedStatistics.levelNumber = Int16(levelStatistics.levelNumber)
+            updatedStatistics.stars = Int16(levelStatistics.stars)
+            try! SPVC.stack.context.save()
+        }
+    }
+    
+    func getStatistics() -> [Statistics] {
+        var statistics: [Statistics] = []
+        let request: NSFetchRequest<Statistics> = Statistics.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "levelNumber", ascending: false)]
+        statistics = try! SPVC.stack.context.fetch(request)
+        return statistics
     }
     
     func call(number: Int) {
         print("to level: ", number + 1)
-        (navigationController as! MainNavigationController).toGameSceneViewController(levelNumber: number + 1)
+        (navigationController as! MainNavigationController).toGameSceneViewController(levelNumber: number)
     }
     
     @objc func toMenuScreen() {

@@ -23,7 +23,6 @@ class GameViewController: UIViewController {
     override func loadView() {
         let sceneView = SKView()
         sceneView.backgroundColor = .white
-        
         self.view = sceneView
     }
     
@@ -32,7 +31,7 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "Level-\(levelNumber)") {
+            if let scene = SKScene(fileNamed: "Level-\(levelNumber + 1)") {
                 gameScene = scene
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
@@ -52,7 +51,7 @@ class GameViewController: UIViewController {
         gameScene?.physicsWorld.speed = 0
         gameScene?.willMove(from: self.view as! SKView)
         let mainNavigationController = navigationController as! MainNavigationController
-        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: Int16(levelNumber), stars: 2))
+        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: levelNumber, stars: 2))
     }
 
     override var shouldAutorotate: Bool {
