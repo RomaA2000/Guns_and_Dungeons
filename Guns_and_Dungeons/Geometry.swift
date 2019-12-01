@@ -54,23 +54,9 @@ class Line {
     func distance(p1 : CGPoint) -> CGFloat {
         return (a * p1.x + b * p1.y + c) / sqrt(a * a + b * b);
     }
-    
-    func isInside(lines : Array<Line>) -> Bool {
-        var less : Bool = false;
-        var greater : Bool = false;
-        for i in lines {
-            if (self < i) {
-                greater = true;
-            } else if (self > i) {
-                less = true;
-            }
-            if (less && greater) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
+
+
 
 class Circle {
     var c : CGPoint;
@@ -90,6 +76,48 @@ func toLineArray(p : CGPoint, array : Array<CGPoint>) throws -> Array<Line> {
         try ans.append(Line(p1: p, p2: i));
     }
     return ans;
+}
+
+func toVectorArray(p : CGPoint, array : Array<CGPoint>) -> Array<CGVector> {
+       var ans : Array<CGVector> =  Array<CGVector>();
+       for i in array {
+            ans.append(CGVector(p1: p, p2: i));
+       }
+       return ans;
+}
+
+extension CGVector {
+    init(p1 : CGPoint, p2 : CGPoint) {
+        self.init()
+        self.dx = p2.x - p1.x;
+        self.dy = p2.y - p1.y;
+    }
+    
+    static func sign_sin(v1 : CGVector, v2 : CGVector) -> CGFloat {
+        return v1.dx * v2.dy - v1.dy * v2.dx;
+    }
+    
+    static func sign_cos(v1 : CGVector, v2 : CGVector) -> CGFloat {
+        return v1.dx * v2.dx + v1.dy * v2.dy;
+    }
+    
+    func isInside(array : Array<CGVector>) -> Bool {
+        var leftPart = false;
+        var rightPart = false;
+        for i in array {
+            if CGVector.sign_cos(v1: self, v2: i) > 0 {
+                if CGVector.sign_sin(v1: self, v2: i) > 0 {
+                    leftPart = true;
+                } else if CGVector.sign_sin(v1: self, v2: i) < 0 {
+                    rightPart = true;
+                }
+                if (leftPart && rightPart) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 extension Line {
@@ -123,18 +151,11 @@ extension Line {
 }
 
 extension CGRect {
-    func intersect(line : Line) throws -> Bool {
-        let p = CGPoint(x: 0, y: line.a + line.c);
-        return try line.isInside(lines: toLineArray(p: p, array: pointArray()));
+    func intersect(p : CGPoint, v : CGVector) -> Bool {
+        let array : Array<CGVector> = toVectorArray(p : p, array : pointArray());
+        return v.isInside(array: array);
     }
     
-    func intersect(p1 : CGPoint, p2 : CGPoint) throws -> Bool {
-        let line = try Line(p1: p1, p2: p2);
-        return line.isInside(lines:
-            try toLineArray(p: p1,
-                            array: pointArray()));
-    }
-
     func pointArray() -> Array<CGPoint> {
         let x = self.origin.x;
         let y = self.origin.y;
