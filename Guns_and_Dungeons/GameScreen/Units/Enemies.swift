@@ -10,10 +10,19 @@ import SpriteKit
 
 class Enemies {
     
+    var spawners: [Spawner] = []
+    
     init() {
         
     }
     
+    func addSpawner(spawner: Spawner) {
+        spawners.append(spawner)
+    }
+    
+    func updateEnemies() {
+        
+    }
 }
 
 

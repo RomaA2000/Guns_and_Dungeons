@@ -54,10 +54,6 @@ class SinglePlayerViewController : UIViewController, Callable {
             statistics = []
         }
         
-        let panelFrame: CGRect = levelPanel.panels.first!.frame
-        let buttonFrame: CGRect = CGRect(origin: CGPoint(),
-                                         size: getRectSize(parentFrame: panelFrame, params: SizeParameters(k: 1.5, square: 0.08)))
-        
         var buttonsParams : [PanelButtonParams] = []
         for number in 0..<levelsNumber {
             if (number < statistics.count) {
@@ -75,7 +71,7 @@ class SinglePlayerViewController : UIViewController, Callable {
     
     func makeLockedButtonParams() -> PanelButtonParams {
         let lockedImage = UIImage(named: "locked")
-        let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
+        let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.08)
         let buttonParams = ButtonParams(location: location, defaultTexture: lockedImage, pressedTexture: nil, label: "")
         return PanelButtonParams(buttonParams: buttonParams)
     }
@@ -83,7 +79,7 @@ class SinglePlayerViewController : UIViewController, Callable {
     func makeUnlockedButtonParams(number: Int, stars: Int = 0) -> PanelButtonParams {
         let unlockedImage = UIImage(named: "unlocked")
         let starImage = UIImage(named: "star")
-        let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
+        let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.08)
         let buttonParams = ButtonParams(location: location, defaultTexture: unlockedImage, pressedTexture: nil)
         let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: number, stars: stars)
         return panelButtonParams
