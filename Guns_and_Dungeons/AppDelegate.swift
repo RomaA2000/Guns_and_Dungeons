@@ -16,14 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var mainNavigationController : UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setupPrefences()
         window = UIWindow(frame: UIScreen.main.bounds)
         let menuViewController = MenuViewController()
-//        let gameViewController = GameViewController()
         mainNavigationController = MainNavigationController(rootViewController: menuViewController)
         window?.rootViewController = mainNavigationController
         window?.makeKeyAndVisible()
         // Override point for customization after application launch.
         return true
+    }
+    
+    func setupPrefences() {
+        UserDefaults.standard.register(defaults: ["sound": true])
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

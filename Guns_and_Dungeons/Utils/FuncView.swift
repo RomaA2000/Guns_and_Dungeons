@@ -56,10 +56,13 @@ func getRect(parentFrame : CGRect, params : LocationParameters) -> CGRect {
 }
 
 extension UIView {
-    
     func posSubviewByRect(subView : UIView, location : LocationParameters) {
         subView.frame = getRect(parentFrame: self.frame, params: location)
         self.addSubview(subView)
+    }
+    
+    func getRectInSelf(location: LocationParameters) -> CGRect {
+        return getRect(parentFrame: self.bounds, params: location)
     }
     
     func addButton(label : String, target: Any?, selector: Selector, params : LocationParameters) -> UIButton {
@@ -69,6 +72,13 @@ extension UIView {
         self.posSubviewByRect(subView: result, location: params)
         return result
     }
+    
+    func animateTo(centerPoint: CGPoint, duration: TimeInterval, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: {
+            self.center = centerPoint
+        }, completion: completion)
+    }
+    
 }
 
 extension Array {

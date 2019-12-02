@@ -28,6 +28,7 @@ class MenuViewController: UIViewController {
                                      params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.7), k: kw, square: sq))
         settingsButton = view.addButton(label: "Settings", target: self, selector: #selector(toSettingScreen),
                                         params: LocationParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1, square: 0.01))
+        
     }
     
     @objc func toSinglePlayerScreen() {
@@ -43,6 +44,7 @@ class MenuViewController: UIViewController {
     }
     
     @objc func toSettingScreen() {
+        print("data: ", UserDefaults.standard.bool(forKey: "sound"))
         self.navigationController?.pushViewController(SettingsViewController(), animated: true)
     }
     

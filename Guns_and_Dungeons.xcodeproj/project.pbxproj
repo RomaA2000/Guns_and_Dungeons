@@ -28,6 +28,7 @@
 		7A01D017237D8E1300D0A4E8 /* Joystic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D016237D8E1300D0A4E8 /* Joystic.swift */; };
 		7A02E2E923883638002AD8FD /* Level-2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2E823883638002AD8FD /* Level-2.sks */; };
 		7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2EA23883DDE002AD8FD /* Level-3.sks */; };
+		7A12C94623948EE3009C73D5 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12C94523948EE3009C73D5 /* Switcher.swift */; };
 		7A18182B2389391A005ECAF1 /* Level-1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A18182A2389391A005ECAF1 /* Level-1.sks */; };
 		7A1929E9237ED7D400113CB2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1929E8237ED7D400113CB2 /* Player.swift */; };
 		7A1929EC237ED8BD00113CB2 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1929EB237ED8BD00113CB2 /* Enemy.swift */; };
@@ -55,6 +56,7 @@
 		7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F623235A23F700DEB50A /* ShopViewController.swift */; };
 		7A89F626235A241A00DEB50A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F625235A241A00DEB50A /* SettingsViewController.swift */; };
 		7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F627235A41D300DEB50A /* Datastructs.swift */; };
+		7AA670D2239512E300250EAD /* UIIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA670D1239512E300250EAD /* UIIndicator.swift */; };
 		7ABF54F423849CD3006C2089 /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F323849CD3006C2089 /* Enemies.swift */; };
 		7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F523849E19006C2089 /* CollisionMasks.swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,7 @@
 		7A01D016237D8E1300D0A4E8 /* Joystic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystic.swift; sourceTree = "<group>"; };
 		7A02E2E823883638002AD8FD /* Level-2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-2.sks"; sourceTree = "<group>"; };
 		7A02E2EA23883DDE002AD8FD /* Level-3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-3.sks"; sourceTree = "<group>"; };
+		7A12C94523948EE3009C73D5 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		7A18182A2389391A005ECAF1 /* Level-1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-1.sks"; sourceTree = "<group>"; };
 		7A1929E8237ED7D400113CB2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		7A1929EB237ED8BD00113CB2 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 		7A89F623235A23F700DEB50A /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7A89F625235A241A00DEB50A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7A89F627235A41D300DEB50A /* Datastructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datastructs.swift; sourceTree = "<group>"; };
+		7AA670D1239512E300250EAD /* UIIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIndicator.swift; sourceTree = "<group>"; };
 		7ABF54F323849CD3006C2089 /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
 		7ABF54F523849E19006C2089 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +191,8 @@
 				7A228599237EC40300546589 /* Protocols.swift */,
 				7A22859B237EC5A300546589 /* InformationClasses.swift */,
 				7A1929ED237F6D6D00113CB2 /* FuncsSprites.swift */,
+				7A12C94523948EE3009C73D5 /* Switcher.swift */,
+				7AA670D1239512E300250EAD /* UIIndicator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -428,11 +434,13 @@
 				7A1929EE237F6D6E00113CB2 /* FuncsSprites.swift in Sources */,
 				7A5AB781238094CF00096A57 /* DestroyableUnit.swift in Sources */,
 				37DF35DA237E969500437375 /* LevelsInfo.xcdatamodeld in Sources */,
+				7A12C94623948EE3009C73D5 /* Switcher.swift in Sources */,
 				37076175238DA45400D617D5 /* Geometry.swift in Sources */,
 				37DF35E4237E9A4A00437375 /* Statistics+CoreDataProperties.swift in Sources */,
 				7A89F620235A1F7600DEB50A /* SinglePlayerViewController.swift in Sources */,
 				37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */,
 				7A228596237EBECA00546589 /* Panel.swift in Sources */,
+				7AA670D2239512E300250EAD /* UIIndicator.swift in Sources */,
 				7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */,
 				37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */,
 				7A228594237EBB3800546589 /* PanelScrollView.swift in Sources */,
