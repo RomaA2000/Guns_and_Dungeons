@@ -21,6 +21,10 @@ class Clip {
         self.makeBullet = spawner
     }
 
+    func changeWeapon(weapon : Weapon?) {
+        self.weapon = weapon
+    }
+    
     func takeShot() {
         if (bullets > 0) {
             if let bullet = makeBullet() {
