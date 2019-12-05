@@ -21,11 +21,15 @@ class Player: MobileUnit {
         physicsBody?.contactTestBitMask = params.mask.contact
         runDefaultAnimation()
     }
+
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
 
 class PlayerParams : MobileUnitParams {
     let mask: PhysicsBodyMask
@@ -35,6 +39,7 @@ class PlayerParams : MobileUnitParams {
         self.mask = mask
         self.body = body
         super.init(mobileUnitParams: mobileUnitParams)
+    
     }
     
     convenience init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, radius: CGFloat) {

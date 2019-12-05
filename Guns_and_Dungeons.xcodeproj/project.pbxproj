@@ -28,6 +28,7 @@
 		7A01D017237D8E1300D0A4E8 /* Joystic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D016237D8E1300D0A4E8 /* Joystic.swift */; };
 		7A02E2E923883638002AD8FD /* Level-2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2E823883638002AD8FD /* Level-2.sks */; };
 		7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E2EA23883DDE002AD8FD /* Level-3.sks */; };
+		7A0E9B09239903A700494BCF /* UIObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E9B08239903A700494BCF /* UIObserver.swift */; };
 		7A12C94623948EE3009C73D5 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12C94523948EE3009C73D5 /* Switcher.swift */; };
 		7A18182B2389391A005ECAF1 /* Level-1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A18182A2389391A005ECAF1 /* Level-1.sks */; };
 		7A1929E9237ED7D400113CB2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1929E8237ED7D400113CB2 /* Player.swift */; };
@@ -97,6 +98,7 @@
 		7A01D016237D8E1300D0A4E8 /* Joystic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystic.swift; sourceTree = "<group>"; };
 		7A02E2E823883638002AD8FD /* Level-2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-2.sks"; sourceTree = "<group>"; };
 		7A02E2EA23883DDE002AD8FD /* Level-3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-3.sks"; sourceTree = "<group>"; };
+		7A0E9B08239903A700494BCF /* UIObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIObserver.swift; sourceTree = "<group>"; };
 		7A12C94523948EE3009C73D5 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		7A18182A2389391A005ECAF1 /* Level-1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-1.sks"; sourceTree = "<group>"; };
 		7A1929E8237ED7D400113CB2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -168,8 +170,6 @@
 		37369D09237749E3007DC726 /* MenuScreen */ = {
 			isa = PBXGroup;
 			children = (
-				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
-				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
 				7A89F61F235A1F7600DEB50A /* SinglePlayerViewController.swift */,
 				7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */,
 				37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */,
@@ -191,8 +191,6 @@
 				7A228599237EC40300546589 /* Protocols.swift */,
 				7A22859B237EC5A300546589 /* InformationClasses.swift */,
 				7A1929ED237F6D6D00113CB2 /* FuncsSprites.swift */,
-				7A12C94523948EE3009C73D5 /* Switcher.swift */,
-				7AA670D1239512E300250EAD /* UIIndicator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -220,6 +218,8 @@
 		37606AC22359B98800FEAE6D /* Guns_and_Dungeons */ = {
 			isa = PBXGroup;
 			children = (
+				7A0E9B0C23991CE600494BCF /* SettingsScreen */,
+				7A0E9B072399036900494BCF /* ShopScreen */,
 				7A02E2E523883336002AD8FD /* Levels */,
 				37369D0A23774A66007DC726 /* Utils */,
 				37369D09237749E3007DC726 /* MenuScreen */,
@@ -253,6 +253,25 @@
 				7A6A06BA2392E758005BCB1D /* Level-4.sks */,
 			);
 			path = Levels;
+			sourceTree = "<group>";
+		};
+		7A0E9B072399036900494BCF /* ShopScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
+				7A0E9B08239903A700494BCF /* UIObserver.swift */,
+			);
+			path = ShopScreen;
+			sourceTree = "<group>";
+		};
+		7A0E9B0C23991CE600494BCF /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7A12C94523948EE3009C73D5 /* Switcher.swift */,
+				7AA670D1239512E300250EAD /* UIIndicator.swift */,
+				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
+			);
+			path = SettingsScreen;
 			sourceTree = "<group>";
 		};
 		7A1929EA237ED86900113CB2 /* Units */ = {
@@ -429,6 +448,7 @@
 				7A5DCD2A2384AB030077D876 /* Wall.swift in Sources */,
 				7A22859A237EC40300546589 /* Protocols.swift in Sources */,
 				7A5AB7852380BA6400096A57 /* EnemiesController.swift in Sources */,
+				7A0E9B09239903A700494BCF /* UIObserver.swift in Sources */,
 				7A1929E9237ED7D400113CB2 /* Player.swift in Sources */,
 				7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */,
 				7A1929EE237F6D6E00113CB2 /* FuncsSprites.swift in Sources */,

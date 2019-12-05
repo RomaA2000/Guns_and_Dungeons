@@ -90,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createPlayer() -> Player {
         let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)
+        let weapon: Weapon = Weapon()
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
                                                     location: CGPoint.zero,
                                                     weapon: nil)

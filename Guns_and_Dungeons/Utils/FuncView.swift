@@ -79,6 +79,10 @@ extension UIView {
         }, completion: completion)
     }
     
+    func resizeAtPoint(newSize: CGSize) {
+        self.frame.resizeAtPoint(newSize: newSize)
+    }
+    
 }
 
 extension Array {
@@ -99,4 +103,14 @@ extension Array {
     }
 }
 
+extension CGRect {
+    init(centerPoint: CGPoint, size: CGSize) {
+        self.init(x: centerPoint.x - size.width / 2, y: centerPoint.y - size.height / 2, width: size.width, height: size.height)
+    }
+    
+    mutating func resizeAtPoint(newSize: CGSize) {
+        origin = CGPoint(x: self.origin.x - newSize.width / 2, y: self.origin.y - newSize.height / 2)
+        size = newSize
+    }
+}
 
