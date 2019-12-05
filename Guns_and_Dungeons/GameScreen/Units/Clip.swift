@@ -15,8 +15,8 @@ class Clip {
         return nil
     }
 
-    init(weapon : Weapon?, bullets : UInt64, spawner : @escaping () -> Bullet?) {
-        self.weapon = weapon
+    init(bullets : UInt64, spawner : @escaping () -> Bullet?) {
+        self.weapon = nil
         self.bullets = bullets
         self.makeBullet = spawner
     }

@@ -15,6 +15,7 @@ class Weapon : SKSpriteNode {
     init(defaultTexture : SKTexture, clip : Clip) {
         self.clip = clip
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
+        self.clip.weapon = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,6 +37,8 @@ class Weapon : SKSpriteNode {
     func replaceClip(clip : Clip) -> Clip {
         let lastClip = clip
         self.clip = clip
+        self.clip.weapon = self
+        lastClip.weapon = nil
         return lastClip
     }
 }
