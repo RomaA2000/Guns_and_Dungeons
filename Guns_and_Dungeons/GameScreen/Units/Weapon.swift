@@ -10,12 +10,12 @@
 import SpriteKit
 
 class Weapon : SKSpriteNode {
-    var clip : Clip
+    var clip : Clip?
 
-    init(defaultTexture : SKTexture, clip : Clip) {
+    init(defaultTexture : SKTexture, clip : Clip?) {
         self.clip = clip
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
-        self.clip.changeWeapon(weapon: self)
+        self.clip?.changeWeapon(weapon: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,13 +31,13 @@ class Weapon : SKSpriteNode {
     }
 
     func fire() {
-        clip.takeShot()
+        clip?.takeShot()
     }
 
     func replaceClip(clip : Clip) -> Clip {
         let lastClip = clip
         self.clip = clip
-        self.clip.changeWeapon(weapon: self)
+        self.clip?.changeWeapon(weapon: self)
         lastClip.changeWeapon(weapon: nil)
         return lastClip
     }
