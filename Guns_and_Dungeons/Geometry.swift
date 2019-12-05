@@ -162,6 +162,6 @@ extension CGRect {
         let w = self.width;
         let h = self.height;
         return [CGPoint(x: x,y: y), CGPoint(x: x + w,y: y),
-                CGPoint(x: x + w,y: y - h), CGPoint(x: x,y: y - h)]
+                CGPoint(x: x + w,y: y + h), CGPoint(x: x,y: y + h)]
     }
 }

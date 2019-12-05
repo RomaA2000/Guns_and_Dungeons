@@ -9,6 +9,33 @@
 
 import SpriteKit
 
-class Weapon {
+class Weapon : SKSpriteNode {
+    var clip : Clip
+
+    init(defaultTexture : SKTexture, clip : Clip) {
+        self.clip = clip
+        super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getAngle() -> CGFloat {
+        return zRotation
+    }
+    
+    func spawn(bullet : Bullet) {
+        scene?.addChild(bullet)
+    }
+
+    func fire() {
+        clip.takeShot()
+    }
+
+    func replaceClip(clip : Clip) -> Clip {
+        let lastClip = clip
+        self.clip = clip
+        return lastClip
+    }
 }

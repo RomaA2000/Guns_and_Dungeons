@@ -44,7 +44,7 @@ class AnimationTexturesParams {
     }
 }
 
-class AnimatedUnitParams :  AnimationTexturesParams{
+class AnimatedUnitParams : AnimationTexturesParams {
 
     let location: CGPoint
     let weapon: Weapon?

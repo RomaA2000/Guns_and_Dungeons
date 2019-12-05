@@ -54,10 +54,6 @@ class SinglePlayerViewController : UIViewController, Callable {
             statistics = []
         }
         
-        let panelFrame: CGRect = levelPanel.panels.first!.frame
-        let buttonFrame: CGRect = CGRect(origin: CGPoint(),
-                                         size: getRectSize(parentFrame: panelFrame, params: SizeParameters(k: 1.5, square: 0.08)))
-        
         var buttonsParams : [PanelButtonParams] = []
         for number in 0..<levelsNumber {
             if (number < statistics.count) {
