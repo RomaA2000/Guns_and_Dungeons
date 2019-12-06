@@ -10,22 +10,22 @@
 import SpriteKit
 
 class Weapon : SKSpriteNode {
-    var clip : Clip
+    var clip : Clip?
 
-    init(defaultTexture : SKTexture, clip : Clip) {
+    init(defaultTexture : SKTexture, clip : Clip?) {
         self.clip = clip
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
-        self.clip.changeWeapon(weapon: self)
+        self.clip?.changeWeapon(weapon: self)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func getAngle() -> CGFloat {
         return zRotation
     }
-    
+
     func spawn(bullet : Bullet) {
         scene?.addChild(bullet)
     }
@@ -37,7 +37,7 @@ class Weapon : SKSpriteNode {
     func replaceClip(clip : Clip) -> Clip {
         let lastClip = clip
         self.clip = clip
-        self.clip.changeWeapon(weapon: self)
+        self.clip?.changeWeapon(weapon: self)
         lastClip.changeWeapon(weapon: nil)
         return lastClip
     }
