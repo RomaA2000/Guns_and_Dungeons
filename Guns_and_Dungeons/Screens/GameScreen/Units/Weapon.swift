@@ -30,8 +30,8 @@ class Weapon : SKSpriteNode {
         scene?.addChild(bullet)
     }
 
-    func fire() {
-        clip.takeShot()
+    func fire(currentTime: TimeInterval) {
+        clip.takeShot(currentTime: currentTime)
     }
 
     func replaceClip(clip : Clip) -> Clip {

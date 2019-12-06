@@ -14,10 +14,16 @@ class Bullet : SKSpriteNode {
     
     init(defaultTexture : SKTexture) {
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
+        self.physicsBody = SKPhysicsBody.init(circleOfRadius: self.frame.width / 2)
     }
 
     func setVelocityVector(angle: CGFloat) {
         physicsBody?.velocity = CGVector(dx: cos(angle) * maxVelocity, dy : sin(angle) * maxVelocity)
+    }
+    
+    func setVelocityVector(angle: CGFloat, length: CGFloat) {
+        maxVelocity = length
+        setVelocityVector(angle: angle)
     }
     
     required init?(coder aDecoder: NSCoder) {

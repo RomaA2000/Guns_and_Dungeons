@@ -1,6 +1,6 @@
 //
 //  GameScene.swift
-//  Guns_and_Dungeons
+//  Guns_andDungeons
 //
 //  Created by Александр Потапов on 18.10.2019.
 //  Copyright © 2019 Роман Геев. All rights reserved.
@@ -9,7 +9,6 @@
 
 import SpriteKit
 import GameplayKit
-
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -34,16 +33,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.addChild(cameraNode)
         //MARK:- test
 
+        let sensitivity: CGFloat = 0.5
         
-        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
+        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 0, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         cameraNode.addChild(moveJoystickHiddenArea)
+        moveJoystick.sensitivityBias = sensitivity
         
-        let fireJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 0, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
+        
+        let fireJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
         fireJoystickHiddenArea.joystick = fireJoystick
         fireJoystick.isMoveable = true
         cameraNode.addChild(fireJoystickHiddenArea)
+        fireJoystick.sensitivityBias = sensitivity
         
         view.isMultipleTouchEnabled = true
     }
@@ -70,11 +73,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
-        if (!fireJoystick.isHidden) {
-            viewController?.toLevelSelectionScreen() // test
-            player.zRotation = fireJoystick.angular
+        if (fireJoystick.tracking && fireJoystick.velocity.getLenOfVector() > fireJoystick.sensitivityBias) {
+            player.rotateGunTo(angel: fireJoystick.angular)
             cameraNode.zRotation = -player.zRotation
-        } else if (!moveJoystick.isHidden) {
+            player.weapon?.fire(currentTime: currentTime)
+        }
+        if (moveJoystick.tracking && moveJoystick.velocity.getLenOfVector() > moveJoystick.sensitivityBias) {
             player.zRotation = moveJoystick.angular
             cameraNode.zRotation = -player.zRotation
         }
@@ -90,9 +94,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createPlayer() -> Player {
         let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)
+        let clip: Clip = Clip(bullets: 100, spawner: { return Bullet(defaultTexture: SKTexture(imageNamed: "bullet"))}, frequence: 1, bulletSpeed: 100)
+        let weapon: Weapon = Weapon(defaultTexture: SKTexture(imageNamed: "gun"), clip: clip)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
                                                     location: CGPoint.zero,
-                                                    weapon: nil)
+                                                    weapon: weapon)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
         let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)

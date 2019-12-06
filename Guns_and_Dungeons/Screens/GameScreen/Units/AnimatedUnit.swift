@@ -20,6 +20,14 @@ class AnimatedUnit: SKSpriteNode {
         self.weapon = params.weapon
         super.init(texture: params.defaultTexture, color: .black, size: defaultTexture.size())
         self.position = params.location
+        if (weapon != nil) {
+            self.addChild(weapon!)
+            weapon?.zPosition = self.zPosition + 1
+        }
+    }
+    
+    func rotateGunTo(angel: CGFloat) {
+        self.weapon?.zRotation = angel - self.zRotation
     }
     
     func runDefaultAnimation() {

@@ -61,6 +61,7 @@
 		7AA670D2239512E300250EAD /* UIIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA670D1239512E300250EAD /* UIIndicator.swift */; };
 		7ABF54F423849CD3006C2089 /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F323849CD3006C2089 /* Enemies.swift */; };
 		7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F523849E19006C2089 /* CollisionMasks.swift */; };
+		7AE997752399A7A300A7384F /* UIObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE997742399A7A300A7384F /* UIObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		7AA670D1239512E300250EAD /* UIIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIndicator.swift; sourceTree = "<group>"; };
 		7ABF54F323849CD3006C2089 /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
 		7ABF54F523849E19006C2089 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
+		7AE997742399A7A300A7384F /* UIObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		37369D0623774915007DC726 /* GameScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7A02E2E523883336002AD8FD /* Levels */,
 				7A35E6F52389E95400E0D8C2 /* Map */,
 				7A3C5D7E23898D2600CF991D /* Textures */,
 				7A2EF82D23884E7B00FCA1B6 /* Interface */,
@@ -172,8 +175,6 @@
 		37369D09237749E3007DC726 /* MenuScreen */ = {
 			isa = PBXGroup;
 			children = (
-				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
-				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
 				7A89F61F235A1F7600DEB50A /* SinglePlayerViewController.swift */,
 				7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */,
 				37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */,
@@ -195,8 +196,6 @@
 				7A228599237EC40300546589 /* Protocols.swift */,
 				7A22859B237EC5A300546589 /* InformationClasses.swift */,
 				7A1929ED237F6D6D00113CB2 /* FuncsSprites.swift */,
-				7A12C94523948EE3009C73D5 /* Switcher.swift */,
-				7AA670D1239512E300250EAD /* UIIndicator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -224,10 +223,8 @@
 		37606AC22359B98800FEAE6D /* Guns_and_Dungeons */ = {
 			isa = PBXGroup;
 			children = (
-				7A02E2E523883336002AD8FD /* Levels */,
+				7AE99777239A2A5B00A7384F /* Screens */,
 				37369D0A23774A66007DC726 /* Utils */,
-				37369D09237749E3007DC726 /* MenuScreen */,
-				37369D0623774915007DC726 /* GameScreen */,
 				37606AC32359B98800FEAE6D /* AppDelegate.swift */,
 				37606AE92359BAA100FEAE6D /* MainNavigationController.swift */,
 				37606AD02359B98E00FEAE6D /* Assets.xcassets */,
@@ -310,6 +307,36 @@
 				7A3C5D8023898D3000CF991D /* gun1.png */,
 			);
 			path = guns;
+			sourceTree = "<group>";
+		};
+		7AE997732399A78900A7384F /* ShopScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
+				7AE997742399A7A300A7384F /* UIObserver.swift */,
+			);
+			path = ShopScreen;
+			sourceTree = "<group>";
+		};
+		7AE997762399A7F200A7384F /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
+				7A12C94523948EE3009C73D5 /* Switcher.swift */,
+				7AA670D1239512E300250EAD /* UIIndicator.swift */,
+			);
+			path = SettingsScreen;
+			sourceTree = "<group>";
+		};
+		7AE99777239A2A5B00A7384F /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				7AE997762399A7F200A7384F /* SettingsScreen */,
+				7AE997732399A78900A7384F /* ShopScreen */,
+				37369D09237749E3007DC726 /* MenuScreen */,
+				37369D0623774915007DC726 /* GameScreen */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,6 +490,7 @@
 				7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */,
 				7A22859E237ECC6E00546589 /* MobileUnit.swift in Sources */,
 				7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */,
+				7AE997752399A7A300A7384F /* UIObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

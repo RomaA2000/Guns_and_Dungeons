@@ -183,6 +183,8 @@ open class TLAnalogJoystick: SKNode {
     public let handle: TLAnalogJoystickComponent
     public let base: TLAnalogJoystickComponent
     
+    public var sensitivityBias: CGFloat = 0
+    
     private var pHandleRatio: CGFloat
     private var displayLink: CADisplayLink!
     private var hadnlers = [TLAnalogJoystickEventType: TLAnalogJoystickEventHandlers]()
@@ -387,7 +389,7 @@ open class TLAnalogJoystick: SKNode {
         let location = touch.location(in: self)
         let baseRadius = base.radius
         let distance = sqrt(pow(location.x, 2) + pow(location.y, 2))
-        let    distanceDiff = distance - baseRadius
+        let distanceDiff = distance - baseRadius
         
         if distanceDiff > 0 {
             let handlePosition = CGPoint(x: location.x / distance * baseRadius, y: location.y / distance * baseRadius)
@@ -414,3 +416,4 @@ open class TLAnalogJoystick: SKNode {
         return "TLAnalogJoystick (position: \(position), velocity: \(velocity), angular: \(angular)"
     }
 }
+

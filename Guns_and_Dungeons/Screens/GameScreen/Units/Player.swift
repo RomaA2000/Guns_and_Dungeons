@@ -22,6 +22,11 @@ class Player: MobileUnit {
         runDefaultAnimation()
     }
     
+    func fire(currentTime: TimeInterval) {
+        print("ok")
+        weapon?.fire(currentTime: currentTime)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

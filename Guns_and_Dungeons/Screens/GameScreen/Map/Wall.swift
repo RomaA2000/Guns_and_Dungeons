@@ -8,7 +8,10 @@
 
 import SpriteKit
 
+@IBDesignable
 class Wall: SKSpriteNode {
+   
+    @IBInspectable var test: Bool = false
     
     init(defaultTexture: SKTexture, location: CGRect) {
         super.init(texture: defaultTexture, color: .black, size: location.size);
