@@ -118,6 +118,18 @@ extension CGVector {
         }
         return false
     }
+    
+    mutating func multiply(_ multiplier: CGFloat) -> CGVector {
+        self.dx *= multiplier
+        self.dy *= multiplier
+        return self
+    }
+    
+    mutating func setDirection(_ leadingVector: CGVector) -> CGVector {
+        self.dx *= leadingVector.dx
+        self.dy *= leadingVector.dy
+        return self
+    }
 }
 
 extension Line {
@@ -164,4 +176,8 @@ extension CGRect {
         return [CGPoint(x: x,y: y), CGPoint(x: x + w,y: y),
                 CGPoint(x: x + w,y: y + h), CGPoint(x: x,y: y + h)]
     }
+}
+
+func getVectorByAngle(angle: CGFloat) -> CGVector {
+    return CGVector(dx: cos(angle), dy : sin(angle))
 }

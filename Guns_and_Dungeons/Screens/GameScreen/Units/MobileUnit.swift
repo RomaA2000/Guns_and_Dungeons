@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class MobileUnit: DestroyableUnit {
-    var maxSpeed: Int
+    var maxSpeed: CGFloat
     var walkAnimation: SKAction
     init(params: MobileUnitParams) {
         maxSpeed = params.maxSpeed;
@@ -25,10 +25,10 @@ class MobileUnit: DestroyableUnit {
 
 class MobileUnitParams : DestroyableUnitParams {
 
-    var maxSpeed: Int
+    var maxSpeed: CGFloat
     var walkAnimation: SKAction
     
-    init(destoyableUntiParams: DestroyableUnitParams, maxSpeed: Int, walkAnimation: SKAction) {
+    init(destoyableUntiParams: DestroyableUnitParams, maxSpeed: CGFloat, walkAnimation: SKAction) {
         self.maxSpeed = maxSpeed
         self.walkAnimation = walkAnimation
         super.init(destroyableUnitParams: destoyableUntiParams)

@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class AnimatedUnit: SKSpriteNode {
+    
     var weapon: Weapon?
     var defaultTexture: SKTexture
     var defaultAnimation: SKAction
@@ -23,7 +24,18 @@ class AnimatedUnit: SKSpriteNode {
         if (weapon != nil) {
             self.addChild(weapon!)
             weapon?.zPosition = self.zPosition + 1
+            weapon?.base = self
         }
+    }
+    
+    func update(_ currentTime: TimeInterval) {
+        
+    }
+    
+    func changeWeapon(weapon: Weapon) -> Weapon? {
+        let temp = self.weapon
+        self.weapon = weapon
+        return temp
     }
     
     func rotateGunTo(angel: CGFloat) {
@@ -36,6 +48,12 @@ class AnimatedUnit: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension AnimatedUnit: UnitHolder {
+    func getAngleOnScene() -> CGFloat {
+        return self.zRotation
     }
 }
 

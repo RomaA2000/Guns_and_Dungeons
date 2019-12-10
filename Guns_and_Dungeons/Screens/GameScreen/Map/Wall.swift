@@ -26,8 +26,9 @@ class Wall: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        
+        self.physicsBody?.categoryBitMask = CategoryMask.wall
+        self.physicsBody?.collisionBitMask = CategoryMask.player | CategoryMask.bullet | CategoryMask.ai
+        self.physicsBody?.contactTestBitMask = self.physicsBody!.collisionBitMask
     }
     
 }

@@ -207,6 +207,10 @@ open class TLAnalogJoystick: SKNode {
             }
         }
     }
+    
+    public func isActivated() -> Bool {
+        return self.tracking && self.velocity.getLenOfVector() > self.sensitivityBias
+    }
 
     public var velocity: CGPoint {
         let diff = handle.diameter * 0.02

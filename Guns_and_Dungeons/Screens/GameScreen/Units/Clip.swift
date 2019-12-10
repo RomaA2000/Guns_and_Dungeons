@@ -33,17 +33,16 @@ class Clip {
         self.weapon = weapon
     }
     
-    func takeShot(currentTime: TimeInterval) -> Bullet? {
+    func takeShot(currentTime: TimeInterval) {
         if (bullets > 0) {
             if (currentTime - lastShotTime >= frequence) {
+                lastShotTime = currentTime
                 if let bullet = makeBullet() {
-                    bullet.setVelocityVector(angle: weapon?.getAngle() ?? 0, length: bulletSpeed)
+                    bullet.maxVelocity = bulletSpeed
                     weapon?.spawn(bullet: bullet)
                     bullets -= 1
-                    return bullet
                 }
             }
         }
-        return nil
     }
 }

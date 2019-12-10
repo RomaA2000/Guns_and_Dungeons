@@ -11,14 +11,29 @@ import SpriteKit
 
 class Bullet : SKSpriteNode {
     var maxVelocity : CGFloat = 0
+    let damage: Int
     
-    init(defaultTexture : SKTexture) {
+    init(defaultTexture : SKTexture, damage: Int) {
+        self.damage = damage
+        
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
+        
         self.physicsBody = SKPhysicsBody.init(circleOfRadius: self.frame.width / 2)
+        self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.categoryBitMask = CategoryMask.bullet
+        self.physicsBody?.collisionBitMask = CategoryMask.player | CategoryMask.ai | CategoryMask.wall
+        self.physicsBody?.contactTestBitMask = self.physicsBody!.collisionBitMask
+        self.physicsBody?.mass = 0
+        
+        self.zPosition = 20
     }
 
     func setVelocityVector(angle: CGFloat) {
         physicsBody?.velocity = CGVector(dx: cos(angle) * maxVelocity, dy : sin(angle) * maxVelocity)
+    }
+    
+    func setVelocityVector(direction: CGVector) {
+        physicsBody?.velocity = CGVector(dx: direction.dx * maxVelocity, dy : direction.dy * maxVelocity)
     }
     
     func setVelocityVector(angle: CGFloat, length: CGFloat) {

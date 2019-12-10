@@ -1,0 +1,9 @@
+{
+  "spawners": [
+    { "number": 1, "units": [
+        {"type": "warrior", "hp": 10, "damage": 10, "frequence": 10},
+        {"type": "warrior", "hp": 50, "damage": 10, "frequence": 10},
+        {"type": "warrior", "hp": 10, "damage": 10, "frequence": 10}
+      ] }
+    ]
+}

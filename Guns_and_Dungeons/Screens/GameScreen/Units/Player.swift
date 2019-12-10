@@ -22,8 +22,11 @@ class Player: MobileUnit {
         runDefaultAnimation()
     }
     
+    func moveByVector(direction: CGVector) {
+        self.physicsBody?.velocity = CGVector(dx: self.maxSpeed * direction.dx, dy: self.maxSpeed * direction.dy)
+    }
+    
     func fire(currentTime: TimeInterval) {
-        print("ok")
         weapon?.fire(currentTime: currentTime)
     }
     

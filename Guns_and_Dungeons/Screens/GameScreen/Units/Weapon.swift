@@ -9,11 +9,18 @@
 
 import SpriteKit
 
+protocol UnitHolder {
+    func getAngleOnScene() -> CGFloat
+}
+
 class Weapon : SKSpriteNode {
     var clip : Clip?
-
+    var spawnLength: CGFloat
+    var base: UnitHolder?
+    
     init(defaultTexture : SKTexture, clip : Clip?) {
         self.clip = clip
+        self.spawnLength = defaultTexture.size().height * 0.8
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
         self.clip?.changeWeapon(weapon: self)
     }
@@ -23,15 +30,18 @@ class Weapon : SKSpriteNode {
     }
 
     func getAngle() -> CGFloat {
-        return zRotation
+        return zRotation + .pi/2 + (base?.getAngleOnScene() ?? 0)
     }
-
-    func spawn(bullet : Bullet) {
+    
+    func spawn(bullet: Bullet) {
+        let bulletPosition = CGPoint(x: 0, y: spawnLength)
+        bullet.setVelocityVector(angle: self.getAngle())
+        bullet.position = scene?.convert(bulletPosition, from: self) ?? CGPoint.zero
         scene?.addChild(bullet)
     }
 
     func fire(currentTime: TimeInterval) {
-        clip.takeShot(currentTime: currentTime)
+        clip?.takeShot(currentTime: currentTime)
     }
 
     func replaceClip(clip : Clip) -> Clip {

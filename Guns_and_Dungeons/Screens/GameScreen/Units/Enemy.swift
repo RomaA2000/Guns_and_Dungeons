@@ -15,11 +15,12 @@ class Enemy : MobileUnit {
         purviewRange = params.purviewRange
         super.init(params: params)
         name = "enemy"
-        physicsBody = SKPhysicsBody(circleOfRadius: self.defaultTexture.size().width / 2)
+        physicsBody = params.body
         physicsBody?.affectedByGravity = false
-        physicsBody?.categoryBitMask = CategoryMask.ai
-        physicsBody?.collisionBitMask = CategoryMask.player
-        physicsBody?.contactTestBitMask = CategoryMask.ai | CategoryMask.player
+        physicsBody?.allowsRotation = false
+        physicsBody?.categoryBitMask = params.mask.category
+        physicsBody?.collisionBitMask = params.mask.collision
+        physicsBody?.contactTestBitMask = params.mask.contact
         runDefaultAnimation()
     }
     
@@ -30,9 +31,17 @@ class Enemy : MobileUnit {
 
 class EnemyParams : MobileUnitParams {
     var purviewRange: Int;
-    
-    init(mobileUnitParams: MobileUnitParams, purvewRange: Int) {
-        self.purviewRange = purvewRange
+    let mask: PhysicsBodyMask
+    let body : SKPhysicsBody;
+
+    init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, body : SKPhysicsBody, purviewRange: Int) {
+        self.mask = mask
+        self.purviewRange = purviewRange
+        self.body = body
         super.init(mobileUnitParams: mobileUnitParams)
+    }
+    
+    convenience init(mobileUnitParams: MobileUnitParams, mask : PhysicsBodyMask, radius: CGFloat, purviewRange: Int) {
+        self.init(mobileUnitParams: mobileUnitParams, mask: mask, body: SKPhysicsBody(circleOfRadius: radius), purviewRange: purviewRange)
     }
 }

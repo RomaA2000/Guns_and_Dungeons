@@ -31,7 +31,6 @@ class PanelButton : UIButton, PanelSubview {
         addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)
         setTitle("Level \(number + 1)", for: .normal)
         setStars(stars: params.stars)
-        print("stars: ", params.stars)
     }
     
     required init?(coder: NSCoder) {

@@ -48,18 +48,20 @@
 		7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8223898D3000CF991D /* enemy.atlas */; };
 		7A5AB781238094CF00096A57 /* DestroyableUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB780238094CF00096A57 /* DestroyableUnit.swift */; };
 		7A5AB7832380953900096A57 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7822380953900096A57 /* Weapon.swift */; };
-		7A5AB7852380BA6400096A57 /* EnemiesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7842380BA6400096A57 /* EnemiesController.swift */; };
 		7A5DCD2A2384AB030077D876 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DCD292384AB030077D876 /* Wall.swift */; };
 		7A6A06BB2392E758005BCB1D /* Level-4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A06BA2392E758005BCB1D /* Level-4.sks */; };
 		7A7101DB238DD1AE000AE1E3 /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7101DA238DD1AE000AE1E3 /* LevelStatistics.swift */; };
-		7A8989F7237DD6FC00801E32 /* Enemy.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A8989F6237DD6FC00801E32 /* Enemy.atlas */; };
 		7A89F620235A1F7600DEB50A /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F61F235A1F7600DEB50A /* SinglePlayerViewController.swift */; };
 		7A89F622235A23DC00DEB50A /* MultiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */; };
 		7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F623235A23F700DEB50A /* ShopViewController.swift */; };
 		7A89F626235A241A00DEB50A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F625235A241A00DEB50A /* SettingsViewController.swift */; };
 		7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F627235A41D300DEB50A /* Datastructs.swift */; };
+		7A8E4C50239DA2A700116565 /* SpawnCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */; };
+		7A8E4C52239DA2B200116565 /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C51239DA2B200116565 /* Spawner.swift */; };
+		7A8E4C54239DA97000116565 /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C53239DA97000116565 /* Enemies.swift */; };
+		7A8E4C6D239E5FB200116565 /* tex.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E4C6C239E5FB200116565 /* tex.atlas */; };
+		7AA4306E23A0114B0091AD2A /* scheme1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AA4306D23A0114B0091AD2A /* scheme1.json */; };
 		7AA670D2239512E300250EAD /* UIIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA670D1239512E300250EAD /* UIIndicator.swift */; };
-		7ABF54F423849CD3006C2089 /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F323849CD3006C2089 /* Enemies.swift */; };
 		7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F523849E19006C2089 /* CollisionMasks.swift */; };
 		7AE997752399A7A300A7384F /* UIObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE997742399A7A300A7384F /* UIObserver.swift */; };
 /* End PBXBuildFile section */
@@ -120,18 +122,20 @@
 		7A3C5D8223898D3000CF991D /* enemy.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy.atlas; sourceTree = "<group>"; };
 		7A5AB780238094CF00096A57 /* DestroyableUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyableUnit.swift; sourceTree = "<group>"; };
 		7A5AB7822380953900096A57 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
-		7A5AB7842380BA6400096A57 /* EnemiesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnemiesController.swift; path = ../EnemiesController.swift; sourceTree = "<group>"; };
 		7A5DCD292384AB030077D876 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		7A6A06BA2392E758005BCB1D /* Level-4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level-4.sks"; sourceTree = "<group>"; };
 		7A7101DA238DD1AE000AE1E3 /* LevelStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStatistics.swift; sourceTree = "<group>"; };
-		7A8989F6237DD6FC00801E32 /* Enemy.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Enemy.atlas; sourceTree = "<group>"; };
 		7A89F61F235A1F7600DEB50A /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerViewController.swift; sourceTree = "<group>"; };
 		7A89F621235A23DC00DEB50A /* MultiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerViewController.swift; sourceTree = "<group>"; };
 		7A89F623235A23F700DEB50A /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7A89F625235A241A00DEB50A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7A89F627235A41D300DEB50A /* Datastructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datastructs.swift; sourceTree = "<group>"; };
+		7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnCreator.swift; sourceTree = "<group>"; };
+		7A8E4C51239DA2B200116565 /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
+		7A8E4C53239DA97000116565 /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
+		7A8E4C6C239E5FB200116565 /* tex.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = tex.atlas; sourceTree = "<group>"; };
+		7AA4306D23A0114B0091AD2A /* scheme1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = scheme1.json; sourceTree = "<group>"; };
 		7AA670D1239512E300250EAD /* UIIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIndicator.swift; sourceTree = "<group>"; };
-		7ABF54F323849CD3006C2089 /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
 		7ABF54F523849E19006C2089 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
 		7AE997742399A7A300A7384F /* UIObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,12 +161,13 @@
 		37369D0623774915007DC726 /* GameScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7A8E4C6C239E5FB200116565 /* tex.atlas */,
+				7A8E4C4E239DA26100116565 /* Spawners */,
 				7A02E2E523883336002AD8FD /* Levels */,
 				7A35E6F52389E95400E0D8C2 /* Map */,
 				7A3C5D7E23898D2600CF991D /* Textures */,
 				7A2EF82D23884E7B00FCA1B6 /* Interface */,
 				7A1929EA237ED86900113CB2 /* Units */,
-				7A8989F6237DD6FC00801E32 /* Enemy.atlas */,
 				37606AC72359B98800FEAE6D /* Actions.sks */,
 				37606AC52359B98800FEAE6D /* GameScene.sks */,
 				37606ACB2359B98800FEAE6D /* GameViewController.swift */,
@@ -252,6 +257,7 @@
 				7A02E2E823883638002AD8FD /* Level-2.sks */,
 				7A02E2EA23883DDE002AD8FD /* Level-3.sks */,
 				7A6A06BA2392E758005BCB1D /* Level-4.sks */,
+				7AA4306D23A0114B0091AD2A /* scheme1.json */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -265,8 +271,6 @@
 				7A1929EB237ED8BD00113CB2 /* Enemy.swift */,
 				7A5AB780238094CF00096A57 /* DestroyableUnit.swift */,
 				7A5AB7822380953900096A57 /* Weapon.swift */,
-				7ABF54F323849CD3006C2089 /* Enemies.swift */,
-				7A5AB7842380BA6400096A57 /* EnemiesController.swift */,
 				7ABF54F523849E19006C2089 /* CollisionMasks.swift */,
 				37A9AF8D2399636D005FF4B7 /* Clip.swift */,
 				37A9AF91239969EC005FF4B7 /* Bullet.swift */,
@@ -307,6 +311,16 @@
 				7A3C5D8023898D3000CF991D /* gun1.png */,
 			);
 			path = guns;
+			sourceTree = "<group>";
+		};
+		7A8E4C4E239DA26100116565 /* Spawners */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */,
+				7A8E4C51239DA2B200116565 /* Spawner.swift */,
+				7A8E4C53239DA97000116565 /* Enemies.swift */,
+			);
+			path = Spawners;
 			sourceTree = "<group>";
 		};
 		7AE997732399A78900A7384F /* ShopScreen */ = {
@@ -421,12 +435,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A3C5D8423898D3000CF991D /* player.atlas in Resources */,
+				7A8E4C6D239E5FB200116565 /* tex.atlas in Resources */,
 				7A3C5D8323898D3000CF991D /* gun1.png in Resources */,
 				37606AC62359B98800FEAE6D /* GameScene.sks in Resources */,
 				7A02E2E923883638002AD8FD /* Level-2.sks in Resources */,
 				37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */,
+				7AA4306E23A0114B0091AD2A /* scheme1.json in Resources */,
 				7A18182B2389391A005ECAF1 /* Level-1.sks in Resources */,
-				7A8989F7237DD6FC00801E32 /* Enemy.atlas in Resources */,
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
 				7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */,
 				7A6A06BB2392E758005BCB1D /* Level-4.sks in Resources */,
@@ -462,7 +477,6 @@
 				7A01D017237D8E1300D0A4E8 /* Joystic.swift in Sources */,
 				7A5DCD2A2384AB030077D876 /* Wall.swift in Sources */,
 				7A22859A237EC40300546589 /* Protocols.swift in Sources */,
-				7A5AB7852380BA6400096A57 /* EnemiesController.swift in Sources */,
 				7A1929E9237ED7D400113CB2 /* Player.swift in Sources */,
 				7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */,
 				7A1929EE237F6D6E00113CB2 /* FuncsSprites.swift in Sources */,
@@ -471,6 +485,7 @@
 				7A12C94623948EE3009C73D5 /* Switcher.swift in Sources */,
 				37076175238DA45400D617D5 /* Geometry.swift in Sources */,
 				37DF35E4237E9A4A00437375 /* Statistics+CoreDataProperties.swift in Sources */,
+				7A8E4C52239DA2B200116565 /* Spawner.swift in Sources */,
 				7A89F620235A1F7600DEB50A /* SinglePlayerViewController.swift in Sources */,
 				37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */,
 				7A228596237EBECA00546589 /* Panel.swift in Sources */,
@@ -478,7 +493,6 @@
 				7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */,
 				37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */,
 				7A228594237EBB3800546589 /* PanelScrollView.swift in Sources */,
-				7ABF54F423849CD3006C2089 /* Enemies.swift in Sources */,
 				37DF35E3237E9A4A00437375 /* Statistics+CoreDataClass.swift in Sources */,
 				37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */,
 				7A89F622235A23DC00DEB50A /* MultiPlayerViewController.swift in Sources */,
@@ -487,7 +501,9 @@
 				37A9AF8E2399636D005FF4B7 /* Clip.swift in Sources */,
 				7A7101DB238DD1AE000AE1E3 /* LevelStatistics.swift in Sources */,
 				3791A8F32359C3E500212BBC /* FuncView.swift in Sources */,
+				7A8E4C54239DA97000116565 /* Enemies.swift in Sources */,
 				7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */,
+				7A8E4C50239DA2A700116565 /* SpawnCreator.swift in Sources */,
 				7A22859E237ECC6E00546589 /* MobileUnit.swift in Sources */,
 				7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */,
 				7AE997752399A7A300A7384F /* UIObserver.swift in Sources */,

@@ -19,9 +19,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let cameraNode: SKCameraNode = SKCameraNode()
 
     var player: Player!
-    var enemy: Enemy!
     var wall: Wall!
     var pauseButton: Button!
+    var enemyController: Enemies!
+    var textureAtlas: SKTextureAtlas!
     
     override func didMove(to view: SKView) {
         
@@ -31,6 +32,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(player)
         camera = cameraNode
         player.addChild(cameraNode)
+        
+        textureAtlas = SKTextureAtlas(named: "tex")
+        textureAtlas.preload { print("preloaded")  }
+        enemyController = Enemies(atlas: textureAtlas, scene: scene!)
+        addSpawners()
+        
         //MARK:- test
 
         let sensitivity: CGFloat = 0.5
@@ -51,37 +58,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view.isMultipleTouchEnabled = true
     }
     
-    func checkCollision(contact: SKPhysicsContact, firstType: UInt32, secondType: UInt32) -> [SKNode?]? {
+    func checkCollision(contact: SKPhysicsContact, firstType: UInt32, secondType: UInt32) -> (first: SKNode?, second: SKNode?)? {
         if (contact.bodyA.node?.physicsBody?.categoryBitMask == firstType &&
             contact.bodyB.node?.physicsBody?.categoryBitMask == secondType) {
-            return [contact.bodyA.node, contact.bodyB.node]
+            return (contact.bodyA.node, contact.bodyB.node)
         } else if (contact.bodyB.node?.physicsBody?.categoryBitMask == firstType &&
                 contact.bodyA.node?.physicsBody?.categoryBitMask == secondType) {
-            return [contact.bodyB.node, contact.bodyA.node]
+            return (contact.bodyB.node, contact.bodyA.node)
         }
         return nil
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        
-        if let bodies = checkCollision(contact: contact, firstType: CategoryMask.player, secondType: CategoryMask.wall) {
-            let player = bodies[0]
-            player?.physicsBody?.velocity = CGVector.zero
-            player!.position = CGPoint.zero
+        if let (bullet, _) =         checkCollision(contact: contact,
+                                                    firstType: CategoryMask.bullet,
+                                                    secondType: CategoryMask.wall) {
+            bullet?.removeFromParent()
         }
+        else if let (bullet, unit) = checkCollision(contact: contact,
+                                                    firstType: CategoryMask.bullet,
+                                                    secondType: CategoryMask.ai){
+            (unit as? DestroyableUnit)?.healthPoints -= (bullet as? Bullet)?.damage ?? 0
+            bullet?.removeFromParent()
+        }
+        
     }
 
     override func update(_ currentTime: TimeInterval) {
-        player.physicsBody!.velocity = CGVector(dx: moveJoystick.velocity.x * 2, dy: moveJoystick.velocity.y * 2)
-        if (fireJoystick.tracking && fireJoystick.velocity.getLenOfVector() > fireJoystick.sensitivityBias) {
+        player.moveByVector(direction: CGVector(p1: CGPoint.zero, p2: moveJoystick.velocity))
+        if (fireJoystick.isActivated()) {
             player.rotateGunTo(angel: fireJoystick.angular)
             cameraNode.zRotation = -player.zRotation
             player.weapon?.fire(currentTime: currentTime)
         }
-        if (moveJoystick.tracking && moveJoystick.velocity.getLenOfVector() > moveJoystick.sensitivityBias) {
+        if (moveJoystick.isActivated()) {
             player.zRotation = moveJoystick.angular
             cameraNode.zRotation = -player.zRotation
         }
+        enemyController.update(currentTime)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,19 +106,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    func addSpawners() {
+        for child in self.children {
+            if let number = child.userData?.value(forKey: "number") {
+                enemyController.addSpawner(location: child.position, number: number as! Int)
+            }
+        }
+    }
+    
+    
     func createPlayer() -> Player {
         let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)
-        let clip: Clip = Clip(bullets: 100, spawner: { return Bullet(defaultTexture: SKTexture(imageNamed: "bullet"))}, frequence: 1, bulletSpeed: 100)
-        let weapon: Weapon = Weapon(defaultTexture: SKTexture(imageNamed: "gun"), clip: clip)
+        let clip: Clip = Clip(bullets: 100, spawner: { return Bullet(defaultTexture: SKTexture(imageNamed: "bullet"), damage: 1)}, frequence: 1, bulletSpeed: 1000)
+        let weapon: Weapon = Weapon(defaultTexture: SKTexture(imageNamed: "gun1"), clip: clip)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
                                                     location: CGPoint.zero,
                                                     weapon: weapon)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
-        let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 10, walkAnimation: animationTexturesParams.defaultAnimation)
+        let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 5, walkAnimation: animationTexturesParams.defaultAnimation)
         let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
         
         let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
         return Player(params: playerParams)
     }
-
 }
