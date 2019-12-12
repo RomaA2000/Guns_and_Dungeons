@@ -13,7 +13,7 @@ struct Schedule: Decodable {
 }
 
 struct SpawnParams: Decodable {
-    let number: Int
+    let number: UInt64
     let units: Array<UnitSpawnParams>
 }
 
@@ -21,10 +21,10 @@ struct UnitSpawnParams: Decodable {
     let type: String
     let gunImg: String
     let img: String
-    let speed: Int
-    let damage: Int
-    let frequence: Int
-    let hp: Int
+    let speed: UInt64
+    let damage: UInt64
+    let frequence: UInt64
+    let hp: Int64
 }
 
 class Enemies {

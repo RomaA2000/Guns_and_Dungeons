@@ -10,7 +10,7 @@ import SpriteKit
 
 class DestroyableUnit: AnimatedUnit {
     
-    var healthPoints: Int
+    var healthPoints: Int64
     var deathAnimation: SKAction
     
     init(params: DestroyableUnitParams) {
@@ -26,10 +26,10 @@ class DestroyableUnit: AnimatedUnit {
 
 class DestroyableUnitParams : AnimatedUnitParams{
 
-    var healthPoints: Int
+    var healthPoints: Int64
     var deathAnimation: SKAction
 
-    init(animatedUnitParams: AnimatedUnitParams, healthPoints: Int, deathAnimation: SKAction) {
+    init(animatedUnitParams: AnimatedUnitParams, healthPoints: Int64, deathAnimation: SKAction) {
         self.healthPoints = healthPoints
         self.deathAnimation = deathAnimation
         super.init(animatedUnitParams: animatedUnitParams)

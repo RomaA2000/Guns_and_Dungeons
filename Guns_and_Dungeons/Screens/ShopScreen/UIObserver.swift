@@ -56,11 +56,11 @@ class UIReviewer: UIImageView {
 }
 
 struct CharactPack {
-    let speed: Int
-    let armor: Int
-    let hp:    Int
-    let damage: Int
-    init(speed: Int, armor: Int, hp: Int, damage: Int) {
+    let speed: UInt64
+    let armor: UInt64
+    let hp:    Int64
+    let damage: UInt64
+    init(speed: UInt64, armor: UInt64, hp: Int64, damage: UInt64) {
         self.speed = speed
         self.armor = armor
         self.hp = hp
