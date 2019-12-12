@@ -27,11 +27,12 @@ struct UnitSpawnParams: Decodable {
     let hp: Int64
 }
 
-class Enemies {
+class EnemiesController {
     var spawners: [Spawner] = []
     let atlas: SKTextureAtlas
     var schedule: Schedule
     let scene: SKScene
+    var outOfCharge: Bool = false
     
     init(atlas: SKTextureAtlas, scene: SKScene) {
         self.atlas = atlas
@@ -55,6 +56,7 @@ class Enemies {
             }
         }
         spawners = spawners.filter({ !$0.isEmpty })
+        self.outOfCharge = spawners.count == 0
     }
     
     func addSpawner(location: CGPoint, number: Int) {

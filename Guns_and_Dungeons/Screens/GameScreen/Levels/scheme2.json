@@ -1,0 +1,19 @@
+{
+    "spawners": [
+        { "number": 0, "units": [
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10, "speed": 10, "img": "pl", "gunImg": "gun1"}
+        ] },
+        { "number": 0, "units": [
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10, "speed": 10, "img": "en", "gunImg": "gun1"}
+        ] },
+        { "number": 0, "units": [
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10, "speed": 10, "img": "en", "gunImg": "gun1"},
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10, "speed": 10, "img": "en", "gunImg": "gun1"},
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10, "speed": 10, "img": "en", "gunImg": "gun1"}
+        ] },
+        { "number": 0, "units": [
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10, "speed": 10, "img": "en", "gunImg": "gun1"}
+        ] },
+    ]
+}
+

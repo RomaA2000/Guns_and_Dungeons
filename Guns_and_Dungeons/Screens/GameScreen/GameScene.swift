@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player: Player!
     var wall: Wall!
     var pauseButton: Button!
-    var enemyController: Enemies!
+    var enemyController: EnemiesController!
     var textureAtlas: SKTextureAtlas!
     
     override func didMove(to view: SKView) {
@@ -35,10 +35,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         textureAtlas = SKTextureAtlas(named: "tex")
         textureAtlas.preload { print("preloaded")  }
-        enemyController = Enemies(atlas: textureAtlas, scene: scene!)
-        addSpawners()
-        
-        //MARK:- test
+        enemyController = EnemiesController(atlas: textureAtlas, scene: scene!)
+        for child in self.children {
+            if let number = child.userData?.value(forKey: "number") {
+                enemyController.addSpawner(location: child.position, number: number as! Int)
+                child.removeFromParent()
+            }
+        }
 
         let sensitivity: CGFloat = 0.5
         
@@ -96,6 +99,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             cameraNode.zRotation = -player.zRotation
         }
         enemyController.update(currentTime)
+        if (enemyController.outOfCharge) {
+            endGame()
+        }
+    }
+    
+    func endGame() {
+        self.physicsWorld.speed = 0
+        self.isPaused = true
+        self.viewController?.toLevelSelectionScreen()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -105,15 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 
     }
-    
-    func addSpawners() {
-        for child in self.children {
-            if let number = child.userData?.value(forKey: "number") {
-                enemyController.addSpawner(location: child.position, number: number as! Int)
-            }
-        }
-    }
-    
+
     
     func createPlayer() -> Player {
         let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)

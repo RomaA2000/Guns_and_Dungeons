@@ -46,6 +46,7 @@
 		7A3C5D8323898D3000CF991D /* gun1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8023898D3000CF991D /* gun1.png */; };
 		7A3C5D8423898D3000CF991D /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8123898D3000CF991D /* player.atlas */; };
 		7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8223898D3000CF991D /* enemy.atlas */; };
+		7A42B20223A162A70043BED6 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A42B20123A162A70043BED6 /* TabsView.swift */; };
 		7A5AB781238094CF00096A57 /* DestroyableUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB780238094CF00096A57 /* DestroyableUnit.swift */; };
 		7A5AB7832380953900096A57 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AB7822380953900096A57 /* Weapon.swift */; };
 		7A5DCD2A2384AB030077D876 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DCD292384AB030077D876 /* Wall.swift */; };
@@ -61,6 +62,7 @@
 		7A8E4C54239DA97000116565 /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C53239DA97000116565 /* Enemies.swift */; };
 		7A8E4C6D239E5FB200116565 /* tex.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E4C6C239E5FB200116565 /* tex.atlas */; };
 		7AA4306E23A0114B0091AD2A /* scheme1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AA4306D23A0114B0091AD2A /* scheme1.json */; };
+		7AA4307223A03D330091AD2A /* scheme2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AA4307123A03D330091AD2A /* scheme2.json */; };
 		7AA670D2239512E300250EAD /* UIIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA670D1239512E300250EAD /* UIIndicator.swift */; };
 		7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF54F523849E19006C2089 /* CollisionMasks.swift */; };
 		7AE997752399A7A300A7384F /* UIObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE997742399A7A300A7384F /* UIObserver.swift */; };
@@ -120,6 +122,7 @@
 		7A3C5D8023898D3000CF991D /* gun1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gun1.png; sourceTree = "<group>"; };
 		7A3C5D8123898D3000CF991D /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
 		7A3C5D8223898D3000CF991D /* enemy.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy.atlas; sourceTree = "<group>"; };
+		7A42B20123A162A70043BED6 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
 		7A5AB780238094CF00096A57 /* DestroyableUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyableUnit.swift; sourceTree = "<group>"; };
 		7A5AB7822380953900096A57 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		7A5DCD292384AB030077D876 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		7A8E4C53239DA97000116565 /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
 		7A8E4C6C239E5FB200116565 /* tex.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = tex.atlas; sourceTree = "<group>"; };
 		7AA4306D23A0114B0091AD2A /* scheme1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = scheme1.json; sourceTree = "<group>"; };
+		7AA4307123A03D330091AD2A /* scheme2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = scheme2.json; sourceTree = "<group>"; };
 		7AA670D1239512E300250EAD /* UIIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIndicator.swift; sourceTree = "<group>"; };
 		7ABF54F523849E19006C2089 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
 		7AE997742399A7A300A7384F /* UIObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIObserver.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				7A02E2EA23883DDE002AD8FD /* Level-3.sks */,
 				7A6A06BA2392E758005BCB1D /* Level-4.sks */,
 				7AA4306D23A0114B0091AD2A /* scheme1.json */,
+				7AA4307123A03D330091AD2A /* scheme2.json */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			children = (
 				7A89F623235A23F700DEB50A /* ShopViewController.swift */,
 				7AE997742399A7A300A7384F /* UIObserver.swift */,
+				7A42B20123A162A70043BED6 /* TabsView.swift */,
 			);
 			path = ShopScreen;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
 				7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */,
 				7A6A06BB2392E758005BCB1D /* Level-4.sks in Resources */,
+				7AA4307223A03D330091AD2A /* scheme2.json in Resources */,
 				372651422374B4E5007C841D /* MyTileSet.sks in Resources */,
 				7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */,
 				37606AC82359B98800FEAE6D /* Actions.sks in Resources */,
@@ -476,6 +483,7 @@
 				7A89F626235A241A00DEB50A /* SettingsViewController.swift in Sources */,
 				7A01D017237D8E1300D0A4E8 /* Joystic.swift in Sources */,
 				7A5DCD2A2384AB030077D876 /* Wall.swift in Sources */,
+				7A42B20223A162A70043BED6 /* TabsView.swift in Sources */,
 				7A22859A237EC40300546589 /* Protocols.swift in Sources */,
 				7A1929E9237ED7D400113CB2 /* Player.swift in Sources */,
 				7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */,
