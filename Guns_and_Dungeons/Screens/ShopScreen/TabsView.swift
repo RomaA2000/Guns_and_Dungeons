@@ -15,19 +15,37 @@ protocol TabsViewDelegate: class {
 class TabsView: UIView {
     
     let tabPanel: UIImageView
-    var tabs: [UIButton]
+    let tabs: [UIButton]
     weak var delegate: TabsViewDelegate?
     var activeTab: UIButton
     let table: UICollectionView
+    var cellColor: UIColor = .green
+    var activeTabNumber: Int {
+        get {
+            return activeTab.tag
+        }
+    }
+    let tabsDesctription: [TabDescription]
     
-    init(frame: CGRect, tabPart: CGFloat, tabs: [UIButton]) {
+    init(frame: CGRect, tabPart: CGFloat, tabs: [UIButton], tabsDesctriptions: [TabDescription]) {
+        self.tabsDesctription = tabsDesctriptions
         let tabPanelSize = CGSize(width: frame.width, height: frame.height * tabPart)
         self.tabPanel = UIImageView(frame: CGRect(origin: CGPoint.zero, size: tabPanelSize))
         self.tabs = tabs
         self.activeTab = tabs[0]
         
         let tableRect = CGRect(x: 0, y: tabPanelSize.height, width: frame.width, height: frame.height - tabPanelSize.height)
-        self.table = UICollectionView(frame: tableRect, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        
+        let itemsAtOneLine: CGFloat = 3
+        let spacingBetween: CGFloat = tableRect.width * 0.01
+        let cellWidth: CGFloat = (frame.width - spacingBetween * (itemsAtOneLine - 1)) / itemsAtOneLine
+        
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        layout.minimumInteritemSpacing = spacingBetween
+        
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth * 0.7)
+        self.table = UICollectionView(frame: tableRect, collectionViewLayout: layout)
         
         super.init(frame: frame)
         self.backgroundColor = .green
@@ -55,7 +73,7 @@ class TabsView: UIView {
         
         table.dataSource = self
         table.delegate = self
-        table.register(MyCell.self, forCellWithReuseIdentifier: MyCell.identyfire)
+        table.register(TableItemCell.self, forCellWithReuseIdentifier: TableItemCell.identyfire)
         
         self.addSubview(table)
     }
@@ -76,6 +94,15 @@ class TabsView: UIView {
             sender.alpha = 1
             activeTab = sender
             self.delegate?.tabSelected(tabNumber: sender.tag)
+            
+            self.table.resetScrollPositionToTop()
+            if cellColor == .green {
+                cellColor = .cyan
+            }
+            else {
+                cellColor = .green
+            }
+            self.table.reloadData()
         }
     }
     
@@ -88,22 +115,23 @@ class TabsView: UIView {
 
 extension TabsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return 9
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyCell
-        cell.backgroundColor = .green
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TableItemCell
+        cell.setData(image: <#T##UIImage#>, background: <#T##UIImage#>, text: <#T##String#>)
+        cell.backgroundColor = cellColor
         return cell
-        
     }
     
 }
 
-class MyCell: UICollectionViewCell {
-    
-    static let identyfire = "cell"
-    
+
+extension UIScrollView {
+    /// Sets content offset to the top.
+    func resetScrollPositionToTop() {
+        self.contentOffset = CGPoint(x: -contentInset.left, y: -contentInset.top)
+    }
 }

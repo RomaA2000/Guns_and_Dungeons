@@ -3,7 +3,7 @@
 //  Guns_and_Dungeons
 //
 //  Created by Александр Потапов on 18/10/2019.
-//  Copyright © 2019 Роман Геев. All rights reserved.
+//  Copyright © 2019 Александр Потапов. All rights reserved.
 //
 import Foundation
 import UIKit
@@ -13,6 +13,7 @@ class ShopViewController : UIViewController {
     var backButton: UIButton!
     var previewer: UIReviewer!
     var tabsView: TabsView!
+    var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,9 @@ class ShopViewController : UIViewController {
         let buttonToBases = UIButton()
         buttonToBases.setTitle("TO bases", for: .normal)
         buttonToBases.backgroundColor = .red
-        tabsView = TabsView(frame: getRect(parentFrame: self.view.frame, params: tabsViewParams), tabPart: 0.1,
-                            tabs: [buttonToGuns, buttonToBases])
+        let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
+        tabsView = TabsView(frame: tabsViewRect, tabPart: 0.1,
+                            tabs: [buttonToGuns, buttonToBases], tabsDesctriptions: [])
         self.view.addSubview(tabsView)
         tabsView.delegate = self
         
@@ -42,13 +44,19 @@ class ShopViewController : UIViewController {
         self.view.addSubview(previewer)
         
         previewer.setCharacteristics(pack: CharactPack(speed: 1, armor: 2, hp: 3, damage: 4))
+        
+        
+        let labelLocationParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.1), k: 5, square: 0.2)
+        label = UILabel(frame: getRect(parentFrame: self.view.bounds, params: labelLocationParams))
+        label.text = "Shop"
+        label.textAlignment = .center
+        self.view.addSubview(label)
     }
     
     
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
     }
-    
 }
 
 extension ShopViewController: TabsViewDelegate {

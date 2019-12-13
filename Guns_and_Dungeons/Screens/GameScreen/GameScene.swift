@@ -93,6 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.rotateGunTo(angel: fireJoystick.angular)
             cameraNode.zRotation = -player.zRotation
             player.weapon?.fire(currentTime: currentTime)
+            viewController?.toLevelSelectionScreen()
         }
         if (moveJoystick.isActivated()) {
             player.zRotation = moveJoystick.angular
