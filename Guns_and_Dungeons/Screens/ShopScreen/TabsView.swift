@@ -36,6 +36,7 @@ class TabsView: UIView {
         let tabMiddleSpace: CGFloat = (tabPanel.bounds.width - tabWidth * CGFloat(tabs.count)) / (CGFloat(tabs.count + 1))
         let tabHeight: CGFloat = tabPanel.bounds.height
         var tabFrame = CGRect(x: tabMiddleSpace, y: 0, width: tabWidth, height: tabHeight)
+        
         for buttonNumber in 0..<tabs.count {
             tabs[buttonNumber].frame = tabFrame
             tabs[buttonNumber].tag = buttonNumber
@@ -46,10 +47,15 @@ class TabsView: UIView {
             tabFrame.origin.x += (tabWidth + tabMiddleSpace)
             tabs[buttonNumber].alpha = 0.5
         }
+        
         self.addSubview(tabPanel)
         self.isUserInteractionEnabled = true
         self.tabPanel.isUserInteractionEnabled = true
         self.tabs[0].alpha = 1
+        
+        table.dataSource = self
+        table.delegate = self
+        table.register(MyCell.self, forCellWithReuseIdentifier: MyCell.identyfire)
         
         self.addSubview(table)
     }
@@ -73,7 +79,31 @@ class TabsView: UIView {
         }
     }
     
+    let identifier = "identifier"
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension TabsView: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 100
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyCell
+        cell.backgroundColor = .green
+        return cell
+        
+    }
+    
+}
+
+class MyCell: UICollectionViewCell {
+    
+    static let identyfire = "cell"
+    
 }
