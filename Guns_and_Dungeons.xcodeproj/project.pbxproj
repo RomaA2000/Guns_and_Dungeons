@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37076175238DA45400D617D5 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37076174238DA45400D617D5 /* Geometry.swift */; };
 		372651422374B4E5007C841D /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 372651412374B4E5007C841D /* MyTileSet.sks */; };
+		3736979423A2D1AE00D0A861 /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3736979323A2D1AE00D0A861 /* Ask.swift */; };
 		37606AC42359B98800FEAE6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AC32359B98800FEAE6D /* AppDelegate.swift */; };
 		37606AC62359B98800FEAE6D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37606AC52359B98800FEAE6D /* GameScene.sks */; };
 		37606AC82359B98800FEAE6D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37606AC72359B98800FEAE6D /* Actions.sks */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		37076174238DA45400D617D5 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		372651412374B4E5007C841D /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
+		3736979323A2D1AE00D0A861 /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
 		37606AC02359B98800FEAE6D /* Guns_and_Dungeons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guns_and_Dungeons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37606AC32359B98800FEAE6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37606AC52359B98800FEAE6D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */,
 				7A8E4C51239DA2B200116565 /* Spawner.swift */,
 				7A8E4C53239DA97000116565 /* Enemies.swift */,
+				3736979323A2D1AE00D0A861 /* Ask.swift */,
 			);
 			path = Spawners;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				7A228596237EBECA00546589 /* Panel.swift in Sources */,
 				7AA670D2239512E300250EAD /* UIIndicator.swift in Sources */,
 				7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */,
+				3736979423A2D1AE00D0A861 /* Ask.swift in Sources */,
 				37606ACC2359B98800FEAE6D /* GameViewController.swift in Sources */,
 				7A228594237EBB3800546589 /* PanelScrollView.swift in Sources */,
 				37DF35E3237E9A4A00437375 /* Statistics+CoreDataClass.swift in Sources */,

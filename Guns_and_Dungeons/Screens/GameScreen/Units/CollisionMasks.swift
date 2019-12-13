@@ -2,7 +2,7 @@
 //  CollisinMasks.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 20.11.2019.
+//  Created by Роман Агеев on 15.11.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 

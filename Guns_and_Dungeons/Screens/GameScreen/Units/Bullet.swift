@@ -11,9 +11,9 @@ import SpriteKit
 
 class Bullet : SKSpriteNode {
     var maxVelocity : CGFloat = 0
-    let damage: Int
+    let damage: UInt64
     
-    init(defaultTexture : SKTexture, damage: Int) {
+    init(defaultTexture : SKTexture, damage: UInt64) {
         self.damage = damage
         
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())

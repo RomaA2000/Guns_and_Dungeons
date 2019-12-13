@@ -23,7 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pauseButton: Button!
     var enemyController: EnemiesController!
     var textureAtlas: SKTextureAtlas!
-    
+    var levelNumber : UInt64 = 1
     override func didMove(to view: SKView) {
         
         physicsWorld.contactDelegate = self
@@ -35,13 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         textureAtlas = SKTextureAtlas(named: "tex")
         textureAtlas.preload { print("preloaded")  }
-        enemyController = EnemiesController(atlas: textureAtlas, scene: scene!)
-        for child in self.children {
-            if let number = child.userData?.value(forKey: "number") {
-                enemyController.addSpawner(location: child.position, number: number as! Int)
-                child.removeFromParent()
-            }
-        }
+        enemyController = EnemiesController(atlas: textureAtlas, scene: scene!, levelNumber : levelNumber)
 
         let sensitivity: CGFloat = 0.5
         
@@ -50,8 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveJoystick.isMoveable = true
         cameraNode.addChild(moveJoystickHiddenArea)
         moveJoystick.sensitivityBias = sensitivity
-        
-        
+
         let fireJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
         fireJoystickHiddenArea.joystick = fireJoystick
         fireJoystick.isMoveable = true
@@ -77,11 +70,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                     firstType: CategoryMask.bullet,
                                                     secondType: CategoryMask.wall) {
             bullet?.removeFromParent()
-        }
-        else if let (bullet, unit) = checkCollision(contact: contact,
+        } else if let (bullet, unit) = checkCollision(contact: contact,
                                                     firstType: CategoryMask.bullet,
                                                     secondType: CategoryMask.ai){
-            (unit as? DestroyableUnit)?.healthPoints -= (bullet as? Bullet)?.damage ?? 0
+            (unit as? DestroyableUnit)?.healthPoints
+                -= Int64((bullet as? Bullet)?.damage ?? 0)
             bullet?.removeFromParent()
         }
         

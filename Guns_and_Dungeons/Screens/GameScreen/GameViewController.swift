@@ -12,10 +12,10 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
-    var levelNumber: Int = 0
+    var levelNumber: UInt64 = 0
     var gameScene: SKScene?
     
-    convenience init(number: Int) {
+    convenience init(number: UInt64) {
         self.init()
         levelNumber = number
     }
@@ -36,6 +36,7 @@ class GameViewController: UIViewController {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 (scene as? GameScene)?.viewController = self
+                (scene as? GameScene)?.levelNumber = levelNumber + 1
                 // Present the scene
                 view.presentScene(scene)
             }

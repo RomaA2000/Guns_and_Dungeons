@@ -2,7 +2,8 @@
 //  SinglePlayerViewController.swift
 //  Guns_and_Dungeons
 //
-//  Copyright © 2019 Александр Потапов . All rights reserved.
+//  Created by Роман Агеев on 18.10.2019.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 import Foundation
@@ -18,16 +19,15 @@ extension UIResponder {
 }
 
 class AboutLevels {
-    var nowPanel : Int = 0
+    var nowPanel : UInt64 = 0
 }
 
 class SinglePlayerViewController : UIViewController, Callable {
-    
     var levelPanel : PanelsScrollView<PanelButton>!
     var backButton: UIButton = UIButton()
     static let stack = DataBaseController()
-    var levelsPerPanel: Int = 4
-    var levelsNumber: Int = 20
+    var levelsPerPanel: UInt64 = 4
+    var levelsNumber: UInt64 = 20
     private typealias SPVC = SinglePlayerViewController
     
     override func viewDidLoad() {
@@ -57,10 +57,10 @@ class SinglePlayerViewController : UIViewController, Callable {
         var buttonsParams : [PanelButtonParams] = []
         for number in 0..<levelsNumber {
             if (number < statistics.count) {
-                buttonsParams.append(makeUnlockedButtonParams(number: number, stars: Int(statistics[number].stars)))
+                buttonsParams.append(makeUnlockedButtonParams(number: number, stars: UInt64(statistics[Int(number)].stars)))
             }
             else if (number == statistics.count) {
-                buttonsParams.append(makeUnlockedButtonParams(number: number, stars: 0))
+                buttonsParams.append(makeUnlockedButtonParams(number: number, stars: UInt64(0)))
             }
             else {
                 buttonsParams.append(makeLockedButtonParams())
@@ -76,7 +76,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         return PanelButtonParams(buttonParams: buttonParams)
     }
     
-    func makeUnlockedButtonParams(number: Int, stars: Int = 0) -> PanelButtonParams {
+    func makeUnlockedButtonParams(number: UInt64, stars: UInt64 = 0) -> PanelButtonParams {
         let unlockedImage = UIImage(named: "unlocked")
         let starImage = UIImage(named: "star")
         let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
@@ -85,7 +85,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         return panelButtonParams
     }
     
-    func updateLevelButton(number: Int, stars: Int = 0) {
+    func updateLevelButton(number: UInt64, stars: UInt64 = 0) {
         levelPanel.setElement(number: number, params: makeUnlockedButtonParams(number: number, stars: stars))
     }
     
@@ -96,7 +96,7 @@ class SinglePlayerViewController : UIViewController, Callable {
             saveStatistics(levelStatistics: levelStatistics)
             updateLevelButton(number: levelStatistics.levelNumber + 1)
         }
-        else if (levelStatistics.stars > statistics[levelStatistics.levelNumber].stars) {
+        else if (levelStatistics.stars > statistics[Int(levelStatistics.levelNumber)].stars) {
             updateLevelButton(number: levelStatistics.levelNumber, stars: levelStatistics.stars)
             saveStatistics(levelStatistics: levelStatistics)
         }
@@ -119,7 +119,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         return statistics
     }
     
-    func call(number: Int) {
+    func call(number: UInt64) {
         (navigationController as! MainNavigationController).toGameSceneViewController(levelNumber: number)
     }
     

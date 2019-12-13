@@ -2,7 +2,7 @@
 //  TabsView.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 11.12.2019.
+//  Created by Александр Потау on 11.12.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 

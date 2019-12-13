@@ -2,15 +2,14 @@
 //  DestroyableUnit.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 16.11.2019.
+//  Created by Роман Агеев on 15.11.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
-
 import SpriteKit
 
 class DestroyableUnit: AnimatedUnit {
     
-    var healthPoints: Int
+    var healthPoints: Int64
     var deathAnimation: SKAction
     
     init(params: DestroyableUnitParams) {
@@ -19,6 +18,12 @@ class DestroyableUnit: AnimatedUnit {
         super.init(params: params)
     }
     
+//    init(destroyableUnit: DestroyableUnit) {
+//        healthPoints = destroyableUnit.healthPoints
+//        deathAnimation = destroyableUnit.deathAnimation
+//        super.init(params: destroyableUnit)
+//    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -26,10 +31,10 @@ class DestroyableUnit: AnimatedUnit {
 
 class DestroyableUnitParams : AnimatedUnitParams{
 
-    var healthPoints: Int
+    var healthPoints: Int64
     var deathAnimation: SKAction
 
-    init(animatedUnitParams: AnimatedUnitParams, healthPoints: Int, deathAnimation: SKAction) {
+    init(animatedUnitParams: AnimatedUnitParams, healthPoints: Int64, deathAnimation: SKAction) {
         self.healthPoints = healthPoints
         self.deathAnimation = deathAnimation
         super.init(animatedUnitParams: animatedUnitParams)

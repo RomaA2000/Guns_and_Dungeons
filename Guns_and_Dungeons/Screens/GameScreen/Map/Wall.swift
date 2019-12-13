@@ -2,7 +2,7 @@
 //  Wall.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 20.11.2019.
+//  Created by Александр Потау on 20.11.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
@@ -30,5 +30,4 @@ class Wall: SKSpriteNode {
         self.physicsBody?.collisionBitMask = CategoryMask.player | CategoryMask.bullet | CategoryMask.ai
         self.physicsBody?.contactTestBitMask = self.physicsBody!.collisionBitMask
     }
-    
 }

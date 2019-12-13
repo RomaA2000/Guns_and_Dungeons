@@ -2,34 +2,54 @@
 //  Spawner.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 09.12.2019.
+//  Created by Роман Агеев. on 09.12.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 import SpriteKit
 
 class Spawner {
-    
-    let spawnPosition: CGPoint
     let atlas: SKTextureAtlas
     var units: [DestroyableUnit]
     var spawnParams: SpawnParams
-    var numberInSchedule: Int = 0
     var scene: SKScene
-    
+    var nowWave : UInt64;
     var isEmpty: Bool {
         get {
-            return self.numberInSchedule == self.spawnParams.units.count && self.units.count == 0
+            return self.units.count == 0
         }
     }
     
-    init(spawnParams: SpawnParams, scene: SKScene ,spawnPoint: CGPoint, atlas: SKTextureAtlas) {
+    init(spawnParams: SpawnParams, scene: SKScene, atlas: SKTextureAtlas) {
         self.atlas = atlas
         self.units = []
-        self.numberInSchedule = 0
+        self.nowWave = 0
         self.spawnParams = spawnParams
-        self.spawnPosition = spawnPoint
         self.scene = scene
+        makeWave()
+    }
+    
+    func makeWave() {
+        for i in spawnParams.units {
+            if i.wave == nowWave {
+                var enemy : DestroyableUnit? = nil
+                switch i.type {
+                case "warrior":
+                    enemy = makeWarrior(params: i)
+                    break
+                default:
+                    break
+                }
+                addUnit(unit: enemy)
+            }
+        }
+    }
+    
+    func addUnit(unit : DestroyableUnit?) {
+        if let i = unit {
+            units.append(i)
+            scene.addChild(i)
+        }
     }
     
     func update(_ currentTime: TimeInterval) {
@@ -41,24 +61,14 @@ class Spawner {
             }
         }
         self.units = self.units.filter({$0.healthPoints > 0})
-        self.checkForSpawn()
+        if self.units.isEmpty {
+            nowWave += 1
+            makeWave()
+        }
     }
     
-    func checkForSpawn() {
-        // MARK: -overflow
-        if (numberInSchedule < self.spawnParams.units.count && self.units.count == 0) {
-            let current: UnitSpawnParams = spawnParams.units[numberInSchedule]
-            switch current.type {
-            case "warrior":
-                let enemy = makeWarrior(params: spawnParams.units[numberInSchedule])
-                numberInSchedule += 1
-                units.append(enemy)
-                scene.addChild(enemy)
-                break
-            default:
-                print("")
-            }
-        }
+    func getInfo() -> Array<SpawnerRequest> {
+        return Array<SpawnerRequest>(units.map({ SpawnerRequest(location: $0.position)}))
     }
     
     func makeWarrior(params: UnitSpawnParams) -> Enemy {
@@ -69,7 +79,7 @@ class Spawner {
                               bulletSpeed: 10)
         let weapon: Weapon = Weapon(defaultTexture: atlas.textureNamed(params.gunImg), clip: clip)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationParams,
-                                                    location: spawnPosition,
+                                                    location: CGPoint(x: CGFloat(params.positionX), y: CGFloat(params.positionY)),
                                                     weapon: weapon)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams,
                                                           healthPoints: params.hp,
@@ -86,6 +96,4 @@ class Spawner {
                                       purviewRange: 50)
         return Enemy(params: enemyParams)
     }
-    
-    
 }

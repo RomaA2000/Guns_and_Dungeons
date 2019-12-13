@@ -61,15 +61,16 @@ class Panel<Element: PanelSubview>: UIImageView {
         }
     }
     
-    func setElement(number: Int, elementParams: Params) {
+    func setElement(number: UInt64, elementParams: Params) {
+        let index : Int = Int(number)
         guard number < panelSubviews.count else { fatalError() }
-        let lastFrame: CGRect = panelSubviews[number].frame
+        let lastFrame: CGRect = panelSubviews[index].frame
         let params: Params = elementParams
         params.setFrame(frame: lastFrame)
-        panelSubviews[number].removeFromSuperview()
+        panelSubviews[index].removeFromSuperview()
         let newElement = Element(params: params)
         addSubview(newElement)
-        panelSubviews[number] = newElement
+        panelSubviews[index] = newElement
     }
     
     required init?(coder aDecoder: NSCoder) {
