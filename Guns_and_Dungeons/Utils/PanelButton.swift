@@ -11,11 +11,11 @@ import UIKit
 class PanelButton : UIButton, PanelSubview {
     typealias Panel = PanelButtonParams
     
-    var number: Int
+    var number: UInt64
     var defaultTexture: UIImage?
     var pressedTexture: UIImage?
     var starTexture:    UIImage?
-    var starsNumber: Int = 0
+    var starsNumber: UInt64 = 0
     
     required init(params: PanelButtonParams) {
         self.number = params.number
@@ -40,7 +40,7 @@ class PanelButton : UIButton, PanelSubview {
         super.init(coder: coder)
     }
     
-    func setStars(stars: Int) {
+    func setStars(stars: UInt64) {
         guard stars > 0, stars > self.starsNumber else { return }
         for starNumber in self.starsNumber + 1 ... stars {
             let star: UIImageView = UIImageView(image: self.starTexture)
@@ -91,8 +91,8 @@ class ButtonParams {
 class PanelButtonParams: ButtonParams, PanelSuviewParams {
     
     let starTexture: UIImage?
-    let stars: Int
-    let number: Int
+    let stars: UInt64
+    let number: UInt64
     var frame: CGRect
     
     func setFrame(frame: CGRect) {
@@ -103,7 +103,7 @@ class PanelButtonParams: ButtonParams, PanelSuviewParams {
         return self.locationParameters
     }
     
-    init(buttonParams: ButtonParams, starTexture: UIImage? = nil, number: Int = 0, stars: Int = 0) {
+    init(buttonParams: ButtonParams, starTexture: UIImage? = nil, number: UInt64 = 0, stars: UInt64 = 0) {
         self.stars = stars
         self.starTexture = starTexture
         self.number = number

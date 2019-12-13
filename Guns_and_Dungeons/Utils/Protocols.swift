@@ -9,5 +9,5 @@
 import UIKit
 
 protocol Callable: class {
-    func call(number: Int)
+    func call(number: UInt64)
 }

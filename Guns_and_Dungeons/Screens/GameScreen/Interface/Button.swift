@@ -2,8 +2,8 @@
 //  Button.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 22.11.2019.
-//  Copyright © 2019 Роман Геев. All rights reserved.
+//  Created by Александр Потау on 20.11.2019.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 import SpriteKit

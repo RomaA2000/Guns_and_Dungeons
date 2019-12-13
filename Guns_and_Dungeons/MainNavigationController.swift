@@ -3,8 +3,8 @@
 //  Guns_and_Dungeons
 //
 //  Created by Роман Агеев on 18.10.2019.
-//  Copyright © 2019 Александр Потапов. All rights reserved.
-//
+//  Copyright © 2019 Роман Агеев. All rights reserved.
+
 
 
 import UIKit
@@ -18,7 +18,7 @@ class MainNavigationController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
-    func toGameSceneViewController(levelNumber: Int) {
+    func toGameSceneViewController(levelNumber: UInt64) {
         pushViewController(GameViewController(number: levelNumber), animated: true)
     }
     

@@ -2,8 +2,8 @@
 //  Wall.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 14.11.2019.
-//  Copyright © 2019 Роман Карман. All rights reserved.
+//  Created by Александр Потау on 14.11.2019.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 import SpriteKit
 
@@ -228,7 +228,6 @@ open class TLAnalogJoystick: SKNode {
         }
         set {
             isUserInteractionEnabled = !newValue
-
             if newValue {
                 stop()
             }

@@ -86,6 +86,12 @@ func toVectorArray(p : CGPoint, array : Array<CGPoint>) -> Array<CGVector> {
        return ans
 }
 
+extension CGPoint {
+    func distance(to point: CGPoint) -> CGFloat {
+        return sqrt(pow((point.x - x), 2) + pow((point.y - y), 2))
+    }
+}
+
 extension CGVector {
     init(p1 : CGPoint, p2 : CGPoint) {
         self.init()
@@ -167,6 +173,12 @@ extension CGRect {
         let array : Array<CGVector> = toVectorArray(p : p, array : pointArray())
         return v.isInside(array: array)
     }
+    
+    func intersect(p1 : CGPoint, p2 : CGPoint) -> Bool {
+        let v : CGVector = CGVector(dx: p2.x - p1.x, dy: p2.y - p1.y)
+        return intersect(p : p1, v : v)
+    }
+
     
     func pointArray() -> Array<CGPoint> {
         let x = self.origin.x

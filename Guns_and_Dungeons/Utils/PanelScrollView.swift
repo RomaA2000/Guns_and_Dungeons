@@ -2,8 +2,8 @@
 //  PanelScrollView.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 15.11.2019.
-//  Copyright © 2019 Александр Потапов. All rights reserved.
+//  Created by Александр Потау on 20.11.2019.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 import Foundation
@@ -24,15 +24,15 @@ class PanelsScrollView<Element: PanelSubview> : UIScrollView, UIScrollViewDelega
     
     var panels: [PanelType] = []
     let margins: MarnginsInformation
-    let elementsPerPanel: Int
+    let elementsPerPanel: UInt64
     
-    init(frame: CGRect = CGRect(), elementsPerPanel: Int) {
+    init(frame: CGRect = CGRect(), elementsPerPanel: UInt64) {
         self.elementsPerPanel = elementsPerPanel
         margins = MarnginsInformation()
         super.init(frame: frame)
     }
     
-    init(parrentBounds: CGRect, panelsNumber: Int, elementsPerPanel: Int) {
+    init(parrentBounds: CGRect, panelsNumber: UInt64, elementsPerPanel: UInt64) {
         self.elementsPerPanel = elementsPerPanel
         let k_scroll = parrentBounds.size.width / (0.6 * parrentBounds.size.height)
         let panelParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.4), k: k_scroll , square: 0.6)
@@ -66,15 +66,15 @@ class PanelsScrollView<Element: PanelSubview> : UIScrollView, UIScrollViewDelega
     
     func createElementsOnPanels(params: [Element.Params]) {
         for elementsNumber in 0..<panels.count {
-            let leftBound: Int = elementsNumber * elementsPerPanel
-            let rightBound: Int = (elementsNumber + 1) * elementsPerPanel
+            let leftBound: Int = elementsNumber * Int(elementsPerPanel)
+            let rightBound: Int = (elementsNumber + 1) * Int(elementsPerPanel)
             panels[elementsNumber].addSubviewsEvenly(elementsParams: Array(params[leftBound..<rightBound]))
         }
     }
     
-    func setElement(number: Int, params: Element.Params) {
-        guard number < panels.count * elementsPerPanel else { fatalError("") }
-        panels[number / elementsPerPanel].setElement(number: number % elementsPerPanel, elementParams: params)
+    func setElement(number: UInt64, params: Element.Params) {
+        guard number < UInt64(panels.count) * elementsPerPanel else { fatalError("") }
+        panels[Int(number / elementsPerPanel)].setElement(number: number % elementsPerPanel, elementParams: params)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

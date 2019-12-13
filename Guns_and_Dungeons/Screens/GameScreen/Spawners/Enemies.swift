@@ -2,18 +2,13 @@
 //  Enemies.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потапов on 09.12.2019.
+//  Created by Роман Агеев. on 09.12.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 import SpriteKit
 
-struct Schedule: Decodable {
-    var spawners: Array<SpawnParams>
-}
-
 struct SpawnParams: Decodable {
-    let number: UInt64
     let units: Array<UnitSpawnParams>
 }
 
@@ -24,24 +19,26 @@ struct UnitSpawnParams: Decodable {
     let speed: UInt64
     let damage: UInt64
     let frequence: UInt64
+    let positionX: Float
+    let positionY: Float
     let hp: Int64
+    let wave: UInt64
 }
 
 class EnemiesController {
-    var spawners: [Spawner] = []
+    var spawner: Spawner
     let atlas: SKTextureAtlas
-    var schedule: Schedule
     let scene: SKScene
     var outOfCharge: Bool = false
     
-    init(atlas: SKTextureAtlas, scene: SKScene) {
+    init(atlas: SKTextureAtlas, scene: SKScene, levelNumber : UInt64) {
         self.atlas = atlas
         self.scene = scene
-        let path = Bundle.main.path(forResource: "scheme1", ofType: "json")
+        let path = Bundle.main.path(forResource: "scheme\(levelNumber)", ofType: "json")
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
-            print(try JSONDecoder().decode(Schedule.self, from: data))
-            self.schedule =  try JSONDecoder().decode(Schedule.self, from: data);
+            print(try JSONDecoder().decode(SpawnParams.self, from: data))
+            self.spawner = Spawner(spawnParams: try JSONDecoder().decode(SpawnParams.self, from: data), scene: scene, atlas: atlas)
         }
         catch {
             fatalError("JSON data not found")
@@ -49,18 +46,12 @@ class EnemiesController {
     }
     
     func update(_ currentTime: TimeInterval) {
-        for spawner in spawners {
-            spawner.update(currentTime)
-            if (spawner.isEmpty) {
-                print("empty")
-            }
+        let enemiesInfo = spawner.getInfo()
+        //solver here
+        spawner.update(currentTime)
+        if spawner.isEmpty {
+            print("empty")
+            outOfCharge = true
         }
-        spawners = spawners.filter({ !$0.isEmpty })
-        self.outOfCharge = spawners.count == 0
-    }
-    
-    func addSpawner(location: CGPoint, number: Int) {
-        print("addSpawner")
-        spawners.append(Spawner(spawnParams: schedule.spawners[number], scene: scene,spawnPoint: location ,atlas: atlas))
     }
 }
