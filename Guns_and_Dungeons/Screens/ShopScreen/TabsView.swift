@@ -121,7 +121,7 @@ extension TabsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TableItemCell
-        cell.setData(image: <#T##UIImage#>, background: <#T##UIImage#>, text: <#T##String#>)
+//        cell.setData(image: <#T##UIImage#>, background: <#T##UIImage#>, text: <#T##String#>)
         cell.backgroundColor = cellColor
         return cell
     }

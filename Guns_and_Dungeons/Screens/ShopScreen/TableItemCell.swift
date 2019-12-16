@@ -3,7 +3,7 @@
 //  Guns_and_Dungeons
 //
 //  Created by Александр Потапов on 13.12.2019.
-//  Copyright © 2019 Роман Агеев. All rights reserved.
+//  Copyright © 2019 Роман Геев. All rights reserved.
 //
 
 import UIKit
@@ -24,13 +24,13 @@ class TableItemCell: UICollectionViewCell {
     }
     
     func setData(cellInfo: CellInfo) {
-        backgroundImageView = UIImageView(image: cellInfo.background)
-        
-        imageView = UIImageView(image: cellInfo.itemImage)
-        
-        button.titleLabel?.text = cellInfo.text
-        
-        button.isEnabled = cellInfo.unlocked
+//        backgroundImageView = UIImageView(image: cellInfo.background)
+//
+//        imageView = UIImageView(image: cellInfo.itemImage)
+//
+//        button.titleLabel?.text = cellInfo.text
+//
+//        button.isEnabled = cellInfo.unlocked
     }
     
     required init?(coder: NSCoder) {
