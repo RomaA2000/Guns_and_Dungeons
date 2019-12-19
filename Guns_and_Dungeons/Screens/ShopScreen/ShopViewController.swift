@@ -20,19 +20,8 @@ class ShopViewController : UIViewController {
 
         self.view.backgroundColor = .white
 
-        let tabsViewParams = LocationParameters(centerPoint: CGPoint(x: 0.6, y: 0.5), k: 1.5, square: 0.4)
-        let buttonToGuns = UIButton()
-        buttonToGuns.setTitle("To guns", for: .normal)
-        buttonToGuns.backgroundColor = .red
-        let buttonToBases = UIButton()
-        buttonToBases.setTitle("TO bases", for: .normal)
-        buttonToBases.backgroundColor = .red
-        let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
-        tabsView = TabsView(frame: tabsViewRect, tabPart: 0.1,
-                            tabs: [buttonToGuns, buttonToBases], tabsDesctriptions: [])
-        self.view.addSubview(tabsView)
-        tabsView.delegate = self
-
+        createTabView()
+        
         let backButtonParams = LocationParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.006)
         backButton = self.view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen), params: backButtonParams)
         backButton.setBackgroundImage(UIImage(named: "unlocked"), for: .normal)
@@ -57,6 +46,49 @@ class ShopViewController : UIViewController {
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
     }
+    
+    func createTabView() {
+        let tabsViewParams = LocationParameters(centerPoint: CGPoint(x: 0.6, y: 0.5), k: 1.5, square: 0.4)
+        let buttonToGuns = UIButton()
+        buttonToGuns.setTitle("To guns", for: .normal)
+        buttonToGuns.backgroundColor = .red
+        let buttonToBases = UIButton()
+        buttonToBases.setTitle("TO bases", for: .normal)
+        buttonToBases.backgroundColor = .red
+        let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
+        
+        var allCellsData: AllCellsData
+        let path = Bundle.main.path(forResource: "items_description", ofType: "json")
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
+            print(data)
+            allCellsData = try JSONDecoder().decode(AllCellsData.self, from: data)
+        }
+        catch {
+            fatalError("JSON data not found")
+        }
+        
+        var cellsSec1: [CellInfo] = []
+        for i in 0..<allCellsData.bases.count {
+            let image = UIImage(named: allCellsData.bases[i].image)
+            let backGroundImage = UIImage(named: "unlocked")
+            let cost = allCellsData.bases[i].cost
+            cellsSec1.append(CellInfo(itemImage: image, backgroundImage: backGroundImage, unlocked: false, cost: cost))
+        }
+        let tabsDesctriptionSec1 = TabDescription(cellInfos: cellsSec1)
+        
+        var cellsSec2: [CellInfo] = []
+        
+        let tabsDesctriptionSec2 = TabDescription(cellInfos: cellsSec1)
+        
+        tabsView = TabsView(frame: tabsViewRect, tabPart: 0.1,
+                            tabs: [buttonToGuns, buttonToBases],
+                            tabsDesctriptions: [tabsDesctriptionSec1, tabsDesctriptionSec2])
+        self.view.addSubview(tabsView)
+        tabsView.delegate = self
+    }
+
+    
 }
 
 extension ShopViewController: TabsViewDelegate {

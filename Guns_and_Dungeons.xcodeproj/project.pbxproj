@@ -42,6 +42,8 @@
 		7A22859A237EC40300546589 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A228599237EC40300546589 /* Protocols.swift */; };
 		7A22859C237EC5A300546589 /* InformationClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22859B237EC5A300546589 /* InformationClasses.swift */; };
 		7A22859E237ECC6E00546589 /* MobileUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22859D237ECC6E00546589 /* MobileUnit.swift */; };
+		7A2E96B223A93AAE009481FC /* items_description.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A2E96B123A93AAE009481FC /* items_description.json */; };
+		7A2E96B423A93C43009481FC /* CellsJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E96B323A93C43009481FC /* CellsJson.swift */; };
 		7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2EF82B2388432B00FCA1B6 /* Button.swift */; };
 		7A333600237D417F0044CAA0 /* AnimatedUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3335FF237D417F0044CAA0 /* AnimatedUnit.swift */; };
 		7A3C5D8323898D3000CF991D /* gun1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8023898D3000CF991D /* gun1.png */; };
@@ -121,6 +123,8 @@
 		7A228599237EC40300546589 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		7A22859B237EC5A300546589 /* InformationClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationClasses.swift; sourceTree = "<group>"; };
 		7A22859D237ECC6E00546589 /* MobileUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileUnit.swift; sourceTree = "<group>"; };
+		7A2E96B123A93AAE009481FC /* items_description.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = items_description.json; sourceTree = "<group>"; };
+		7A2E96B323A93C43009481FC /* CellsJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsJson.swift; sourceTree = "<group>"; };
 		7A2EF82B2388432B00FCA1B6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		7A3335FF237D417F0044CAA0 /* AnimatedUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedUnit.swift; sourceTree = "<group>"; };
 		7A3C5D8023898D3000CF991D /* gun1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gun1.png; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 				7A42B20123A162A70043BED6 /* TabsView.swift */,
 				7A4E45D623A3947100ACCD54 /* TabsDescription.swift */,
 				7A4E45D823A3EC7600ACCD54 /* TableItemCell.swift */,
+				7A2E96B123A93AAE009481FC /* items_description.json */,
+				7A2E96B323A93C43009481FC /* CellsJson.swift */,
 			);
 			path = ShopScreen;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				7A3C5D8423898D3000CF991D /* player.atlas in Resources */,
 				7A8E4C6D239E5FB200116565 /* tex.atlas in Resources */,
 				7A3C5D8323898D3000CF991D /* gun1.png in Resources */,
+				7A2E96B223A93AAE009481FC /* items_description.json in Resources */,
 				37606AC62359B98800FEAE6D /* GameScene.sks in Resources */,
 				7A02E2E923883638002AD8FD /* Level-2.sks in Resources */,
 				37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */,
@@ -483,6 +490,7 @@
 			files = (
 				7A5AB7832380953900096A57 /* Weapon.swift in Sources */,
 				37A9AF92239969EC005FF4B7 /* Bullet.swift in Sources */,
+				7A2E96B423A93C43009481FC /* CellsJson.swift in Sources */,
 				37DF35DC237E96BC00437375 /* DataBaseController.swift in Sources */,
 				7A333600237D417F0044CAA0 /* AnimatedUnit.swift in Sources */,
 				7A22859C237EC5A300546589 /* InformationClasses.swift in Sources */,

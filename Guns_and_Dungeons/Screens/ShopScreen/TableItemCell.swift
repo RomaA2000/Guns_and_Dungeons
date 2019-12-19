@@ -10,27 +10,21 @@ import UIKit
 
 class TableItemCell: UICollectionViewCell {
     
-    var button: UIButton
-    var backgroundImageView: UIImageView?
-    var imageView: UIImageView?
+    var backgroundImageView: UIImageView
+    var imageView: UIImageView
     
     override init(frame: CGRect) {
-        let locationParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.8), k: 1.8, square: 0.1)
-        let buttonFrame = getRect(parentFrame: frame, params: locationParams)
-        button = UIButton(frame: buttonFrame)
+        let locationParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: 1.2, square: 0.4)
+        imageView = UIImageView(frame: getRect(parentFrame: frame, params: locationParams))
+        backgroundImageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         super.init(frame: frame)
-        button.backgroundColor = .red
-        self.addSubview(button)
+        self.addSubview(backgroundImageView)
+        self.addSubview(imageView)
     }
     
     func setData(cellInfo: CellInfo) {
-//        backgroundImageView = UIImageView(image: cellInfo.background)
-//
-//        imageView = UIImageView(image: cellInfo.itemImage)
-//
-//        button.titleLabel?.text = cellInfo.text
-//
-//        button.isEnabled = cellInfo.unlocked
+        backgroundImageView.image = cellInfo.backgroundImage
+        imageView.image = cellInfo.itemImage
     }
     
     required init?(coder: NSCoder) {
