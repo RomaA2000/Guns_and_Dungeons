@@ -2,8 +2,8 @@
 //  GameScene.swift
 //  Guns_andDungeons
 //
-//  Created by Александр Потапов on 18.10.2019.
-//  Copyright © 2019 Роман Геев. All rights reserved.
+//  Created by Александр Потау on 18.10.2019.
+//  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
 
@@ -86,7 +86,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.rotateGunTo(angel: fireJoystick.angular)
             cameraNode.zRotation = -player.zRotation
             player.weapon?.fire(currentTime: currentTime)
-            viewController?.toLevelSelectionScreen()
         }
         if (moveJoystick.isActivated()) {
             player.zRotation = moveJoystick.angular

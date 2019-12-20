@@ -21,6 +21,7 @@
 		37606AEA2359BAA100FEAE6D /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AE92359BAA100FEAE6D /* MainNavigationController.swift */; };
 		37606AEC2359BAEB00FEAE6D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */; };
 		37606AEE2359BDE900FEAE6D /* FuncButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37606AED2359BDE900FEAE6D /* FuncButtons.swift */; };
+		376D2E3123AC0BC700EC2899 /* NetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D2E3023AC0BC700EC2899 /* NetLoader.swift */; };
 		3791A8F32359C3E500212BBC /* FuncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791A8F22359C3E500212BBC /* FuncView.swift */; };
 		37A9AF8E2399636D005FF4B7 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9AF8D2399636D005FF4B7 /* Clip.swift */; };
 		37A9AF92239969EC005FF4B7 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9AF91239969EC005FF4B7 /* Bullet.swift */; };
@@ -102,6 +103,7 @@
 		37606AE92359BAA100FEAE6D /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		37606AEB2359BAEB00FEAE6D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		37606AED2359BDE900FEAE6D /* FuncButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncButtons.swift; sourceTree = "<group>"; };
+		376D2E3023AC0BC700EC2899 /* NetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetLoader.swift; sourceTree = "<group>"; };
 		3791A8F22359C3E500212BBC /* FuncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncView.swift; sourceTree = "<group>"; };
 		37A9AF8D2399636D005FF4B7 /* Clip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		37A9AF91239969EC005FF4B7 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				7A4E45D823A3EC7600ACCD54 /* TableItemCell.swift */,
 				7A2E96B123A93AAE009481FC /* items_description.json */,
 				7A2E96B323A93C43009481FC /* CellsJson.swift */,
+				376D2E3023AC0BC700EC2899 /* NetLoader.swift */,
 			);
 			path = ShopScreen;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				7A1929EC237ED8BD00113CB2 /* Enemy.swift in Sources */,
 				37A9AF8E2399636D005FF4B7 /* Clip.swift in Sources */,
 				7A7101DB238DD1AE000AE1E3 /* LevelStatistics.swift in Sources */,
+				376D2E3123AC0BC700EC2899 /* NetLoader.swift in Sources */,
 				3791A8F32359C3E500212BBC /* FuncView.swift in Sources */,
 				7A8E4C54239DA97000116565 /* Enemies.swift in Sources */,
 				7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */,

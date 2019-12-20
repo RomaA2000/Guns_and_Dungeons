@@ -57,28 +57,37 @@ class ShopViewController : UIViewController {
         buttonToBases.backgroundColor = .red
         let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
         
+        //let netCollector = NetCollector()
+        //netCollector.startLoadingData()
         var allCellsData: AllCellsData
         let path = Bundle.main.path(forResource: "items_description", ofType: "json")
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
             print(data)
             allCellsData = try JSONDecoder().decode(AllCellsData.self, from: data)
-        }
-        catch {
+        } catch {
             fatalError("JSON data not found")
         }
         
         var cellsSec1: [CellInfo] = []
-        for i in 0..<allCellsData.bases.count {
-            let image = UIImage(named: allCellsData.bases[i].image)
+        for i in allCellsData.bases {
+            let image = UIImage(named: i.image)
             let backGroundImage = UIImage(named: "unlocked")
-            let cost = allCellsData.bases[i].cost
+            let cost = i.cost
             cellsSec1.append(CellInfo(itemImage: image, backgroundImage: backGroundImage, unlocked: false, cost: cost))
         }
-        let tabsDesctriptionSec1 = TabDescription(cellInfos: cellsSec1)
         
         var cellsSec2: [CellInfo] = []
+        for i in allCellsData.guns {
+            let image = UIImage(named: i.image)
+            let backGroundImage = UIImage(named: "unlocked")
+            let cost = i.cost
+            cellsSec2.append(CellInfo(itemImage: image, backgroundImage: backGroundImage, unlocked: false, cost: cost))
+        }
         
+        
+        
+        let tabsDesctriptionSec1 = TabDescription(cellInfos: cellsSec2)
         let tabsDesctriptionSec2 = TabDescription(cellInfos: cellsSec1)
         
         tabsView = TabsView(frame: tabsViewRect, tabPart: 0.1,
@@ -87,8 +96,6 @@ class ShopViewController : UIViewController {
         self.view.addSubview(tabsView)
         tabsView.delegate = self
     }
-
-    
 }
 
 extension ShopViewController: TabsViewDelegate {
