@@ -57,8 +57,9 @@ class ShopViewController : UIViewController {
         buttonToBases.backgroundColor = .red
         let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
         
-        //let netCollector = NetCollector()
-        //netCollector.startLoadingData()
+//        let netCollector = NetCollector(gunsSelector: nil)
+//        netCollector.startLoadingData()
+        
         var allCellsData: AllCellsData
         let path = Bundle.main.path(forResource: "items_description", ofType: "json")
         do {

@@ -25,7 +25,7 @@ class TabsView: UIView {
             return activeTab.tag
         }
     }
-    let tabsDesctription: [TabDescription]
+    var tabsDesctription: [TabDescription]
     
     init(frame: CGRect, tabPart: CGFloat, tabs: [UIButton], tabsDesctriptions: [TabDescription]) {
         self.tabsDesctription = tabsDesctriptions
@@ -76,6 +76,11 @@ class TabsView: UIView {
         table.register(TableItemCell.self, forCellWithReuseIdentifier: TableItemCell.identyfire)
         
         self.addSubview(table)
+    }
+    
+    func refreshTab(tabDesctription: TabDescription, number: Int) {
+        tabsDesctription[number] = tabDesctription
+        table.reloadData()
     }
     
     @objc func tabPressed(_ sender: UIButton) {
