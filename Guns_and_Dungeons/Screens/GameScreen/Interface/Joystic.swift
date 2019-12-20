@@ -350,7 +350,6 @@ open class TLAnalogJoystick: SKNode {
         currHandlers[handlerID] = handler
         handlerIDsRelEvent[handlerID] = event
         hadnlers[event] = currHandlers
-        
         return handlerID
     }
 

@@ -13,28 +13,19 @@ class NetCollector {
     let gunsLoader : Loader = Loader()
     let basesLoader : Loader = Loader()
     
-    func startLoadingData(urlsGuns : [URL], urlsBases : [URL]) {
-        gunsLoader.load(urls: urlsGuns)
-        basesLoader.load(urls: urlsBases)
-    }
-    
-    func getInfo() -> (Array<UIImage>, Array<UIImage>)? {
-        if (gunsLoader.ready && basesLoader.ready) {
-            return (gunsLoader.array, basesLoader.array)
-        }
-        return nil;
+    func startLoadingData(urlsGuns : [URL], gunsUpdater : Selector, urlsBases : [URL], basesUpdater : Selector) {
+        gunsLoader.load(urls: urlsGuns, selector : gunsUpdater)
+        basesLoader.load(urls: urlsBases, selector: basesUpdater)
     }
 }
 
 class Loader {
-    
+
     var array : Array<UIImage> = []
     var ready : Bool = true
-    
-    func load(urls : [URL]) {
+    func load(urls : [URL], selector : Selector) -> Void {
         if (ready) {
             array.removeAll()
-            ready = false
                 DispatchQueue.main.async { [self, urls] in
                     for i in urls {
                         if let data = try? Data(contentsOf: i) {
@@ -43,9 +34,7 @@ class Loader {
                             }
                         }
                     }
-                    self.ready = true
-                }
-            
+            }
         }
     }
 }

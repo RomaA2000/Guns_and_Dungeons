@@ -72,7 +72,7 @@ class Spawner {
     }
     
     func makeWarrior(params: UnitSpawnParams) -> Enemy {
-        let animationParams = getAnimation(atlas: atlas, frameName: params.img, defaultName: params.img + "1", size: 4)
+        let animationParams = getAnimation(atlas: atlas, frameName: params.img, defaultName: params.img + "1", size: 3)
         let clip: Clip = Clip(bullets: 1000,
                               spawner: { return Bullet(defaultTexture: self.atlas.textureNamed("bullet"), damage: params.damage)},
                               frequence: TimeInterval(params.frequence),
@@ -82,7 +82,7 @@ class Spawner {
                                                     location: CGPoint(x: CGFloat(params.positionX), y: CGFloat(params.positionY)),
                                                     weapon: weapon)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams,
-                                                          healthPoints: params.hp,
+                                                           healthPoints: params.hp,
                                                           deathAnimation: animationParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams,
                                                 maxSpeed: CGFloat(params.speed),
