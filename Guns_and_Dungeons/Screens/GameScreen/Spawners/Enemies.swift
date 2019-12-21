@@ -46,8 +46,6 @@ class EnemiesController {
 
     func update(_ currentTime: TimeInterval) {
         let enemiesInfo = spawner.getInfo()
-
-        print()
         
         //solver here
         

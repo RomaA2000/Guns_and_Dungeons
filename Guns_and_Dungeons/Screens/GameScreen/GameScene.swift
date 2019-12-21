@@ -19,15 +19,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let cameraNode: SKCameraNode = SKCameraNode()
 
     var player: Player!
-    var wall: Wall!
     var pauseButton: Button!
     var enemyController: EnemiesController!
     var textureAtlas: SKTextureAtlas!
     var levelNumber : UInt64 = 1
+    var walls: [SKNode] = []
     
     override func didMove(to view: SKView) {
         
         physicsWorld.contactDelegate = self
+        
+        for child in self.scene!.children {
+            if (child.name == "Wall") {
+                walls.append(child)
+            }
+        }
         
         player = createPlayer()
         addChild(player)
@@ -60,7 +66,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton = Button(defaultTexture: pauseDefault, pressedTexture: pauseTexture,
                              params: pauseLocationParams, sceneFrame: self.frame)
         pauseButton.position = CGPoint(x: 0, y: 180 * (frame.size.width / 650))
-        print(self.frame.size)
         pauseButton.zPosition = 15
         cameraNode.addChild(pauseButton)
     }
