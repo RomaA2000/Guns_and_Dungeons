@@ -27,31 +27,27 @@ class NetCollector {
 }
 
 class Loader {
-    var array : Array<UIImage> = []
     var ready : Bool = true
     var selector : (Array<UIImage>) -> Void
     
     init(selector : @escaping ImageAdder) {
         self.selector = selector
     }
-    
-    func completed() {
-        selector(array)
-    }
 
     func load(urls : [URL]) -> Void {
         if (ready) {
-            array.removeAll()
+            
             ready = false
                 DispatchQueue.main.async { [self, urls] in
+                    var array : Array<UIImage> = []
                     for i in urls {
                         if let data = try? Data(contentsOf: i) {
                             if let image = UIImage(data: data) {
-                                self.array.append(image)
+                                array.append(image)
                             }
                         }
                     }
-                    self.selector(self.array)
+                    self.selector(array)
                     self.ready = true
                 }
         }
