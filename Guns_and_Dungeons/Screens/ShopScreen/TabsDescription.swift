@@ -16,10 +16,10 @@ class TabDescription {
 }
 
 class CellInfo {
-    let itemImage: UIImage?
-    let backgroundImage: UIImage?
-    let cost: Int
-    let unlocked: Bool
+    var itemImage: UIImage?
+    var backgroundImage: UIImage?
+    var cost: Int
+    var unlocked: Bool
     
     init(itemImage: UIImage?, backgroundImage: UIImage? ,unlocked: Bool, cost: Int) {
         self.itemImage = itemImage

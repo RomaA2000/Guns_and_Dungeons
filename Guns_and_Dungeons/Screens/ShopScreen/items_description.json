@@ -4,7 +4,10 @@
     {"name": "base3", "image": "bot2", "cost": 10},
     {"name": "base4", "image": "bot2", "cost": 10},
     {"name": "base5", "image": "bot2", "cost": 10},
-    {"name": "base6", "image": "bot2", "cost": 10}
+    {"name": "base6", "image": "bot2", "cost": 10},
+    {"name": "base7", "image": "locked", "cost": 10},
+    {"name": "base8", "image": "locked", "cost": 10},
+    {"name": "base9", "image": "locked", "cost": 10}
 ],
 "guns": [
     {"name": "gun1", "image": "rocket1", "cost": 10},
@@ -12,6 +15,9 @@
     {"name": "gun3", "image": "rocket1", "cost": 10},
     {"name": "gun4", "image": "rocket1", "cost": 10},
     {"name": "gun5", "image": "rocket1", "cost": 10},
-    {"name": "gun6", "image": "rocket1", "cost": 10}
+    {"name": "gun5", "image": "rocket1", "cost": 10},
+    {"name": "gun5", "image": "locked", "cost": 10},
+    {"name": "gun5", "image": "locked", "cost": 10},
+    {"name": "gun6", "image": "locked", "cost": 10}
     ]
 }

@@ -14,6 +14,7 @@ class ShopViewController : UIViewController {
     var previewer: UIReviewer!
     var tabsView: TabsView!
     var label: UILabel!
+    var tabsDesctription: [TabDescription] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +43,17 @@ class ShopViewController : UIViewController {
         self.view.addSubview(label)
     }
 
-
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func generateUpdater(number: Int) -> (Array<UIImage>) -> Void {
+        return { (array: Array<UIImage>) -> Void in
+            self.tabsDesctription[number].cellInfos[6].itemImage = array[0]
+            self.tabsDesctription[number].cellInfos[7].itemImage = array[1]
+            self.tabsDesctription[number].cellInfos[8].itemImage = array[2]
+            self.tabsView.table.reloadData()
+        }
     }
 
     func createTabView() {
@@ -56,9 +65,6 @@ class ShopViewController : UIViewController {
         buttonToBases.setTitle("TO bases", for: .normal)
         buttonToBases.backgroundColor = .red
         let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
-
-        //let netCollector = NetCollector()
-        //netCollector.startLoadingData()
 
         var allCellsData: AllCellsData
         let path = Bundle.main.path(forResource: "items_description", ofType: "json")
@@ -86,16 +92,22 @@ class ShopViewController : UIViewController {
             cellsSec2.append(CellInfo(itemImage: image, backgroundImage: backGroundImage, unlocked: false, cost: cost))
         }
 
-
-
         let tabsDesctriptionSec1 = TabDescription(cellInfos: cellsSec2)
         let tabsDesctriptionSec2 = TabDescription(cellInfos: cellsSec1)
+        
+        tabsDesctription = [tabsDesctriptionSec1, tabsDesctriptionSec2]
 
         tabsView = TabsView(frame: tabsViewRect, tabPart: 0.1,
                             tabs: [buttonToGuns, buttonToBases],
                             tabsDesctriptions: [tabsDesctriptionSec1, tabsDesctriptionSec2])
         self.view.addSubview(tabsView)
         tabsView.delegate = self
+        
+        let netCollector = NetCollector(gunsSelector: generateUpdater(number: 0),
+                                        basesSelector: generateUpdater(number: 1))
+        let testUrl = URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")
+        netCollector.startLoadingData(urlsGuns: [testUrl!, testUrl!, testUrl!],
+                                      urlsBases: [testUrl!, testUrl!, testUrl!])
     }
 }
 
