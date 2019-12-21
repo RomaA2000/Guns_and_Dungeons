@@ -82,7 +82,7 @@ class Spawner {
                                                     location: CGPoint(x: CGFloat(params.positionX), y: CGFloat(params.positionY)),
                                                     weapon: weapon)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams,
-                                                          healthPoints: params.hp,
+                                                           healthPoints: params.hp,
                                                           deathAnimation: animationParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams,
                                                 maxSpeed: CGFloat(params.speed),

@@ -40,13 +40,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         let sensitivity: CGFloat = 0.5
         
-        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 0, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
+        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 0, y: -frame.height / 2, width: (frame.width / 2), height: frame.height))
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         cameraNode.addChild(moveJoystickHiddenArea)
         moveJoystick.sensitivityBias = sensitivity
 
-        let fireJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: frame.width / 2, height: frame.height))
+        let fireJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: -frame.width / 2, y: -frame.height / 2, width: (frame.width / 2), height: frame.height))
         fireJoystickHiddenArea.joystick = fireJoystick
         fireJoystick.isMoveable = true
         cameraNode.addChild(fireJoystickHiddenArea)

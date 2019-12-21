@@ -8,30 +8,38 @@
 
 import UIKit
 
+typealias ImageAdder = (Array<UIImage>) -> Void
+
 class NetCollector {
     
-    let gunsLoader : Loader = Loader()
-    let basesLoader : Loader = Loader()
+    let gunsLoader : Loader
+    let basesLoader : Loader
+    
+    init(gunsSelector : @escaping ImageAdder, basesSelector : @escaping ImageAdder) {
+        self.gunsLoader = Loader(selector: gunsSelector)
+        self.basesLoader = Loader(selector: basesSelector)
+    }
     
     func startLoadingData(urlsGuns : [URL], urlsBases : [URL]) {
         gunsLoader.load(urls: urlsGuns)
         basesLoader.load(urls: urlsBases)
     }
-    
-    func getInfo() -> (Array<UIImage>, Array<UIImage>)? {
-        if (gunsLoader.ready && basesLoader.ready) {
-            return (gunsLoader.array, basesLoader.array)
-        }
-        return nil;
-    }
 }
 
 class Loader {
-    
     var array : Array<UIImage> = []
     var ready : Bool = true
+    var selector : (Array<UIImage>) -> Void
     
-    func load(urls : [URL]) {
+    init(selector : @escaping ImageAdder) {
+        self.selector = selector
+    }
+    
+    func completed() {
+        selector(array)
+    }
+
+    func load(urls : [URL]) -> Void {
         if (ready) {
             array.removeAll()
             ready = false
@@ -43,9 +51,9 @@ class Loader {
                             }
                         }
                     }
+                    self.selector(self.array)
                     self.ready = true
                 }
-            
         }
     }
 }

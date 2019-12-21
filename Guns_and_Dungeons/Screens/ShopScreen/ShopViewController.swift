@@ -21,7 +21,7 @@ class ShopViewController : UIViewController {
         self.view.backgroundColor = .white
 
         createTabView()
-        
+
         let backButtonParams = LocationParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.006)
         backButton = self.view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen), params: backButtonParams)
         backButton.setBackgroundImage(UIImage(named: "unlocked"), for: .normal)
@@ -46,7 +46,7 @@ class ShopViewController : UIViewController {
     @objc func toMenuScreen() {
         navigationController?.popViewController(animated: true)
     }
-    
+
     func createTabView() {
         let tabsViewParams = LocationParameters(centerPoint: CGPoint(x: 0.6, y: 0.5), k: 1.5, square: 0.4)
         let buttonToGuns = UIButton()
@@ -56,10 +56,10 @@ class ShopViewController : UIViewController {
         buttonToBases.setTitle("TO bases", for: .normal)
         buttonToBases.backgroundColor = .red
         let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
-        
+
         //let netCollector = NetCollector()
         //netCollector.startLoadingData()
-        
+
         var allCellsData: AllCellsData
         let path = Bundle.main.path(forResource: "items_description", ofType: "json")
         do {
@@ -69,7 +69,7 @@ class ShopViewController : UIViewController {
         } catch {
             fatalError("JSON data not found")
         }
-        
+
         var cellsSec1: [CellInfo] = []
         for i in allCellsData.bases {
             let image = UIImage(named: i.image)
@@ -77,7 +77,7 @@ class ShopViewController : UIViewController {
             let cost = i.cost
             cellsSec1.append(CellInfo(itemImage: image, backgroundImage: backGroundImage, unlocked: false, cost: cost))
         }
-        
+
         var cellsSec2: [CellInfo] = []
         for i in allCellsData.guns {
             let image = UIImage(named: i.image)
@@ -85,12 +85,12 @@ class ShopViewController : UIViewController {
             let cost = i.cost
             cellsSec2.append(CellInfo(itemImage: image, backgroundImage: backGroundImage, unlocked: false, cost: cost))
         }
-        
-        
-        
+
+
+
         let tabsDesctriptionSec1 = TabDescription(cellInfos: cellsSec2)
         let tabsDesctriptionSec2 = TabDescription(cellInfos: cellsSec1)
-        
+
         tabsView = TabsView(frame: tabsViewRect, tabPart: 0.1,
                             tabs: [buttonToGuns, buttonToBases],
                             tabsDesctriptions: [tabsDesctriptionSec1, tabsDesctriptionSec2])
@@ -103,7 +103,7 @@ extension ShopViewController: TabsViewDelegate {
     func tabSelected(tabNumber: Int) {
         print("new tab selected")
     }
-    
+
     func itemSelected(tabNumber: Int) {
         print("new item selected")
     }

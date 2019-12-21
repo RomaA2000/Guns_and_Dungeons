@@ -39,12 +39,11 @@ class EnemiesController {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
             print(try JSONDecoder().decode(SpawnParams.self, from: data))
             self.spawner = Spawner(spawnParams: try JSONDecoder().decode(SpawnParams.self, from: data), scene: scene, atlas: atlas)
-        }
-        catch {
+        } catch {
             fatalError("JSON data not found")
         }
     }
-    
+
     func update(_ currentTime: TimeInterval) {
         let enemiesInfo = spawner.getInfo()
         //solver here
