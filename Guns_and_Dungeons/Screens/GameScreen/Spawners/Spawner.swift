@@ -72,7 +72,7 @@ class Spawner {
     }
     
     func makeWarrior(params: UnitSpawnParams) -> Enemy {
-        let animationParams = getAnimation(atlas: atlas, frameName: params.img, defaultName: params.img + "1", size: 4)
+        let animationParams = getAnimation(atlas: atlas, frameName: params.img, defaultName: params.img + "1", size: 3)
         let clip: Clip = Clip(bullets: 1000,
                               spawner: { return Bullet(defaultTexture: self.atlas.textureNamed("bullet"), damage: params.damage)},
                               frequence: TimeInterval(params.frequence),

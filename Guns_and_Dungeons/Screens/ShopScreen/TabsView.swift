@@ -2,7 +2,7 @@
 //  TabsView.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потау on 11.12.2019.
+//  Created by Александр Потапов on 11.12.2019.
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import UIKit
 
 protocol TabsViewDelegate: class {
     func tabSelected(tabNumber: Int)
+    func itemSelected(tabNumber: Int)
 }
 
 class TabsView: UIView {
@@ -125,6 +126,11 @@ extension TabsView: UICollectionViewDelegate, UICollectionViewDataSource {
         print(indexPath)
         cell.backgroundColor = cellColor
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected ", indexPath.item)
+        delegate?.itemSelected(tabNumber: indexPath.item)
     }
     
 }

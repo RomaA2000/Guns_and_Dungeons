@@ -59,6 +59,7 @@ class ShopViewController : UIViewController {
         
         //let netCollector = NetCollector()
         //netCollector.startLoadingData()
+        
         var allCellsData: AllCellsData
         let path = Bundle.main.path(forResource: "items_description", ofType: "json")
         do {
@@ -101,6 +102,10 @@ class ShopViewController : UIViewController {
 extension ShopViewController: TabsViewDelegate {
     func tabSelected(tabNumber: Int) {
         print("new tab selected")
+    }
+    
+    func itemSelected(tabNumber: Int) {
+        print("new item selected")
     }
 
 }

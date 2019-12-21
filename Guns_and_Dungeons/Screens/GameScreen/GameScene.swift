@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemyController: EnemiesController!
     var textureAtlas: SKTextureAtlas!
     var levelNumber : UInt64 = 1
+    
     override func didMove(to view: SKView) {
         
         physicsWorld.contactDelegate = self
@@ -52,6 +53,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fireJoystick.sensitivityBias = sensitivity
         
         view.isMultipleTouchEnabled = true
+        
+        let pauseDefault = SKTexture(imageNamed: "pausebutton0")
+        let pauseTexture = SKTexture(imageNamed: "pausebutton1")
+        let pauseLocationParams = LocationParameters(centerPoint: CGPoint(x: 0, y: 0.15), k: 1, square: 0.001)
+        pauseButton = Button(defaultTexture: pauseDefault, pressedTexture: pauseTexture,
+                             params: pauseLocationParams, sceneFrame: self.frame)
+        pauseButton.position = CGPoint(x: 0, y: 180 * (frame.size.width / 650))
+        print(self.frame.size)
+        pauseButton.zPosition = 15
+        cameraNode.addChild(pauseButton)
     }
     
     func checkCollision(contact: SKPhysicsContact, firstType: UInt32, secondType: UInt32) -> (first: SKNode?, second: SKNode?)? {
