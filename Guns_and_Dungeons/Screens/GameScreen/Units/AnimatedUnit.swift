@@ -9,11 +9,11 @@
 import SpriteKit
 
 class AnimatedUnit: SKSpriteNode {
-    
+
     var weapon: Weapon?
     var defaultTexture: SKTexture
     var defaultAnimation: SKAction
-    
+
     init(params: AnimatedUnitParams) {
         self.defaultAnimation = params.defaultAnimation
         self.defaultTexture = params.defaultTexture
@@ -26,35 +26,42 @@ class AnimatedUnit: SKSpriteNode {
             weapon?.base = self
         }
     }
-    
+
 //    init(animatedUnit : AnimatedUnit) {
 //        self.weapon = animatedUnit.weapon
 //        self.defaultTexture = animatedUnit.defaultTexture
 //        self.defaultAnimation = animatedUnit.defaultAnimation
 //        super.init(imageNamed: animatedUnit)
 //    }
-    
+
     func update(_ currentTime: TimeInterval, target: CGPoint?) {
         if let point = target {
-            print("point: ", point)
-            weapon?.fire(currentTime: currentTime)
+            self.weapon?.zRotation += .pi / 2
+            if (self.weapon!.zRotation > CGFloat(10.0)) {
+                self.weapon?.zRotation = 0
+            }
+            //weapon?.fire(currentTime: currentTime)
         }
     }
-    
+
     func changeWeapon(weapon: Weapon) -> Weapon? {
         let temp = self.weapon
         self.weapon = weapon
         return temp
     }
-    
+
     func rotateGunTo(angel: CGFloat) {
         self.weapon?.zRotation = angel - self.zRotation
     }
-    
+
+    func gunVector() {
+
+    }
+
     func runDefaultAnimation() {
         run(defaultAnimation, withKey: "default")
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -83,13 +90,13 @@ class AnimatedUnitParams : AnimationTexturesParams {
 
     let location: CGPoint
     let weapon: Weapon?
-    
+
     init(animationTexturesParams : AnimationTexturesParams, location: CGPoint, weapon: Weapon?) {
         self.location = location
         self.weapon = weapon
         super.init(animationTexturesParams: animationTexturesParams)
     }
-    
+
      init(animatedUnitParams: AnimatedUnitParams) {
         self.location = animatedUnitParams.location
         self.weapon = animatedUnitParams.weapon
