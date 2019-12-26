@@ -8,47 +8,36 @@
 
 import UIKit
 
-typealias ImageAdder = (Array<UIImage>) -> Void
+typealias ImageAdder = (UIImage, Int) -> Void
 
 class NetCollector {
     
-    let gunsLoader : Loader
-    let basesLoader : Loader
+    let gunsSelector : ImageAdder
+    let basesSelector : ImageAdder
     
     init(gunsSelector : @escaping ImageAdder, basesSelector : @escaping ImageAdder) {
-        self.gunsLoader = Loader(selector: gunsSelector)
-        self.basesLoader = Loader(selector: basesSelector)
+        self.gunsSelector = gunsSelector
+        self.basesSelector = basesSelector
     }
     
-    func startLoadingData(urlsGuns : [URL], urlsBases : [URL]) {
-        gunsLoader.load(urls: urlsGuns)
-        basesLoader.load(urls: urlsBases)
-    }
-}
-
-class Loader {
-    var ready : Bool = true
-    var selector : (Array<UIImage>) -> Void
-    
-    init(selector : @escaping ImageAdder) {
-        self.selector = selector
-    }
-
-    func load(urls : [URL]) -> Void {
-        if (ready) {
-            ready = false
-            DispatchQueue.main.async{[self, urls] in
-                    var array : Array<UIImage> = []
-                    for i in urls {
-                        if let data = try? Data(contentsOf: i) {
-                            if let image = UIImage(data: data) {
-                                array.append(image)
-                            }
-                        }
-                    }
-                    self.selector(array)
-                    self.ready = true
-            }
+    func startLoadingData(urlsGunsPos : [(URL, Int)], urlsBasesPos : [(URL, Int)]) {
+        for i in urlsGunsPos {
+            loadImage(url: i.0, index: i.1, selector: gunsSelector)
+        }
+        for i in urlsBasesPos {
+            loadImage(url: i.0, index: i.1, selector: basesSelector)
         }
     }
 }
+
+func loadImage(url: URL, index: Int, selector: @escaping ImageAdder) {
+    DispatchQueue.main.async{[selector, url, index] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                        selector(image, index)
+                }
+            }
+            
+    }
+}
+

@@ -47,13 +47,12 @@ class ShopViewController : UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    func generateUpdater(number: Int) -> (Array<UIImage>) -> Void {
-        return { (array: Array<UIImage>) -> Void in
-            guard array.count == 3 else { return }
-            self.tabsDesctription[number].cellInfos[6].itemImage = array[0]
-            self.tabsDesctription[number].cellInfos[7].itemImage = array[1]
-            self.tabsDesctription[number].cellInfos[8].itemImage = array[2]
-            self.tabsView.table.reloadData()
+    func generateUpdater(number: Int) -> (UIImage?, Int) -> Void {
+        return { (image: UIImage?, cellNumber: Int) -> Void in
+            if let data = image {
+                self.tabsDesctription[number].cellInfos[cellNumber].itemImage = data
+                self.tabsView.table.reloadData()
+            }
         }
     }
 
@@ -106,15 +105,15 @@ class ShopViewController : UIViewController {
 
         let netCollector = NetCollector(gunsSelector: self.generateUpdater(number: 0),
                                         basesSelector: self.generateUpdater(number: 1))
-        let gunsUrl: Array<URL> = [URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!,
-                                   URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!,
-                                   URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!]
+        let gunsUrl: Array<(URL, Int)> = [(URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!, 6),
+                                   (URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!, 7),
+                                   (URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!, 8)]
 
-        let basesUrl: Array<URL> = [URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!,
-                                    URL(string: "https://bipbap.ru/wp-content/uploads/2019/05/1532440298_3.jpg")!,
-                                    URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!]
+        let basesUrl: Array<(URL, Int)> = [(URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!, 6),
+                                    (URL(string: "https://bipbap.ru/wp-content/uploads/2019/05/1532440298_3.jpg")!, 7),
+                                    (URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!, 8)]
 
-        netCollector.startLoadingData(urlsGuns: gunsUrl, urlsBases: basesUrl)
+        netCollector.startLoadingData(urlsGunsPos: gunsUrl, urlsBasesPos: basesUrl)
     }
 }
 
