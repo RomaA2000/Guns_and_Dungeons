@@ -53,7 +53,6 @@ class ShopViewController : UIViewController {
         let path = Bundle.main.path(forResource: "items_description", ofType: "json")
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
-            print(data)
             allCellsData = try JSONDecoder().decode(AllCellsData.self, from: data)
         } catch {
             fatalError("JSON data not found")
@@ -104,11 +103,11 @@ class ShopViewController : UIViewController {
 
 extension ShopViewController: TabsViewDelegate {
     func tabSelected(tabNumber: Int) {
-        print("new tab selected")
+
     }
 
     func itemSelected(tabNumber: Int) {
-        print("new item selected")
+
     }
 
 }

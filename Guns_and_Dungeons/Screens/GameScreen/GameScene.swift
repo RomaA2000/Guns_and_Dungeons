@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.addChild(cameraNode)
         
         textureAtlas = SKTextureAtlas(named: "tex")
-        textureAtlas.preload { print("preloaded")  }
+        textureAtlas.preload{   }
         enemyController = EnemiesController(atlas: textureAtlas, scene: scene! as! GameScene, levelNumber : levelNumber)
 
         let sensitivity: CGFloat = 0.5
@@ -151,7 +151,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 extension GameScene: ButtonDelegate {
     func buttonPressed(_ sender: Button) {
-        print("123")
         self.isPaused = true
         self.viewController?.toLevelSelectionScreen()
     }

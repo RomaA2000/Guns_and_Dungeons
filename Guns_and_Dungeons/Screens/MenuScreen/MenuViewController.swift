@@ -59,7 +59,6 @@ class MenuViewController: UIViewController {
     }
     
     @objc func toSettingScreen() {
-        print("data: ", UserDefaults.standard.bool(forKey: "sound"))
         self.navigationController?.pushViewController(SettingsViewController(), animated: true)
     }
     
