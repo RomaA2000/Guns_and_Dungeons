@@ -49,7 +49,7 @@ class AnimatedUnit: SKSpriteNode {
     }
 
     func gunVector() {
-
+            
     }
 
     func runDefaultAnimation() {

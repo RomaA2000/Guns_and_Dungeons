@@ -79,7 +79,7 @@ class Spawner {
         let clip: Clip = Clip(bullets: 1000,
                               spawner: { return Bullet(defaultTexture: self.atlas.textureNamed("bullet"), damage: params.damage)},
                               frequence: TimeInterval(params.frequence),
-                              bulletSpeed: 0)
+                              bulletSpeed: 1000)
         let weapon: Weapon = Weapon(defaultTexture: atlas.textureNamed(params.gunImg), clip: clip)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationParams,
                                                     location: CGPoint(x: CGFloat(params.positionX), y: CGFloat(params.positionY)),

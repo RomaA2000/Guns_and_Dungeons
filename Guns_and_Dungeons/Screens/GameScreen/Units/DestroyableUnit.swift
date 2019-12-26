@@ -19,7 +19,7 @@ class DestroyableUnit: AnimatedUnit {
     }
     
     func update(_ currentTime: TimeInterval, target: CGPoint?) {
-        // выстрел
+       // weapon?.fire(currentTime: currentTime)
     }
 //    init(destroyableUnit: DestroyableUnit) {
 //        healthPoints = destroyableUnit.healthPoints
