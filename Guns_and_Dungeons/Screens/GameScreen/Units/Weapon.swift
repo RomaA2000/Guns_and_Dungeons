@@ -32,6 +32,11 @@ class Weapon : SKSpriteNode {
         return zRotation + .pi/2 + (base?.getAngleOnScene() ?? 0)
     }
     
+    func getLookVector() -> CGVector {
+        let angle = getAngle()
+        return CGVector(dx: cos(angle), dy: sin(angle))
+    }
+    
     func spawn(bullet: Bullet) {
         let bulletPosition = CGPoint(x: 0, y: spawnLength)
         bullet.setVelocityVector(angle: self.getAngle())

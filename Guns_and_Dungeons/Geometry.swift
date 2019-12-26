@@ -164,7 +164,11 @@ extension CGVector {
     }
     
     func getAngle(v: CGVector) -> CGFloat {
-        return acos(cos(v1: v))
+        var l : CGFloat = 1
+        if (sign_sin(v1: v) > 0) {
+            l = -1
+        }
+        return acos(cos(v1: v)) * l
     }
 }
 
@@ -211,7 +215,7 @@ extension CGRect {
             return false
         } else {
             let v : CGVector = CGVector(dx: p2.x - p1.x, dy: p2.y - p1.y)
-            if intersect(p : p1, v : v) {
+            if (intersect(p : p1, v : v)) {
                 return intersect(p : p1, v : v)
             } else {
                 return false
@@ -220,7 +224,9 @@ extension CGRect {
     }
     
     func isNear(p1 : CGPoint, p2 : CGPoint) -> Bool {
-        return p1.distanceX(to: p2) < getDistX(p: p1) || p1.distanceY(to: p2) < getDistY(p: p1)
+        return p1.distanceX(to: p2) < getDistX(p: p1) || p1.distanceY(to: p2) < getDistY(p: p1) ||
+            (p2.x < p1.x && p1.x < minX) || (p2.x > p1.x && p1.x > minX) ||
+            (p2.y < p1.y && p1.y < minY) || (p2.y > p1.y && p1.y > minY)
     }
     
     func isBetween(p1 : CGPoint, p2 : CGPoint) -> Bool {

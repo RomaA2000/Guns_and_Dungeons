@@ -18,6 +18,9 @@ class DestroyableUnit: AnimatedUnit {
         super.init(params: params)
     }
     
+    func update(_ currentTime: TimeInterval, target: CGPoint?) {
+        // выстрел
+    }
 //    init(destroyableUnit: DestroyableUnit) {
 //        healthPoints = destroyableUnit.healthPoints
 //        deathAnimation = destroyableUnit.deathAnimation
