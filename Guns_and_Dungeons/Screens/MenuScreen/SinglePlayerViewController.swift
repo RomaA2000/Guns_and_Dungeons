@@ -79,8 +79,8 @@ class SinglePlayerViewController : UIViewController, Callable {
     func makeLockedButtonParams() -> PanelButtonParams {
         let lockedImage = UIImage(named: "infoplacelocked")
         let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
-        let buttonParams = ButtonParams(location: location, defaultTexture: lockedImage, pressedTexture: nil, label: "")
-        return PanelButtonParams(buttonParams: buttonParams)
+        let buttonParams = ButtonParams(location: location, defaultTexture: lockedImage, pressedTexture: nil, label: "Leve: ")
+        return PanelButtonParams(buttonParams: buttonParams, enabled: false)
     }
     
     func makeUnlockedButtonParams(number: UInt64, stars: UInt64 = 0) -> PanelButtonParams {
@@ -88,7 +88,7 @@ class SinglePlayerViewController : UIViewController, Callable {
         let starImage = UIImage(named: "star")
         let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
         let buttonParams = ButtonParams(location: location, defaultTexture: unlockedImage, pressedTexture: nil)
-        let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: number, stars: stars)
+        let panelButtonParams = PanelButtonParams(buttonParams: buttonParams, starTexture: starImage, number: number, stars: stars, enabled: true)
         return panelButtonParams
     }
     

@@ -30,7 +30,7 @@ class MenuViewController: UIViewController {
                                             params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
         singlePlayerButton?.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
-        multiPlayerButton = view.addButton(label: "Multi player Texture",
+        multiPlayerButton = view.addButton(label: "Multi player",
                                            target: self,
                                            selector: #selector(toMultiPlayerScreen),
                                            params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))

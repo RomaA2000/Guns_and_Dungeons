@@ -13,9 +13,14 @@ class ShopViewController : UIViewController {
     var backButton: UIButton!
     var tabsView: TabsView!
     var tabsDesctription: [TabDescription] = []
+    var background: UIImageView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.background = UIImageView(frame: self.view.frame)
+        self.background?.image = UIImage(named: "iron_back")
+        self.view.addSubview(background!)
 
         self.view.backgroundColor = .white
 
@@ -23,7 +28,7 @@ class ShopViewController : UIViewController {
 
         let backButtonParams = LocationParameters(centerPoint: CGPoint(x: 0.9, y: 0.9), k: 1.25, square: 0.006)
         backButton = self.view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen), params: backButtonParams)
-        backButton.setBackgroundImage(UIImage(named: "unlocked"), for: .normal)
+        backButton.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
     }
 
     @objc func toMenuScreen() {

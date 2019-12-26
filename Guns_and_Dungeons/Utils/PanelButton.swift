@@ -30,6 +30,7 @@ class PanelButton : UIButton, PanelSubview {
         addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)
         self.setTitle("Level \(number + 1)", for: .normal)
         setStars(stars: params.stars)
+        self.isEnabled = params.enabled
     }
     
     required init?(coder: NSCoder) {
@@ -94,6 +95,7 @@ class PanelButtonParams: ButtonParams, PanelSuviewParams {
     let stars: UInt64
     let number: UInt64
     var frame: CGRect
+    var enabled: Bool
     
     func setFrame(frame: CGRect) {
         self.frame = frame
@@ -103,11 +105,12 @@ class PanelButtonParams: ButtonParams, PanelSuviewParams {
         return self.locationParameters
     }
     
-    init(buttonParams: ButtonParams, starTexture: UIImage? = nil, number: UInt64 = 0, stars: UInt64 = 0) {
+    init(buttonParams: ButtonParams, starTexture: UIImage? = nil, number: UInt64 = 0, stars: UInt64 = 0, enabled: Bool) {
         self.stars = stars
         self.starTexture = starTexture
         self.number = number
         self.frame = CGRect()
+        self.enabled = enabled
         super.init(copy: buttonParams)
     }
 }
