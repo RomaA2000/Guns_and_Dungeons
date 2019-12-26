@@ -28,7 +28,7 @@ class PanelButton : UIButton, PanelSubview {
         addTarget(self, action: #selector(buttonRelisedInside(sender:)), for: .touchUpInside)
         addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchDown)
         addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)
-        setTitle("Level \(number + 1)", for: .normal)
+        self.setTitle("Level \(number + 1)", for: .normal)
         setStars(stars: params.stars)
     }
     
@@ -57,11 +57,13 @@ class PanelButton : UIButton, PanelSubview {
     
     @objc func buttonReleasedOutside(sender: PanelButton) {
         self.imageView?.alpha = 1
+        backgroundColor = nil
     }
     
     @objc func buttonRelisedInside(sender: PanelButton) {
         parent(implementing: Callable.self)?.call(number: sender.number)
         self.imageView?.alpha = 0.5
+        backgroundColor = nil
     }
 }
 
