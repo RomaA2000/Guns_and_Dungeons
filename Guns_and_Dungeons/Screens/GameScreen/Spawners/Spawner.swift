@@ -52,12 +52,15 @@ class Spawner {
         }
     }
     
-    func update(_ currentTime: TimeInterval) {
-        for unit in self.units {
-            unit.update(currentTime)
-            if (unit.healthPoints <= 0) {
-                print("delete")
-                unit.removeFromParent()
+    func update(_ currentTime: TimeInterval, targets: [CGPoint?]) {
+        guard targets.count == units.count else {
+            return;
+        }
+        for i in 0..<units.count {
+            if (units[i].healthPoints <= 0) {
+                units[i].removeFromParent()
+            } else {
+                units[i].update(currentTime, target: targets[i])
             }
         }
         self.units = self.units.filter({$0.healthPoints > 0})

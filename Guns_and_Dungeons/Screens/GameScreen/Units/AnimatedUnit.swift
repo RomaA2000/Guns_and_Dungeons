@@ -6,7 +6,6 @@
 //  Copyright © 2019 Роман Агеев. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 class AnimatedUnit: SKSpriteNode {
@@ -35,8 +34,10 @@ class AnimatedUnit: SKSpriteNode {
 //        super.init(imageNamed: animatedUnit)
 //    }
     
-    func update(_ currentTime: TimeInterval) {
-        
+    func update(_ currentTime: TimeInterval, target: CGPoint?) {
+        if let point = target {
+            weapon?.fire(currentTime: currentTime)
+        }
     }
     
     func changeWeapon(weapon: Weapon) -> Weapon? {

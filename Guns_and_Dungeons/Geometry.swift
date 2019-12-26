@@ -175,18 +175,58 @@ extension CGRect {
     }
     
     func intersect(p1 : CGPoint, p2 : CGPoint) -> Bool {
-        let v : CGVector = CGVector(dx: p2.x - p1.x, dy: p2.y - p1.y)
-        return intersect(p : p1, v : v)
+        if (p1.distance(to: p2) < getDist(p: p1)) {
+            return false
+        } else {
+            let v : CGVector = CGVector(dx: p2.x - p1.x, dy: p2.y - p1.y)
+            return intersect(p : p1, v : v)
+        }
     }
-
+    
+    func getDist(p : CGPoint) -> CGFloat {
+        let pArray = pointArray()
+        if (p.x > minX) {
+            if (p.x > maxX) {
+                if (p.y > minY) {
+                    if (p.y > maxY) {
+                        return p.distance(to: pArray[2])
+                    } else {
+                        return p.x - maxX
+                    }
+                } else {
+                    return p.distance(to: pArray[1])
+                }
+            } else {
+                if (p.y > minY) {
+                    if (p.y > maxY) {
+                        return p.y - maxY
+                    } else {
+                        return 0
+                    }
+                } else {
+                    return minY - p.y
+                }
+            }
+        } else {
+            if (p.y > minY) {
+                if (p.y > maxY) {
+                    return p.distance(to: pArray[3])
+                } else {
+                    return minX - p.x
+                }
+            } else {
+                return p.distance(to: pArray[0])
+            }
+        }
+    }
     
     func pointArray() -> Array<CGPoint> {
-        let x = self.origin.x
-        let y = self.origin.y
+        let x = self.minX
+        let y = self.minY
         let w = self.width
         let h = self.height
         return [CGPoint(x: x,y: y), CGPoint(x: x + w,y: y),
-                CGPoint(x: x + w,y: y + h), CGPoint(x: x,y: y + h)]
+                CGPoint(x: x + w,y: y + h), CGPoint(x: x, y: y + h)]
     }
 }
 

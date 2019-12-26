@@ -14,7 +14,6 @@ class NetCollector {
     
     let gunsSelector : ImageAdder
     let basesSelector : ImageAdder
-    
     init(gunsSelector : @escaping ImageAdder, basesSelector : @escaping ImageAdder) {
         self.gunsSelector = gunsSelector
         self.basesSelector = basesSelector
@@ -37,7 +36,5 @@ func loadImage(url: URL, index: Int, selector: @escaping ImageAdder) {
                         selector(image, index)
                 }
             }
-            
     }
 }
-

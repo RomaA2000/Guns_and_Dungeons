@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import SpriteKit
+
 class SpawnerRequest {
     var location : CGPoint
     init(location : CGPoint) {
@@ -16,21 +18,19 @@ class SpawnerRequest {
 }
 
 class RequesSolver {
-    let players : [CGPoint]
-    let walls : [CGRect]
-    init(players : [CGPoint], walls : [CGRect]) {
-        self.players = players
+    let walls : [SKNode]
+    init(walls : [SKNode]) {
         self.walls = walls
     }
     
-    func solveOne(request : SpawnerRequest) -> CGPoint? {
+    func solveOne(request : SpawnerRequest, players : [CGPoint]) -> CGPoint? {
         var first : Bool = true
         var ans : CGPoint? = nil
         var length : CGFloat = 0
         for i in players {
             var can = true
             for j in walls {
-                if j.intersect(p1: request.location, p2: i) {
+                if j.frame.intersect(p1: request.location, p2: i) {
                     can = false
                 }
             }
@@ -44,8 +44,8 @@ class RequesSolver {
         return ans
     }
     
-    func solve(request : Array<SpawnerRequest>) -> Array<CGPoint?> {
-        return Array<CGPoint?>(request.map({ solveOne(request: $0)}))
+    func solve(request : Array<SpawnerRequest>, players : [CGPoint]) -> Array<CGPoint?> {
+        return Array<CGPoint?>(request.map({ solveOne(request: $0, players: players)}))
     }
 }
 

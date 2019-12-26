@@ -28,12 +28,14 @@ struct UnitSpawnParams: Decodable {
 class EnemiesController {
     var spawner: Spawner
     let atlas: SKTextureAtlas
-    let scene: SKScene
+    let scene: GameScene
     var outOfCharge: Bool = false
-    
-    init(atlas: SKTextureAtlas, scene: SKScene, levelNumber : UInt64) {
+    let requesSolver: RequesSolver
+
+    init(atlas: SKTextureAtlas, scene: GameScene, levelNumber : UInt64) {
         self.atlas = atlas
         self.scene = scene
+        self.requesSolver = RequesSolver(walls: scene.walls)
         let path = Bundle.main.path(forResource: "scheme\(levelNumber)", ofType: "json")
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
@@ -45,9 +47,9 @@ class EnemiesController {
     }
 
     func update(_ currentTime: TimeInterval) {
-        let enemiesInfo = spawner.getInfo()
-        // solver here
-        spawner.update(currentTime)
+        let request = spawner.getInfo()
+        let results = requesSolver.solve(request: request, players: [scene.player.position])
+        spawner.update(currentTime, targets: results)
         if spawner.isEmpty {
             print("empty")
             outOfCharge = true

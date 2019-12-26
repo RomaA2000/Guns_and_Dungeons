@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         textureAtlas = SKTextureAtlas(named: "tex")
         textureAtlas.preload { print("preloaded")  }
-        enemyController = EnemiesController(atlas: textureAtlas, scene: scene!, levelNumber : levelNumber)
+        enemyController = EnemiesController(atlas: textureAtlas, scene: scene! as! GameScene, levelNumber : levelNumber)
 
         let sensitivity: CGFloat = 0.5
         
