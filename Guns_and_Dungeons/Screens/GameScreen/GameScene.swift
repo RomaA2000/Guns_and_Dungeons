@@ -63,13 +63,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         view.isMultipleTouchEnabled = true
         
-        let pauseDefault = SKTexture(imageNamed: "pausebutton0")
-        let pauseTexture = SKTexture(imageNamed: "pausebutton1")
+        let pauseDefault = SKTexture(imageNamed: "speedbox1a")
         let pauseLocationParams = LocationParameters(centerPoint: CGPoint(x: 0, y: 0.15), k: 1, square: 0.001)
-        pauseButton = Button(defaultTexture: pauseDefault, pressedTexture: pauseTexture,
+        pauseButton = Button(defaultTexture: pauseDefault, pressedTexture: pauseDefault,
                              params: pauseLocationParams, sceneFrame: self.frame)
-        pauseButton.position = CGPoint(x: 0, y: 180 * (frame.size.width / 650))
-        pauseButton.zPosition = 15
+        
+        let bounds = UIScreen.main.bounds
+        pauseButton.position = CGPoint(x: 0, y: bounds.width / 4)
+        pauseButton.zPosition = 25
+        pauseButton.delegate = self
         cameraNode.addChild(pauseButton)
     }
     
@@ -144,5 +146,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
         return Player(params: playerParams)
+    }
+}
+
+extension GameScene: ButtonDelegate {
+    func buttonPressed(_ sender: Button) {
+        print("123")
+        self.isPaused = true
+        self.viewController?.toLevelSelectionScreen()
     }
 }

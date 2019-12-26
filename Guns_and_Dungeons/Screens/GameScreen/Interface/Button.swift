@@ -23,6 +23,7 @@ class Button: SKSpriteNode {
         self.pressedTexture = pressedTexture
         let locationFrame = getRect(parentFrame: sceneFrame, params: params);
         super.init(texture: defaultTexture, color: .black, size: locationFrame.size)
+        self.isUserInteractionEnabled = true
         position = CGPoint(x: locationFrame.midX, y: locationFrame.midY)
     }
     

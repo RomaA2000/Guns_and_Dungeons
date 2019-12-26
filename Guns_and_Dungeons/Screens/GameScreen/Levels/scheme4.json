@@ -1,0 +1,18 @@
+{ "units": [
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10,
+                "positionX" : -320, "positionY" : -320
+                , "speed": 10, "wave" : 0,"img": "pl", "gunImg": "gun1"},
+            
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10,
+            "positionX" : 240, "positionY" : 240
+            , "speed": 10, "wave" : 0, "img": "pl", "gunImg": "gun1"},
+            
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10,
+                "positionX" : -310, "positionY" : -310
+                , "speed": 10, "wave" : 1, "img": "pl", "gunImg": "gun1"},
+            
+            {"type": "warrior", "hp": 1, "damage": 10, "frequence": 10,
+            "positionX" : 210, "positionY" : 210
+            , "speed": 10, "wave" : 1, "img": "pl", "gunImg": "gun1"}
+
+]}

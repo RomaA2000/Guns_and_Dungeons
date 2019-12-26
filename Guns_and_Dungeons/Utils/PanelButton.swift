@@ -25,7 +25,6 @@ class PanelButton : UIButton, PanelSubview {
         super.init(frame: params.frame)
         self.setImage(defaultTexture, for: .normal)
         self.setImage(pressedTexture, for: .selected)
-        backgroundColor = .black
         addTarget(self, action: #selector(buttonRelisedInside(sender:)), for: .touchUpInside)
         addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchDown)
         addTarget(self, action: #selector(buttonReleasedOutside(sender:)), for: .touchUpOutside)

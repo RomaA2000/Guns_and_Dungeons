@@ -13,15 +13,20 @@ class SettingsViewController : UIViewController, SwitcherDelegate {
     var backButton: UIButton!
     var saveButton: UIButton!
     var switchView: UISwitch!
-    var titleView: UILabel!
+    var titleView: ImageLabel!
+    var background: UIImageView!
     
-    var soundLabel: UILabel!
+    var soundLabel: ImageLabel!
     var soundSwitch: Switcher!
     var soundIcon: UIIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        
+        self.background = UIImageView(frame: self.view.frame)
+        self.background?.image = UIImage(named: "iron_back")
+        self.view.addSubview(background!)
         
         let yPos: CGFloat = 0.9
         
@@ -34,9 +39,9 @@ class SettingsViewController : UIViewController, SwitcherDelegate {
         saveButton.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
         let titleLocationParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.1), k: 5, square: 0.08)
-        titleView = UILabel(frame: getRect(parentFrame: self.view.bounds, params: titleLocationParams))
-        titleView.text = "Settings"
-        titleView.textAlignment = .center
+        titleView = ImageLabel(frame: getRect(parentFrame: self.view.bounds, params: titleLocationParams),
+                               image: UIImage(named: "infoplace"),
+                               text: "Settings")
         self.view.addSubview(titleView)
         
         self.createSoundSection()
@@ -47,9 +52,7 @@ class SettingsViewController : UIViewController, SwitcherDelegate {
         
         let soundLabelParams = LocationParameters(centerPoint: CGPoint(x: 0.3, y: yPos), k: 2, square: 0.01)
         let soundLabelFrame = self.view.getRectInSelf(location: soundLabelParams)
-        soundLabel = UILabel(frame: soundLabelFrame)
-        soundLabel.text = "Sound"
-        soundLabel.textAlignment = .center
+        soundLabel = ImageLabel(frame: soundLabelFrame, image: UIImage(named: "infoplace"), text: "Sound")
         self.view.addSubview(soundLabel)
         
         let switcherParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: yPos), k: 2, square: 0.01)

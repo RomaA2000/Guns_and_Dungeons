@@ -47,6 +47,9 @@
 		7A2E96B423A93C43009481FC /* CellsJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E96B323A93C43009481FC /* CellsJson.swift */; };
 		7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2EF82B2388432B00FCA1B6 /* Button.swift */; };
 		7A333600237D417F0044CAA0 /* AnimatedUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3335FF237D417F0044CAA0 /* AnimatedUnit.swift */; };
+		7A3689C723B562D4000645A8 /* scheme3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A3689C623B562D4000645A8 /* scheme3.json */; };
+		7A3689C923B562EF000645A8 /* scheme4.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A3689C823B562EF000645A8 /* scheme4.json */; };
+		7A3689CB23B5682F000645A8 /* ImageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3689CA23B5682F000645A8 /* ImageLabel.swift */; };
 		7A3C5D8323898D3000CF991D /* gun1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8023898D3000CF991D /* gun1.png */; };
 		7A3C5D8423898D3000CF991D /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8123898D3000CF991D /* player.atlas */; };
 		7A3C5D8523898D3000CF991D /* enemy.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C5D8223898D3000CF991D /* enemy.atlas */; };
@@ -129,6 +132,9 @@
 		7A2E96B323A93C43009481FC /* CellsJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsJson.swift; sourceTree = "<group>"; };
 		7A2EF82B2388432B00FCA1B6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		7A3335FF237D417F0044CAA0 /* AnimatedUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedUnit.swift; sourceTree = "<group>"; };
+		7A3689C623B562D4000645A8 /* scheme3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = scheme3.json; sourceTree = "<group>"; };
+		7A3689C823B562EF000645A8 /* scheme4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = scheme4.json; sourceTree = "<group>"; };
+		7A3689CA23B5682F000645A8 /* ImageLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLabel.swift; sourceTree = "<group>"; };
 		7A3C5D8023898D3000CF991D /* gun1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gun1.png; sourceTree = "<group>"; };
 		7A3C5D8123898D3000CF991D /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
 		7A3C5D8223898D3000CF991D /* enemy.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy.atlas; sourceTree = "<group>"; };
@@ -275,6 +281,8 @@
 				7A6A06BA2392E758005BCB1D /* Level-4.sks */,
 				7AA4306D23A0114B0091AD2A /* scheme1.json */,
 				7AA4307123A03D330091AD2A /* scheme2.json */,
+				7A3689C623B562D4000645A8 /* scheme3.json */,
+				7A3689C823B562EF000645A8 /* scheme4.json */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -362,6 +370,7 @@
 				7A89F625235A241A00DEB50A /* SettingsViewController.swift */,
 				7A12C94523948EE3009C73D5 /* Switcher.swift */,
 				7AA670D1239512E300250EAD /* UIIndicator.swift */,
+				7A3689CA23B5682F000645A8 /* ImageLabel.swift */,
 			);
 			path = SettingsScreen;
 			sourceTree = "<group>";
@@ -463,11 +472,13 @@
 				7A3C5D8323898D3000CF991D /* gun1.png in Resources */,
 				7A2E96B223A93AAE009481FC /* items_description.json in Resources */,
 				37606AC62359B98800FEAE6D /* GameScene.sks in Resources */,
+				7A3689C923B562EF000645A8 /* scheme4.json in Resources */,
 				7A02E2E923883638002AD8FD /* Level-2.sks in Resources */,
 				37606AD12359B98E00FEAE6D /* Assets.xcassets in Resources */,
 				7AA4306E23A0114B0091AD2A /* scheme1.json in Resources */,
 				7A18182B2389391A005ECAF1 /* Level-1.sks in Resources */,
 				37606AD42359B98E00FEAE6D /* LaunchScreen.storyboard in Resources */,
+				7A3689C723B562D4000645A8 /* scheme3.json in Resources */,
 				7A02E2EB23883DDE002AD8FD /* Level-3.sks in Resources */,
 				7A6A06BB2392E758005BCB1D /* Level-4.sks in Resources */,
 				7AA4307223A03D330091AD2A /* scheme2.json in Resources */,
@@ -511,6 +522,7 @@
 				7A5AB781238094CF00096A57 /* DestroyableUnit.swift in Sources */,
 				37DF35DA237E969500437375 /* LevelsInfo.xcdatamodeld in Sources */,
 				7A12C94623948EE3009C73D5 /* Switcher.swift in Sources */,
+				7A3689CB23B5682F000645A8 /* ImageLabel.swift in Sources */,
 				37076175238DA45400D617D5 /* Geometry.swift in Sources */,
 				37DF35E4237E9A4A00437375 /* Statistics+CoreDataProperties.swift in Sources */,
 				7A8E4C52239DA2B200116565 /* Spawner.swift in Sources */,
