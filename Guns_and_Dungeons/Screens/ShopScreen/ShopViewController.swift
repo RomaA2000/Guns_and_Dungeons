@@ -105,14 +105,16 @@ class ShopViewController : UIViewController {
 
         let netCollector = NetCollector(gunsSelector: self.generateUpdater(number: 0),
                                         basesSelector: self.generateUpdater(number: 1))
-        let gunsUrl: Array<(URL, Int)> = [(URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!, 6),
-                                   (URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!, 7),
-                                   (URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!, 8)]
-
-        let basesUrl: Array<(URL, Int)> = [(URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!, 6),
-                                    (URL(string: "https://bipbap.ru/wp-content/uploads/2019/05/1532440298_3.jpg")!, 7),
-                                    (URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!, 8)]
-
+        let gunUrl = URL(string:"https://psv4.userapi.com/c856336/u251664583/docs/d12/f1b149d62a0f/rocket1.png?extra=ngAxzY5aFg6SDD_mnOuCQ61jWty02RGY3wXfGAFsXuELjBH4WYqDPbucoO4ErljAh93fgVjur9tyhw_QY2BtD5Uk5zgaTB-6yGUXOEuNUmrOJIVHt-OVVmUNLqhEdiRMDjiExtFkOsdTZtzyXhMAlSA")!
+        let gunsUrl: Array<(URL, Int)> =
+            [(gunUrl, 6),
+            (gunUrl, 7),
+            (gunUrl, 8)]
+        let baseUrl = URL(string: "https://psv4.userapi.com/c856416/u251664583/docs/d3/54c05b31018f/en1.png?extra=R6rsMIL7FSyMa6Q7QfTEGqxG6xkOl_I5eooGYkeWaZHyXvLJ4VJc_diCaetwvAQyJrMc5LMdUi-3oAQhR7nPQDSh0Htgx4BbUCVSiavbKOIDHRhae7hGOXxyr02fa9EObI7CGTRhu42e-OhtrIGLHxQ")!
+        let basesUrl: Array<(URL, Int)> =
+            [(baseUrl, 6),
+             (baseUrl, 7),
+             (baseUrl, 8)]
         netCollector.startLoadingData(urlsGunsPos: gunsUrl, urlsBasesPos: basesUrl)
     }
 }
