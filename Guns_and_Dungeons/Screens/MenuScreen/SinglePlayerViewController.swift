@@ -33,9 +33,15 @@ class SinglePlayerViewController : UIViewController, Callable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+//        view.backgroundColor = .blue
+        self.background = UIImageView(frame: self.view.frame)
+        self.background?.image = UIImage(named: "iron_back")
+        self.view.addSubview(background!)
+        
         backButton = view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen),
                                     params: LocationParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
+        backButton.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
+        
         levelsNumber = 20
         levelsPerPanel = 4
         makePanelScrollView()
@@ -71,14 +77,14 @@ class SinglePlayerViewController : UIViewController, Callable {
     }
     
     func makeLockedButtonParams() -> PanelButtonParams {
-        let lockedImage = UIImage(named: "locked")
+        let lockedImage = UIImage(named: "infoplacelocked")
         let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
         let buttonParams = ButtonParams(location: location, defaultTexture: lockedImage, pressedTexture: nil, label: "")
         return PanelButtonParams(buttonParams: buttonParams)
     }
     
     func makeUnlockedButtonParams(number: UInt64, stars: UInt64 = 0) -> PanelButtonParams {
-        let unlockedImage = UIImage(named: "unlocked")
+        let unlockedImage = UIImage(named: "infoplace")
         let starImage = UIImage(named: "star")
         let location: LocationParameters = LocationParameters(centerPoint: CGPoint.zero, k: 1.5, square: 0.06)
         let buttonParams = ButtonParams(location: location, defaultTexture: unlockedImage, pressedTexture: nil)

@@ -40,7 +40,6 @@ class GameViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
             }
-            
             view.ignoresSiblingOrder = true
             view.showsFPS = true
             view.showsNodeCount = true
@@ -52,7 +51,7 @@ class GameViewController: UIViewController {
         gameScene?.physicsWorld.speed = 0
         gameScene?.willMove(from: self.view as! SKView)
         let mainNavigationController = navigationController as! MainNavigationController
-        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: levelNumber, stars: 2))
+        mainNavigationController.toLevelSelectionViewController(statistics: LevelStatistics(levelNumber: levelNumber, stars: 3))
     }
 
     override var shouldAutorotate: Bool {
