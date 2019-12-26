@@ -58,6 +58,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cameraNode.addChild(fireJoystickHiddenArea)
         fireJoystick.sensitivityBias = sensitivity
         
+        moveJoystickHiddenArea.lineWidth = 0
+        fireJoystickHiddenArea.lineWidth = 0
+        
         view.isMultipleTouchEnabled = true
         
         let pauseDefault = SKTexture(imageNamed: "pausebutton0")
