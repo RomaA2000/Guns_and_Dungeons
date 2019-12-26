@@ -103,8 +103,8 @@ class ShopViewController : UIViewController {
         self.view.addSubview(tabsView)
         tabsView.delegate = self
         
-        let netCollector = NetCollector(gunsSelector: generateUpdater(number: 0),
-                                        basesSelector: generateUpdater(number: 1))
+        let netCollector = NetCollector(gunsSelector: self.generateUpdater(number: 0),
+                                        basesSelector: self.generateUpdater(number: 1))
         let gunsUrl: Array<URL> = [URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!,
                                    URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!,
                                    URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!]
@@ -112,7 +112,6 @@ class ShopViewController : UIViewController {
         let basesUrl: Array<URL> = [URL(string: "https://klike.net/uploads/posts/2018-06/1528641301_4.jpg")!,
                                     URL(string: "https://bipbap.ru/wp-content/uploads/2019/05/1532440298_3.jpg")!,
                                     URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!]
-        
         netCollector.startLoadingData(urlsGuns: gunsUrl,
                                       urlsBases: basesUrl)
     }

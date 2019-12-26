@@ -37,7 +37,7 @@ class Loader {
     func load(urls : [URL]) -> Void {
         if (ready) {
             ready = false
-                DispatchQueue.main.async { [self, urls] in
+            DispatchQueue.main.async{[self, urls] in
                     var array : Array<UIImage> = []
                     for i in urls {
                         if let data = try? Data(contentsOf: i) {
@@ -48,7 +48,7 @@ class Loader {
                     }
                     self.selector(array)
                     self.ready = true
-                }
+            }
         }
     }
 }

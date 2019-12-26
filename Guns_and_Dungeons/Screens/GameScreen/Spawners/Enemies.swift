@@ -46,9 +46,7 @@ class EnemiesController {
 
     func update(_ currentTime: TimeInterval) {
         let enemiesInfo = spawner.getInfo()
-        
-        //solver here
-        
+        // solver here
         spawner.update(currentTime)
         if spawner.isEmpty {
             print("empty")
