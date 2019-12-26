@@ -126,17 +126,27 @@ extension CGVector {
     func isInside(array : Array<CGVector>) -> Bool {
         var leftPart = false
         var rightPart = false
+        var allBehind = true
         for i in array {
-            if self.sign_cos(v1: i) > 0 {
-                if self.sign_sin(v1: i) > 0 {
+            if sign_cos(v1: i) > 0 {
+                allBehind = false
+            }
+        }
+        if allBehind {
+            return false
+        }
+        for i in array {
+                if sign_sin(v1: i) > 0 {
                     leftPart = true
-                } else if self.sign_sin(v1: i) < 0 {
+                } else if sign_sin(v1: i) < 0 {
                     rightPart = true
+                } else {
+                    rightPart = true
+                    leftPart = true
                 }
                 if (leftPart && rightPart) {
                     return true
                 }
-            }
         }
         return false
     }
@@ -154,7 +164,11 @@ extension CGVector {
     }
     
     func getAngle(v: CGVector) -> CGFloat {
-        return acos(cos(v1: v))
+        var l : CGFloat = 1
+        if (sign_sin(v1: v) > 0) {
+            l = -1
+        }
+        return acos(cos(v1: v)) * l
     }
 }
 
@@ -201,12 +215,18 @@ extension CGRect {
             return false
         } else {
             let v : CGVector = CGVector(dx: p2.x - p1.x, dy: p2.y - p1.y)
-            return intersect(p : p1, v : v)
+            if (intersect(p : p1, v : v)) {
+                return intersect(p : p1, v : v)
+            } else {
+                return false
+            }
         }
     }
     
     func isNear(p1 : CGPoint, p2 : CGPoint) -> Bool {
-        return p1.distanceX(to: p2) < getDistX(p: p1) || p1.distanceY(to: p2) < getDistY(p: p1)
+        return p1.distanceX(to: p2) < getDistX(p: p1) || p1.distanceY(to: p2) < getDistY(p: p1) ||
+            (p2.x < p1.x && p1.x < minX) || (p2.x > p1.x && p1.x > minX) ||
+            (p2.y < p1.y && p1.y < minY) || (p2.y > p1.y && p1.y > minY)
     }
     
     func isBetween(p1 : CGPoint, p2 : CGPoint) -> Bool {
@@ -237,50 +257,13 @@ extension CGRect {
         return min(abs(p.y - minY), abs(p.y - maxY))
     }
     
-    func getDist(p : CGPoint) -> CGFloat {
-        let pArray = pointArray()
-        if (p.x > minX) {
-            if (p.x > maxX) {
-                if (p.y > minY) {
-                    if (p.y > maxY) {
-                        return p.distance(to: pArray[2])
-                    } else {
-                        return p.x - maxX
-                    }
-                } else {
-                    return p.distance(to: pArray[1])
-                }
-            } else {
-                if (p.y > minY) {
-                    if (p.y > maxY) {
-                        return p.y - maxY
-                    } else {
-                        return 0
-                    }
-                } else {
-                    return minY - p.y
-                }
-            }
-        } else {
-            if (p.y > minY) {
-                if (p.y > maxY) {
-                    return p.distance(to: pArray[3])
-                } else {
-                    return minX - p.x
-                }
-            } else {
-                return p.distance(to: pArray[0])
-            }
-        }
-    }
-    
     func pointArray() -> Array<CGPoint> {
         let x = self.minX
-        let y = self.minY
+        let y = self.maxY
         let w = self.width
         let h = self.height
         return [CGPoint(x: x,y: y), CGPoint(x: x + w,y: y),
-                CGPoint(x: x + w,y: y + h), CGPoint(x: x, y: y + h)]
+                CGPoint(x: x + w,y: y - h), CGPoint(x: x, y: y - h)]
     }
 }
 
