@@ -215,11 +215,7 @@ extension CGRect {
             return false
         } else {
             let v : CGVector = CGVector(dx: p2.x - p1.x, dy: p2.y - p1.y)
-            if (intersect(p : p1, v : v)) {
-                return intersect(p : p1, v : v)
-            } else {
-                return false
-            }
+            return intersect(p : p1, v : v)
         }
     }
     
