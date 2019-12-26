@@ -36,7 +36,11 @@ class AnimatedUnit: SKSpriteNode {
     
     func update(_ currentTime: TimeInterval, target: CGPoint?) {
         if let point = target {
-            weapon?.fire(currentTime: currentTime)
+            self.weapon?.zRotation += .pi / 2
+            if (self.weapon!.zRotation > CGFloat(10.0)) {
+                self.weapon?.zRotation = 0
+            }
+            //weapon?.fire(currentTime: currentTime)
         }
     }
     
@@ -48,6 +52,10 @@ class AnimatedUnit: SKSpriteNode {
     
     func rotateGunTo(angel: CGFloat) {
         self.weapon?.zRotation = angel - self.zRotation
+    }
+    
+    func gunVector() {
+        
     }
     
     func runDefaultAnimation() {
