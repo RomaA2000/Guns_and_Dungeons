@@ -27,11 +27,11 @@ class SettingsViewController : UIViewController, SwitcherDelegate {
         
         let backButtonParams = LocationParameters(centerPoint: CGPoint(x: 0.8, y: yPos), k: 1.25, square: 0.005)
         backButton = self.view.addButton(label: "Back", target: self, selector: #selector(toMenuScreen), params: backButtonParams)
-        backButton.setBackgroundImage(UIImage(named: "unlocked"), for: .normal)
+        backButton.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
         let saveButtonParams = LocationParameters(centerPoint: CGPoint(x: 0.3, y: yPos), k: 1.25, square: 0.005)
         saveButton = self.view.addButton(label: "Save", target: self, selector: #selector(saveSettings), params: saveButtonParams)
-        saveButton.setBackgroundImage(UIImage(named: "locked"), for: .normal)
+        saveButton.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
         let titleLocationParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.1), k: 5, square: 0.08)
         titleView = UILabel(frame: getRect(parentFrame: self.view.bounds, params: titleLocationParams))
@@ -54,14 +54,14 @@ class SettingsViewController : UIViewController, SwitcherDelegate {
         
         let switcherParams = LocationParameters(centerPoint: CGPoint(x: 0.5, y: yPos), k: 2, square: 0.01)
         let switcherFrame = self.view.getRectInSelf(location: switcherParams)
-        soundSwitch = Switcher(frame: switcherFrame, backgroundImage: UIImage(named: "locked"), buttonImage: UIImage(named: "unlocked"))
+        soundSwitch = Switcher(frame: switcherFrame, backgroundImage: UIImage(named: "btnplay"), buttonImage: UIImage(named: "selecter"))
         self.view.addSubview(soundSwitch)
         
         soundSwitch.delegate = self
         
         let soundIconParams = LocationParameters(centerPoint: CGPoint(x: 0.8, y: yPos), k: 1, square: 0.01)
         let soundIconFrame = self.view.getRectInSelf(location: soundIconParams)
-        soundIcon = UIIndicator(frame: soundIconFrame, imageOn: UIImage(named: "unlocked"), imageOff: UIImage(named: "locked"))
+        soundIcon = UIIndicator(frame: soundIconFrame, imageOn: UIImage(named: "indic_on"), imageOff: UIImage(named: "indic_off"))
         self.view.addSubview(soundIcon)
         
         let isSoundEnabled: Bool = UserDefaults.standard.bool(forKey: "sound")

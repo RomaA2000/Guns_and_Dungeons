@@ -29,6 +29,7 @@ class SinglePlayerViewController : UIViewController, Callable {
     var levelsPerPanel: UInt64 = 4
     var levelsNumber: UInt64 = 20
     private typealias SPVC = SinglePlayerViewController
+    var background: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()

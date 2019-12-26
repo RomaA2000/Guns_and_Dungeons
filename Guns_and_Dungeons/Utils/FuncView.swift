@@ -68,8 +68,9 @@ extension UIView {
     func addButton(label : String, target: Any?, selector: Selector, params : LocationParameters) -> UIButton {
         let result = UIButton();
         result.addTarget(target, action: selector, for: .touchUpInside)
-        result.setUpButton(label : label, color : .black, translatesMask: true)
+        result.setUpButton(label : label, color: nil, translatesMask: true)
         self.posSubviewByRect(subView: result, location: params)
+        result.titleLabel?.font = .systemFont(ofSize: min(result.frame.width, result.frame.height) / 4)
         return result
     }
     

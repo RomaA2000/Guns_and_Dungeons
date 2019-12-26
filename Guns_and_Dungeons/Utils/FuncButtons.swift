@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    func setUpButton(label: String, color : UIColor, translatesMask : Bool) {
+    func setUpButton(label: String, color : UIColor?, translatesMask : Bool) {
         self.setTitle(label, for: .normal)
 //        self.addTarget(target, action: action, for: .touchUpInside)
         self.setTitleColor(UIColor.gray, for: .highlighted)
+        self.setTitleColor(UIColor.black, for: .normal)
         self.translatesAutoresizingMaskIntoConstraints = translatesMask
         self.backgroundColor = color
     }

@@ -45,7 +45,7 @@ class PanelsScrollView<Element: PanelSubview> : UIScrollView, UIScrollViewDelega
         super.init(frame: scrollFrame)
         var locationRect: CGRect = CGRect(x: margins.marginStart, y: 0, width: margins.panelWidth, height: bounds.height)
         for _ in 0..<panelsNumber {
-            addPanel(frame: locationRect, image: nil)
+            addPanel(frame: locationRect, image: UIImage(named: "btnplay"))
             locationRect.origin.x += margins.marginMiddle + margins.panelWidth
         }
         
@@ -59,7 +59,6 @@ class PanelsScrollView<Element: PanelSubview> : UIScrollView, UIScrollViewDelega
         let panel = PanelType(frame: frame, defaultImage: image)
         panel.layer.cornerRadius = 10
         panel.layer.masksToBounds = true
-        panel.backgroundColor = .green
         addSubview(panel)
         panels.append(panel)
     }

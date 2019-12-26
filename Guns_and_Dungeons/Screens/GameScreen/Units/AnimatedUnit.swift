@@ -36,6 +36,7 @@ class AnimatedUnit: SKSpriteNode {
     
     func update(_ currentTime: TimeInterval, target: CGPoint?) {
         if let point = target {
+            print("point: ", point)
             weapon?.fire(currentTime: currentTime)
         }
     }
