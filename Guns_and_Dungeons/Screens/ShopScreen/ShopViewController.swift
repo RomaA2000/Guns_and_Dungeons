@@ -49,6 +49,7 @@ class ShopViewController : UIViewController {
     
     func generateUpdater(number: Int) -> (Array<UIImage>) -> Void {
         return { (array: Array<UIImage>) -> Void in
+            guard array.count == 3 else { return }
             self.tabsDesctription[number].cellInfos[6].itemImage = array[0]
             self.tabsDesctription[number].cellInfos[7].itemImage = array[1]
             self.tabsDesctription[number].cellInfos[8].itemImage = array[2]
@@ -62,7 +63,7 @@ class ShopViewController : UIViewController {
         buttonToGuns.setTitle("To guns", for: .normal)
         buttonToGuns.backgroundColor = .red
         let buttonToBases = UIButton()
-        buttonToBases.setTitle("TO bases", for: .normal)
+        buttonToBases.setTitle("To bases", for: .normal)
         buttonToBases.backgroundColor = .red
         let tabsViewRect = getRect(parentFrame: self.view.bounds, params: tabsViewParams)
 
@@ -113,8 +114,7 @@ class ShopViewController : UIViewController {
                                     URL(string: "https://bipbap.ru/wp-content/uploads/2019/05/1532440298_3.jpg")!,
                                     URL(string: "https://vjoy.cc/wp-content/uploads/2019/05/1-13.jpg")!]
         
-        netCollector.startLoadingData(urlsGuns: gunsUrl,
-                                      urlsBases: basesUrl)
+        netCollector.startLoadingData(urlsGuns: gunsUrl, urlsBases: basesUrl)
     }
 }
 
