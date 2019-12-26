@@ -39,7 +39,6 @@ class EnemiesController {
         let path = Bundle.main.path(forResource: "scheme\(levelNumber)", ofType: "json")
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .mappedIfSafe)
-            print(try JSONDecoder().decode(SpawnParams.self, from: data))
             self.spawner = Spawner(spawnParams: try JSONDecoder().decode(SpawnParams.self, from: data), scene: scene, atlas: atlas)
         } catch {
             fatalError("JSON data not found")
@@ -51,7 +50,6 @@ class EnemiesController {
         let results = requesSolver.solve(request: request, players: [scene.player.position])
         spawner.update(currentTime, targets: results)
         if spawner.isEmpty {
-            print("empty")
             outOfCharge = true
         }
     }

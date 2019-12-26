@@ -68,7 +68,6 @@ class SettingsViewController : UIViewController, SwitcherDelegate {
         self.view.addSubview(soundIcon)
         
         let isSoundEnabled: Bool = UserDefaults.standard.bool(forKey: "sound")
-        print("state: ", isSoundEnabled)
         soundSwitch.setState(state: isSoundEnabled)
     }
         

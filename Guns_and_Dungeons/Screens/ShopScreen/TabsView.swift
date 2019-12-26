@@ -128,13 +128,11 @@ extension TabsView: UICollectionViewDelegate, UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TableItemCell
         cell.setData(cellInfo: tabsDesctription[activeTabNumber].cellInfos[ indexPath.item ])
-        print(indexPath)
         cell.backgroundColor = cellColor
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected ", indexPath.item)
         delegate?.itemSelected(tabNumber: indexPath.item)
     }
     

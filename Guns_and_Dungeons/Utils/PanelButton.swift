@@ -45,7 +45,6 @@ class PanelButton : UIButton, PanelSubview {
             let star: UIImageView = UIImageView(image: self.starTexture)
             let location = LocationParameters(centerPoint: CGPoint(x: 0.25 * CGFloat(starNumber), y: 0.8), k: 1, square: 0.01)
             self.posSubviewByRect(subView: star, location: location)
-            print(star.frame)
         }
         self.starsNumber = stars
     }
