@@ -2,8 +2,8 @@
 //  UIObserver.swift
 //  Guns_and_Dungeons
 //
-//  Created by Александр Потау on 05.12.2019.
-//  Copyright © 2019 Александр Потау. All rights reserved.
+//  Created by Александр Потапов on 05.12.2019.
+//  Copyright © 2019 Александр Потапов. All rights reserved.
 //
 import UIKit
 
