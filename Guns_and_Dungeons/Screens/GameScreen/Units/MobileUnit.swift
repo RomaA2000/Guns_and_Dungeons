@@ -24,11 +24,7 @@ class MobileUnit: DestroyableUnit {
             let vector = getVector(to: point)
             let l = vector.length()
             zRotation = vector.getAngle(v: CGVector(dx: 0, dy: 1))
-            self.weapon?.zRotation += .pi / 2
-            if (self.weapon!.zRotation > CGFloat(10.0)) {
-                self.weapon?.zRotation = 0
-            }
-            if (point.distance(to: position) > 60) {
+            if (point.distance(to: position) > 100) {
                 physicsBody?.velocity = CGVector(dx: vector.dx / l * maxSpeed , dy: vector.dy / l * maxSpeed)
             } else {
                 physicsBody?.velocity = CGVector(dx: 0 , dy: 0)
