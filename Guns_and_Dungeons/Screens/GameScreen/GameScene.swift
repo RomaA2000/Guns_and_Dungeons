@@ -87,7 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        if let (bullet, _) =         checkCollision(contact: contact,
+        if let (bullet, _) = checkCollision(contact: contact,
                                                     firstType: CategoryMask.bullet,
                                                     secondType: CategoryMask.wall) {
             bullet?.removeFromParent()
