@@ -11,30 +11,35 @@ import UIKit
 typealias ImageAdder = (UIImage, Int) -> Void
 
 class NetCollector {
-    
+    let session : URLSession
     let gunsSelector : ImageAdder
     let basesSelector : ImageAdder
     init(gunsSelector : @escaping ImageAdder, basesSelector : @escaping ImageAdder) {
         self.gunsSelector = gunsSelector
         self.basesSelector = basesSelector
+        self.session = URLSession(configuration: .default)
     }
     
     func startLoadingData(urlsGunsPos : [(URL, Int)], urlsBasesPos : [(URL, Int)]) {
         for i in urlsGunsPos {
-            loadImage(url: i.0, index: i.1, selector: gunsSelector)
+            loadImage(url: i.0, index: i.1, selector: gunsSelector, session: session)
         }
         for i in urlsBasesPos {
-            loadImage(url: i.0, index: i.1, selector: basesSelector)
+            loadImage(url: i.0, index: i.1, selector: basesSelector, session: session)
         }
     }
 }
 
-func loadImage(url: URL, index: Int, selector: @escaping ImageAdder) {
-    DispatchQueue.main.async{[selector, url, index] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                        selector(image, index)
+func loadImage(url: URL, index: Int, selector: @escaping ImageAdder, session: URLSession) {
+    DispatchQueue.main.async{[selector, url, index, session] in
+        let handler = {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if let dataUnwrapped = data {
+                if let image = UIImage(data: dataUnwrapped) {
+                    selector(image, index)
                 }
             }
+        }
+        let task = session.dataTask(with: url, completionHandler: handler)
+        task.resume()
     }
 }
