@@ -220,9 +220,11 @@ extension CGRect {
     }
     
     func isNear(p1 : CGPoint, p2 : CGPoint) -> Bool {
+        let midX = (minX + maxX) / 2
+        let midY = (minY + maxY) / 2
         return p1.distanceX(to: p2) < getDistX(p: p1) || p1.distanceY(to: p2) < getDistY(p: p1) ||
-            (p2.x < p1.x && p1.x < minX) || (p2.x > p1.x && p1.x > minX) ||
-            (p2.y < p1.y && p1.y < minY) || (p2.y > p1.y && p1.y > minY)
+            (p2.x < p1.x && p1.x < midX) || (p2.x > p1.x && p1.x > midX) ||
+            (p2.y < p1.y && p1.y < midY) || (p2.y > p1.y && p1.y > midY)
     }
     
     func isBetween(p1 : CGPoint, p2 : CGPoint) -> Bool {

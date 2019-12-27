@@ -31,15 +31,15 @@ class NetCollector {
 }
 
 func loadImage(url: URL, index: Int, selector: @escaping ImageAdder, session: URLSession) {
-    DispatchQueue.main.async{[selector, url, index, session] in
         let handler = {(data: Data?, response: URLResponse?, error: Error?) -> Void in
-            if let dataUnwrapped = data {
-                if let image = UIImage(data: dataUnwrapped) {
-                    selector(image, index)
+            DispatchQueue.main.async{[selector, index] in
+                    if let dataUnwrapped = data {
+                        if let image = UIImage(data: dataUnwrapped) {
+                            selector(image, index)
+                        }
+                    }
                 }
-            }
         }
         let task = session.dataTask(with: url, completionHandler: handler)
         task.resume()
-    }
 }
