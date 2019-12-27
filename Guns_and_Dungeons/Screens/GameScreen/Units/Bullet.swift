@@ -25,7 +25,7 @@ class Bullet : SKSpriteNode {
         self.physicsBody?.contactTestBitMask = self.physicsBody!.collisionBitMask
         self.physicsBody?.mass = 0
         
-        self.zPosition = 2
+        self.zPosition = 30
     }
 
     func setVelocityVector(angle: CGFloat) {
