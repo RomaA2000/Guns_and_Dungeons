@@ -12,7 +12,7 @@ class Spawner {
     let atlas: SKTextureAtlas
     var units: [DestroyableUnit]
     var spawnParams: SpawnParams
-    var scene: SKScene
+    weak var scene: SKScene?
     var nowWave : UInt64;
     var isEmpty: Bool {
         get {
@@ -48,7 +48,7 @@ class Spawner {
     func addUnit(unit : DestroyableUnit?) {
         if let i = unit {
             units.append(i)
-            scene.addChild(i)
+            scene?.addChild(i)
         }
     }
     
@@ -77,16 +77,14 @@ class Spawner {
     func makeWarrior(params: UnitSpawnParams) -> Enemy {
         let animationParams = getAnimation(atlas: atlas, frameName: params.img, defaultName: params.img + "1", size: 3)
         let clip: Clip = Clip(bullets: 100,
-                              spawner: { return Bullet(defaultTexture: self.atlas.textureNamed("bullet"), damage: params.damage)},
+                              spawner: { return Bullet(defaultTexture: self.atlas.textureNamed("bullet"), damage: params.damage, creatorType: 1)},
                               frequence: TimeInterval(params.frequence),
                               bulletSpeed: 1000)
         let weapon: Weapon = Weapon(defaultTexture: atlas.textureNamed(params.gunImg), clip: clip)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationParams,
                                                     location: CGPoint(x: CGFloat(params.positionX), y: CGFloat(params.positionY)),
-                                                    weapon: weapon)
-        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams,
-                                                           healthPoints: params.hp,
-                                                          deathAnimation: animationParams.defaultAnimation)
+                                                    weapon: weapon, type: 1)
+        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: params.hp, deathAnimation: animationParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams,
                                                 maxSpeed: CGFloat(params.speed),
                                                 walkAnimation: animatedUnitParams.defaultAnimation)
@@ -96,7 +94,7 @@ class Spawner {
         let enemyParams = EnemyParams(mobileUnitParams: mobileUnitParams,
                                       mask: enemyMask,
                                       radius: animationParams.defaultTexture.size().width / 2,
-                                      purviewRange: 50)
+                                      purviewRange: 50, dist: CGFloat(params.dist))
         return Enemy(params: enemyParams)
     }
 }

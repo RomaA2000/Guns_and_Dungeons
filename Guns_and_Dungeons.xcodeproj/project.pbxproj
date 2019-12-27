@@ -66,7 +66,6 @@
 		7A89F624235A23F700DEB50A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F623235A23F700DEB50A /* ShopViewController.swift */; };
 		7A89F626235A241A00DEB50A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F625235A241A00DEB50A /* SettingsViewController.swift */; };
 		7A89F628235A41D300DEB50A /* Datastructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89F627235A41D300DEB50A /* Datastructs.swift */; };
-		7A8E4C50239DA2A700116565 /* SpawnCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */; };
 		7A8E4C52239DA2B200116565 /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C51239DA2B200116565 /* Spawner.swift */; };
 		7A8E4C54239DA97000116565 /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E4C53239DA97000116565 /* Enemies.swift */; };
 		7A8E4C6D239E5FB200116565 /* tex.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E4C6C239E5FB200116565 /* tex.atlas */; };
@@ -151,7 +150,6 @@
 		7A89F623235A23F700DEB50A /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7A89F625235A241A00DEB50A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7A89F627235A41D300DEB50A /* Datastructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datastructs.swift; sourceTree = "<group>"; };
-		7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnCreator.swift; sourceTree = "<group>"; };
 		7A8E4C51239DA2B200116565 /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
 		7A8E4C53239DA97000116565 /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
 		7A8E4C6C239E5FB200116565 /* tex.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = tex.atlas; sourceTree = "<group>"; };
@@ -341,7 +339,6 @@
 		7A8E4C4E239DA26100116565 /* Spawners */ = {
 			isa = PBXGroup;
 			children = (
-				7A8E4C4F239DA2A700116565 /* SpawnCreator.swift */,
 				7A8E4C51239DA2B200116565 /* Spawner.swift */,
 				7A8E4C53239DA97000116565 /* Enemies.swift */,
 				3736979323A2D1AE00D0A861 /* Ask.swift */,
@@ -547,7 +544,6 @@
 				3791A8F32359C3E500212BBC /* FuncView.swift in Sources */,
 				7A8E4C54239DA97000116565 /* Enemies.swift in Sources */,
 				7ABF54F623849E19006C2089 /* CollisionMasks.swift in Sources */,
-				7A8E4C50239DA2A700116565 /* SpawnCreator.swift in Sources */,
 				7A22859E237ECC6E00546589 /* MobileUnit.swift in Sources */,
 				7A2EF82C2388432B00FCA1B6 /* Button.swift in Sources */,
 				7AE997752399A7A300A7384F /* UIObserver.swift in Sources */,

@@ -42,13 +42,13 @@ class SinglePlayerViewController : UIViewController, Callable {
                                     params: LocationParameters(centerPoint: CGPoint(x: 0.8, y: 0.9), k: 1.25, square: 0.005))
         backButton.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
-        levelsNumber = 20
+        levelsNumber = 8
         levelsPerPanel = 4
         makePanelScrollView()
     }
     
     func makePanelScrollView() {
-        levelPanel = PanelsScrollView(parrentBounds: view.bounds, panelsNumber: 5, elementsPerPanel: 4)
+        levelPanel = PanelsScrollView(parrentBounds: view.bounds, panelsNumber: levelsNumber / levelsPerPanel, elementsPerPanel: 4)
         view.addSubview(levelPanel)
         
         var statistics: [Statistics] = []

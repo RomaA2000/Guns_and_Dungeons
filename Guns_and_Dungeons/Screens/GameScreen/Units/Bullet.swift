@@ -12,12 +12,11 @@ import SpriteKit
 class Bullet : SKSpriteNode {
     var maxVelocity : CGFloat = 0
     let damage: UInt64
-    
-    init(defaultTexture : SKTexture, damage: UInt64) {
+    let creatorType : UInt64
+    init(defaultTexture : SKTexture, damage: UInt64, creatorType: UInt64) {
         self.damage = damage
-        
+        self.creatorType = creatorType
         super.init(texture: defaultTexture, color: .black, size: defaultTexture.size())
-        
         self.physicsBody = SKPhysicsBody.init(circleOfRadius: self.frame.width / 2)
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = CategoryMask.bullet

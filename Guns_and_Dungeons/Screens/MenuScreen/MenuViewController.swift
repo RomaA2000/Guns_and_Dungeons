@@ -30,9 +30,9 @@ class MenuViewController: UIViewController {
                                             params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.3), k: kw, square: sq))
         singlePlayerButton?.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
-        multiPlayerButton = view.addButton(label: "Multi player",
+        multiPlayerButton = view.addButton(label: "Arcade",
                                            target: self,
-                                           selector: #selector(toMultiPlayerScreen),
+                                           selector: #selector(toArcadeScreen),
                                            params: LocationParameters(centerPoint: CGPoint(x: 0.5, y: 0.5), k: kw, square: sq))
         multiPlayerButton?.setBackgroundImage(UIImage(named: "btnplay"), for: .normal)
         
@@ -50,8 +50,8 @@ class MenuViewController: UIViewController {
         self.navigationController?.pushViewController(SinglePlayerViewController(), animated: true)
     }
     
-    @objc func toMultiPlayerScreen() {
-        self.navigationController?.pushViewController(MultiPlayerViewController(), animated: true)
+    @objc func toArcadeScreen() {
+        self.navigationController?.pushViewController(ArcadeViewController(), animated: true)
     }
     
     @objc func toShopScreen() {

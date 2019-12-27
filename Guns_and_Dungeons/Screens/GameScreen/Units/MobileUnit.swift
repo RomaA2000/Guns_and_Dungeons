@@ -20,16 +20,6 @@ class MobileUnit: DestroyableUnit {
     
     override func update(_ currentTime: TimeInterval, target: CGPoint?) {
         super.update(currentTime, target: target)
-        if let point = target {
-            let vector = getVector(to: point)
-            let l = vector.length()
-            zRotation = vector.getAngle(v: CGVector(dx: 0, dy: 1))
-            if (point.distance(to: position) > 100) {
-                physicsBody?.velocity = CGVector(dx: vector.dx / l * maxSpeed , dy: vector.dy / l * maxSpeed)
-            } else {
-                physicsBody?.velocity = CGVector(dx: 0 , dy: 0)
-            }
-        }
     }
     
     

@@ -1,18 +1,25 @@
 { "units": [
             {"type": "warrior", "hp": 1, "damage": 1, "frequence": 1,
-                "positionX" : 0, "positionY" : 80
-                , "speed": 50, "wave" : 0,"img": "pl", "gunImg": "gun1"},
+                "positionX" : -250, "positionY" : 290
+                , "speed": 50, "wave" : 0,"img": "pl", "gunImg": "gun1", "dist": 100},
             
             {"type": "warrior", "hp": 1, "damage": 1, "frequence": 1,
-            "positionX" : -160, "positionY" : 400
-            , "speed": 50, "wave" : 0, "img": "pl", "gunImg": "gun1"},
+            "positionX" : 380, "positionY" : 80
+            , "speed": 50, "wave" : 0, "img": "pl", "gunImg": "gun1", "dist": 200},
             
-            {"type": "warrior", "hp": 1, "damage": 1, "frequence": 1,
+            {"type": "warrior", "hp": 2, "damage": 1, "frequence": 1,
             "positionX" : 320, "positionY" : -160
-                , "speed": 50, "wave" : 1, "img": "pl", "gunImg": "gun1"},
+                , "speed": 60, "wave" : 1, "img": "pl", "gunImg": "gun1", "dist": 100},
             
-            {"type": "warrior", "hp": 1, "damage": 1, "frequence": 1,
+            {"type": "warrior", "hp": 2, "damage": 1, "frequence": 1,
             "positionX" : 0, "positionY" : -240
-            , "speed": 50, "wave" : 1, "img": "pl", "gunImg": "gun1"}
+                , "speed": 60, "wave" : 1, "img": "pl", "gunImg": "gun1", "dist": 150},
             
+            {"type": "warrior", "hp": 2, "damage": 1, "frequence": 0.5,
+            "positionX" : -240, "positionY" : 160
+                , "speed": 70, "wave" : 2, "img": "pl", "gunImg": "gun1", "dist": 200},
+            
+            {"type": "warrior", "hp": 2, "damage": 1, "frequence": 0.5,
+            "positionX" : 220, "positionY" : 0
+                , "speed": 70, "wave" : 2, "img": "pl", "gunImg": "gun1", "dist": 200}
 ]}

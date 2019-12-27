@@ -39,7 +39,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(player)
         camera = cameraNode
         player.addChild(cameraNode)
-        
         textureAtlas = SKTextureAtlas(named: "tex")
         textureAtlas.preload{   }
         enemyController = EnemiesController(atlas: textureAtlas, scene: scene! as! GameScene, levelNumber : levelNumber)
@@ -93,14 +92,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             bullet?.removeFromParent()
         } else if let (bullet, unit) = checkCollision(contact: contact,
                                                     firstType: CategoryMask.bullet,
-                                                    secondType: CategoryMask.ai){
-            (unit as? DestroyableUnit)?.healthPoints -= Int64((bullet as? Bullet)?.damage ?? 0)
-            bullet?.removeFromParent()
+                                                    secondType: CategoryMask.ai) {
+            if let bulletUnwrapped = bullet as? Bullet, let unitUnwrapped = unit as? DestroyableUnit  {
+                if (bulletUnwrapped.creatorType != unitUnwrapped.type) {
+                    unitUnwrapped.healthPoints -= Int64(bulletUnwrapped.damage)
+                    bulletUnwrapped.removeFromParent()
+                }
+            }
         } else if let (bullet, player) = checkCollision(contact: contact,
                                                         firstType: CategoryMask.bullet,
                                                         secondType: CategoryMask.player) {
-            (player as? Player)?.healthPoints -= Int64((bullet as? Bullet)?.damage ?? 0)
-            bullet?.removeFromParent()
+            if let bulletUnwrapped = bullet as? Bullet, let playerUnwrapped = player as? Player  {
+                if (bulletUnwrapped.creatorType != playerUnwrapped.type) {
+                    playerUnwrapped.healthPoints -= Int64((bullet as? Bullet)?.damage ?? 0)
+                    bulletUnwrapped.removeFromParent()
+                }
+            }
         }
         
         
@@ -140,11 +147,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createPlayer() -> Player {
         let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)
-        let clip: Clip = Clip(bullets: 100, spawner: { return Bullet(defaultTexture: SKTexture(imageNamed: "bullet"), damage: 1)}, frequence: 1, bulletSpeed: 1000)
+        let clip: Clip = Clip(bullets: 100, spawner: { return Bullet(defaultTexture: SKTexture(imageNamed: "bullet"), damage: 1, creatorType: 0)}, frequence: 1, bulletSpeed: 1000)
         let weapon: Weapon = Weapon(defaultTexture: SKTexture(imageNamed: "gun1"), clip: clip)
         let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
                                                     location: CGPoint.zero,
-                                                    weapon: weapon)
+                                                    weapon: weapon, type: 0)
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 5, walkAnimation: animationTexturesParams.defaultAnimation)
         let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)

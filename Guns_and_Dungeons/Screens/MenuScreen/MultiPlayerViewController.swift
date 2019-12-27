@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-class MultiPlayerViewController : UIViewController {
+class ArcadeViewController : UIViewController {
     
     var backButton: UIButton!
     var background: UIImageView?

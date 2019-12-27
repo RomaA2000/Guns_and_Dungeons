@@ -16,19 +16,20 @@ struct UnitSpawnParams: Decodable {
     let type: String
     let gunImg: String
     let img: String
-    let speed: UInt64
+    let speed: Float
     let damage: UInt64
-    let frequence: UInt64
+    let frequence: Float
     let positionX: Float
     let positionY: Float
     let hp: Int64
     let wave: UInt64
+    let dist: Float
 }
 
 class EnemiesController {
     var spawner: Spawner
     let atlas: SKTextureAtlas
-    let scene: GameScene
+    weak var scene: GameScene?
     var outOfCharge: Bool = false
     let requesSolver: RequesSolver
 
@@ -46,11 +47,13 @@ class EnemiesController {
     }
 
     func update(_ currentTime: TimeInterval) {
-        let request = spawner.getInfo()
-        let results = requesSolver.solve(request: request, players: [scene.player.position])
-        spawner.update(currentTime, targets: results)
-        if spawner.isEmpty {
-            outOfCharge = true
+        if let sceneUnwrapped = scene {
+            let request = spawner.getInfo()
+            let results = requesSolver.solve(request: request, players: [sceneUnwrapped.player.position])
+            spawner.update(currentTime, targets: results)
+            if spawner.isEmpty {
+                outOfCharge = true
+            }
         }
     }
 }

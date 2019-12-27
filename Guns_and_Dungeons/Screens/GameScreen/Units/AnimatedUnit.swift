@@ -9,7 +9,7 @@
 import SpriteKit
 
 class AnimatedUnit: SKSpriteNode {
-
+    var type: UInt64
     var weapon: Weapon?
     var defaultTexture: SKTexture
     var defaultAnimation: SKAction
@@ -18,6 +18,7 @@ class AnimatedUnit: SKSpriteNode {
         self.defaultAnimation = params.defaultAnimation
         self.defaultTexture = params.defaultTexture
         self.weapon = params.weapon
+        self.type = params.type
         super.init(texture: params.defaultTexture, color: .black, size: defaultTexture.size())
         self.position = params.location
         if (weapon != nil) {
@@ -81,11 +82,12 @@ class AnimationTexturesParams {
 }
 
 class AnimatedUnitParams : AnimationTexturesParams {
-
+    let type: UInt64
     let location: CGPoint
     let weapon: Weapon?
 
-    init(animationTexturesParams : AnimationTexturesParams, location: CGPoint, weapon: Weapon?) {
+    init(animationTexturesParams : AnimationTexturesParams, location: CGPoint, weapon: Weapon?, type: UInt64) {
+        self.type = type
         self.location = location
         self.weapon = weapon
         super.init(animationTexturesParams: animationTexturesParams)
@@ -94,6 +96,7 @@ class AnimatedUnitParams : AnimationTexturesParams {
      init(animatedUnitParams: AnimatedUnitParams) {
         self.location = animatedUnitParams.location
         self.weapon = animatedUnitParams.weapon
+        self.type = animatedUnitParams.type
         super.init(animationTexturesParams: animatedUnitParams)
     }
 }
