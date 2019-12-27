@@ -143,7 +143,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 5, walkAnimation: animationTexturesParams.defaultAnimation)
         let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
-        
         let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
         return Player(params: playerParams)
     }
