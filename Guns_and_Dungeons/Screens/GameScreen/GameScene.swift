@@ -94,10 +94,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if let (bullet, unit) = checkCollision(contact: contact,
                                                     firstType: CategoryMask.bullet,
                                                     secondType: CategoryMask.ai){
-            (unit as? DestroyableUnit)?.healthPoints
-                -= Int64((bullet as? Bullet)?.damage ?? 0)
+            (unit as? DestroyableUnit)?.healthPoints -= Int64((bullet as? Bullet)?.damage ?? 0)
+            bullet?.removeFromParent()
+        } else if let (bullet, player) = checkCollision(contact: contact,
+                                                        firstType: CategoryMask.bullet,
+                                                        secondType: CategoryMask.player) {
+            (player as? Player)?.healthPoints -= Int64((bullet as? Bullet)?.damage ?? 0)
             bullet?.removeFromParent()
         }
+        
         
     }
 
@@ -113,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             cameraNode.zRotation = -player.zRotation
         }
         enemyController.update(currentTime)
-        if (enemyController.outOfCharge) {
+        if (enemyController.outOfCharge || player.healthPoints <= 0) {
             endGame()
         }
     }
