@@ -149,10 +149,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let animationTexturesParams = getAnimation(atlasName: "player", frameName: "pl", defaultName: "pl1", size: 4)
         let clip: Clip = Clip(bullets: 100, spawner: { return Bullet(defaultTexture: SKTexture(imageNamed: "bullet"), damage: 1, creatorType: 0)}, frequence: 1, bulletSpeed: 1000)
         let weapon: Weapon = Weapon(defaultTexture: SKTexture(imageNamed: "gun1"), clip: clip)
-        let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams,
-                                                    location: CGPoint.zero,
-                                                    weapon: weapon, type: 0)
-        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 10, deathAnimation: animationTexturesParams.defaultAnimation)
+        let animatedUnitParams = AnimatedUnitParams(animationTexturesParams: animationTexturesParams, location: CGPoint.zero, weapon: weapon, type: 0)
+        let destroyableUnitParams = DestroyableUnitParams(animatedUnitParams: animatedUnitParams, healthPoints: 30, deathAnimation: animationTexturesParams.defaultAnimation)
         let mobileUnitParams = MobileUnitParams(destoyableUntiParams: destroyableUnitParams, maxSpeed: 5, walkAnimation: animationTexturesParams.defaultAnimation)
         let playerPhysicsBodyMask = PhysicsBodyMask(category: CategoryMask.player, collision: CategoryMask.ai | CategoryMask.wall, contact: CategoryMask.bullet)
         let playerParams = PlayerParams(mobileUnitParams: mobileUnitParams, mask: playerPhysicsBodyMask, radius: mobileUnitParams.defaultTexture.size().width / 2)
